@@ -326,7 +326,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `soilmatesdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `role`, `created_at`, `updated_at`, `image_url`, `biography`, `enabled`) VALUES (1, 'test', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', NULL, NULL, NULL, 'role', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `role`, `created_at`, `updated_at`, `image_url`, `biography`, `enabled`) VALUES (1, '1', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', NULL, NULL, NULL, 'role', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `role`, `created_at`, `updated_at`, `image_url`, `biography`, `enabled`) VALUES (2, 'test', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 COMMIT;
 
@@ -336,9 +337,56 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `soilmatesdb`;
-INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Easy', NULL, NULL);
-INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Medium', NULL, NULL);
-INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Req. Special Equipment', NULL, NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Foolproof', 'Nearly impossible to kill. Great for beginners or busy folks.', NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Very Easy', 'Minimal care needed, thrives in various conditions.', NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Easy', 'Requires basic care like light and watering once a week.', NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (4, 'Moderate', 'Needs attention to light, water, and occasional fertilizing.', NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (5, 'Challenging', 'Requires consistent care and ideal conditions.', NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (6, 'Demanding', 'Sensitive to environment; mistakes can cost dearly.', NULL);
+INSERT INTO `care_difficulty` (`id`, `name`, `description`, `image_url`) VALUES (7, 'Expert', 'For seasoned plant lovers. High maintenance and fragile.', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `plant_species`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (1, 'Ficus', 'elastica', 'Rubber Plant', 'Glossy-leaved beauty, great indoors.', 'Bright indirect', 'weekly', 'Southeast Asia', '60–75°F', NULL, 1, 3);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (2, 'Sansevieria', 'trifasciata', 'Snake Plant, Mother-in-law\\\'s Tongue', 'Tolerates neglect and low light.', 'Low to bright indirect', 'Every 2–3 weeks', 'West Africa', '60–85°F', NULL, 1, 2);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (3, 'Aloe', 'barbadensis', 'Aloe Vera', 'Succulent with medicinal gel inside leaves.', 'Low to bright indirect', 'Every 2–3 weeks', 'North Africa', '55–80°F', NULL, 1, 2);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (4, 'Chlorophytum', 'comosum', 'Spider Plant, Airplane Plant', 'Air-purifying plant with runners.', 'Bright Indirect', 'Weekly', 'South Africa', '65–75°F', NULL, 1, 2);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (5, 'Spathiphyllum', 'wallisii', 'Peace Lily', 'Flowering plant, prefers moist soil.', 'Low to Medium', 'Weekly', 'Americas', '65–80°F', NULL, 1, 1);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (6, 'Zamioculcas', 'zamiifolia', 'ZZ Plant', 'Glossy green leaves, thrives on neglect.', 'Low to Bright, Indirect', 'Every 2-3 weeks', 'Eastern Africa', '60–75°F', NULL, 1, 1);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (7, 'Epipremnum', 'aureum', 'Pothos, Devil\\\'s Ivy\'', 'Fast-growing vine with heart leaves.', 'Low to Bright', 'Weekly', 'Solomon Islands', '60–80°F', NULL, 1, 2);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (8, 'Monstera', 'deliciosa', 'Swiss Cheese Plant, Monstera', 'Tropical plant with fenestrated leaves.', 'Bright Indirect', 'Weekly', 'Central America', '65–85°F', NULL, 1, 4);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (9, 'Ficus', 'robusta', 'Rubber Tree', 'Dark green, tough leaves, air purifying.', 'Bright Indirect', 'Weekly', 'India', '65–80°F', NULL, 1, 3);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (10, 'Nephrolepis', 'exaltata', 'Boston Fern', 'Feathery fronds, loves moisture.', 'Indirect Light', '2-3 Times per week', 'Tropical Americas', '65–80°F', NULL, 1, 5);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (11, 'Phalaenopsis', 'spp.', 'Moth Orchid', 'Long-blooming elegant flowers.', 'Bright Indirect', 'Weekly (less in Winter)', 'Asia', '60–80°F', NULL, 1, 5);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (12, 'Crassula', 'ovata', 'Jade Plant, Money Plant', 'Thick leaves, stores water.', 'Bright Light', 'Every 2-3 weeks', 'South Africa', '65–75°F', NULL, 1, 6);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (13, 'Chamaedorea', 'seifrizii', 'Bamboo Palm, Reed Palm', 'Air-purifying indoor palm.', 'Low to Bright Indirect', 'Weekly', 'Central America', '65–75°F', NULL, 1, 4);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (14, 'Codiaeum', 'variegatum', 'Croton', 'Colorful tropical leaves.', 'Bright Light', 'Weekly', 'Southeast Asia', '60–85°F', NULL, 1, 5);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (15, 'Calathea', 'ornata', 'Pinstripe Calathea', 'Striped leaves that move at night.', 'Low to Medium', '2-3 Times per week', 'South America', '65–80°F', NULL, 1, 6);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (16, 'Dracaena', 'marginata', 'Dragon Tree', 'Spiky leaves, low maintenance.', 'Bright Indirect', 'Every 2 weeks', 'Madagascar', '65–80°F', NULL, 1, 3);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (17, 'Dracaena', 'sanderiana', 'Lucky Bamboo', 'Often grown in water.', 'Low to Medium', 'Top off weekly', 'Central Africa', '65–80°F', NULL, 1, 2);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (18, 'Aglaonema', 'spp.\'', 'Chinese Evergreen', 'Colorful, easy-care foliage.', 'Low to Medium', 'Weekly', 'Asia', '65–80°F', NULL, 1, 2);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (19, 'Strelitzia', 'reginae', 'Bird of Paradise', 'Striking tropical flowers.', 'Bright Indirect to Direct', 'Weekly', 'South Africa', '65–80°F', NULL, 1, 5);
+INSERT INTO `plant_species` (`id`, `genus`, `species`, `common_names`, `description`, `light_requirements`, `water_frequency`, `native_to`, `temperature_range`, `image_url`, `enabled`, `care_difficulty_id`) VALUES (20, 'Dionaea', 'muscipula', 'Venus Flytrap', 'Carnivorous plant, sensitive to care.', 'Bright Direct', 'Keep Moist; distilled water only.', 'United States', '65–80°F', NULL, 1, 7);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_plant`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `user_plant` (`id`, `name`, `acquired_date`, `where_acquired`, `location`, `notes`, `alive`, `created_date`, `updated_date`, `image_url`, `enabled`, `user_id`, `plant_species_id`) VALUES (1, 'Snappy', '2023-11-02\'', 'Online Shop', 'Office Desk', 'Super chill, always has munchies', 1, NULL, NULL, NULL, 1, 1, 20);
+INSERT INTO `user_plant` (`id`, `name`, `acquired_date`, `where_acquired`, `location`, `notes`, `alive`, `created_date`, `updated_date`, `image_url`, `enabled`, `user_id`, `plant_species_id`) VALUES (2, 'Ruby', '2024-03-15', 'Farmer\\\'s market', 'Bedroom Shelf', 'My first ever plant — a total survivor.', 1, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `user_plant` (`id`, `name`, `acquired_date`, `where_acquired`, `location`, `notes`, `alive`, `created_date`, `updated_date`, `image_url`, `enabled`, `user_id`, `plant_species_id`) VALUES (3, 'Bitter Aloe', '2024-05-03', 'Gift from Mom', 'Kitchen Window', 'Useful for burns, thrives on neglect.', 1, NULL, NULL, NULL, 1, 2, 2);
+INSERT INTO `user_plant` (`id`, `name`, `acquired_date`, `where_acquired`, `location`, `notes`, `alive`, `created_date`, `updated_date`, `image_url`, `enabled`, `user_id`, `plant_species_id`) VALUES (4, 'Fronz', '2022-05-10', 'Community Nursery', 'Bathroom', 'I keep this Boston Fern in the bathroom.', 1, NULL, NULL, NULL, 1, 2, 3);
+INSERT INTO `user_plant` (`id`, `name`, `acquired_date`, `where_acquired`, `location`, `notes`, `alive`, `created_date`, `updated_date`, `image_url`, `enabled`, `user_id`, `plant_species_id`) VALUES (5, 'Whiz', '2025-03-12', 'Terrarium Kit', 'Glass Bowl on Table', 'Big Monstera taking over the living room.', 1, NULL, NULL, NULL, 1, 2, 10);
 
 COMMIT;
 
@@ -348,8 +396,92 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `soilmatesdb`;
-INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Watering', NULL, NULL);
-INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Fertilize', NULL, NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Watering', 'Providing the plant with the appropriate amount of water.', NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Pruning', 'Trimming dead or overgrown leaves, stems, or branches.', NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Fertilizing', 'Adding nutrients to the soil to promote growth.', NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (4, 'Reporting', 'Repotting\', \'Moving the plant to a larger container or refreshing soil.', NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (5, 'Pest Control', 'Pest Control\', \'Treating the plant to remove or prevent pests.', NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (6, 'Cleaning', 'Cleaning\', \'Wiping dust off leaves or cleaning debris from soil.', NULL);
+INSERT INTO `care_type` (`id`, `name`, `description`, `image_url`) VALUES (7, 'Sunlight Adjustment', 'Relocating the plant to improve light exposure.', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `care_log`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `care_log` (`id`, `notes`, `care_date`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (1, 'Thoroughly watered the soil.', '2025-06-10', NULL, 1, 1, 1);
+INSERT INTO `care_log` (`id`, `notes`, `care_date`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (2, 'Snipped off a few dead leaves.', '2025-06-08', NULL, 1, 3, 2);
+INSERT INTO `care_log` (`id`, `notes`, `care_date`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (3, 'Fed it with balanced fertilizer.', '2025-06-07', NULL, 1, 4, 3);
+INSERT INTO `care_log` (`id`, `notes`, `care_date`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (4, 'Moved plant to brighter window spot.', '2025-06-09', NULL, 1, 5, 7);
+INSERT INTO `care_log` (`id`, `notes`, `care_date`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (5, 'Removed pests with neem oil spray.', '2025-06-11', NULL, 1, 2, 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `reminder`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `reminder` (`id`, `created_at`, `reminder_date`, `title`, `notes`, `completed`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (1, NULL, NULL, 'Water Ruby', 'Time to water Ruby.', 0, NULL, 1, 1, 1);
+INSERT INTO `reminder` (`id`, `created_at`, `reminder_date`, `title`, `notes`, `completed`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (2, NULL, NULL, 'Prune Spikey', 'Prune Spikey for better growth.', 0, NULL, 1, 2, 2);
+INSERT INTO `reminder` (`id`, `created_at`, `reminder_date`, `title`, `notes`, `completed`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (3, NULL, NULL, 'Feralize Ruby', 'Fertilize Ruby with houseplant food.', 0, NULL, 1, 1, 3);
+INSERT INTO `reminder` (`id`, `created_at`, `reminder_date`, `title`, `notes`, `completed`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (4, NULL, NULL, 'Clean Spikey', 'Clean dust off Spikey’s leaves.', 0, NULL, 1, 2, 6);
+INSERT INTO `reminder` (`id`, `created_at`, `reminder_date`, `title`, `notes`, `completed`, `image_url`, `enabled`, `user_plant_id`, `care_type_id`) VALUES (5, NULL, NULL, 'Ruby needs new light', 'Move Ruby to sunnier spot for better light.', 0, NULL, 1, 1, 7);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `species_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `species_comment` (`id`, `created_at`, `updated_at`, `comment`, `image_url`, `enabled`, `plant_species_id`, `user_id`, `in_reply_to_id`) VALUES (1, NULL, NULL, 'Ficus elastica is super resilient!', NULL, 1, 1, 1, NULL);
+INSERT INTO `species_comment` (`id`, `created_at`, `updated_at`, `comment`, `image_url`, `enabled`, `plant_species_id`, `user_id`, `in_reply_to_id`) VALUES (2, NULL, NULL, 'Snake Plants are basically immortal. Perfect for beginners.', NULL, 1, 2, 2, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `plant_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `plant_comment` (`id`, `created_at`, `updated_at`, `comment`, `image_url`, `enabled`, `user_id`, `in_reply_to_id`, `user_plant_id`) VALUES (1, NULL, NULL, 'Ruby looks super healthy, great job!', NULL, 1, 2, NULL, 1);
+INSERT INTO `plant_comment` (`id`, `created_at`, `updated_at`, `comment`, `image_url`, `enabled`, `user_id`, `in_reply_to_id`, `user_plant_id`) VALUES (2, NULL, NULL, 'Thanks! I’ve been misting her every morning.', NULL, 1, 1, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `plant_collection`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `plant_collection` (`id`, `name`, `description`, `image_url`, `created_at`, `updated_at`, `user_id`) VALUES (1, 'Sunny Squad', 'Plants that thrive in bright light.', NULL, NULL, NULL, 1);
+INSERT INTO `plant_collection` (`id`, `name`, `description`, `image_url`, `created_at`, `updated_at`, `user_id`) VALUES (2, 'Shady Corner Crew', 'Low-light tolerant plants grouped together.', NULL, NULL, NULL, 1);
+INSERT INTO `plant_collection` (`id`, `name`, `description`, `image_url`, `created_at`, `updated_at`, `user_id`) VALUES (3, 'Kitchen Greens', 'Plants adding life to the kitchen area.', NULL, NULL, NULL, 2);
+INSERT INTO `plant_collection` (`id`, `name`, `description`, `image_url`, `created_at`, `updated_at`, `user_id`) VALUES (4, 'Healing Herbs', 'Useful and medicinal plants I rely on.', NULL, NULL, NULL, 2);
+INSERT INTO `plant_collection` (`id`, `name`, `description`, `image_url`, `created_at`, `updated_at`, `user_id`) VALUES (5, 'Mood Boosters', 'Plants that make me feel good.', NULL, NULL, NULL, 2);
+INSERT INTO `plant_collection` (`id`, `name`, `description`, `image_url`, `created_at`, `updated_at`, `user_id`) VALUES (DEFAULT, NULL, NULL, NULL, NULL, NULL, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `collection_has_plant`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `soilmatesdb`;
+INSERT INTO `collection_has_plant` (`plant_collection_id`, `user_plant_id`) VALUES (1, 2);
+INSERT INTO `collection_has_plant` (`plant_collection_id`, `user_plant_id`) VALUES (1, 3);
+INSERT INTO `collection_has_plant` (`plant_collection_id`, `user_plant_id`) VALUES (1, 4);
+INSERT INTO `collection_has_plant` (`plant_collection_id`, `user_plant_id`) VALUES (4, 3);
+INSERT INTO `collection_has_plant` (`plant_collection_id`, `user_plant_id`) VALUES (4, 2);
 
 COMMIT;
 
