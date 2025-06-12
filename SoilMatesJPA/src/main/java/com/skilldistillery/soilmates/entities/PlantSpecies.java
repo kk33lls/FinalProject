@@ -1,5 +1,6 @@
 package com.skilldistillery.soilmates.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,23 +22,42 @@ public class PlantSpecies {
 	private Id id;
 
 	private String genus;
+	
 	private String species;
+	
 	@Column(name = "common_names")
 	private String commonNames;
+	
 	private String description;
+	
 	@Column(name = "light_requirements")
 	private String lightRequirements;
+	
 	@Column(name = "water_frequency")
 	private String waterFrequency;
+	
 	@Column(name = "native_to")
 	private String nativeTo;
+	
 	@Column(name = "temperature_range")
 	private String temperatureRange;
+	
 	@Column(name = "image_url")
 	private String imageUrl;
-	private boolean enabled;
-
 	
+	private boolean enabled;
+	
+	@ManyToOne
+	@JoinColumn(name="care_difficulty_id")
+	private CareDifficulty careDifficulty;
+	
+	@OneToMany(mappedBy="plantSpecies")
+	private List<UserPlant> userPlants;
+	
+	@OneToMany(mappedBy="plantSpecies")
+	private List<SpeciesComment> speciesComments;
+
+
 	// constructors
 	public PlantSpecies() {
 		super();
@@ -129,6 +152,29 @@ public class PlantSpecies {
 		this.enabled = enabled;
 	}
 
+	public CareDifficulty getCareDifficulty() {
+		return careDifficulty;
+	}
+	
+	public void setCareDifficulty(CareDifficulty careDifficulty) {
+		this.careDifficulty = careDifficulty;
+	}
+	
+	public List<UserPlant> getUserPlants() {
+		return userPlants;
+	}
+	
+	public void setUserPlants(List<UserPlant> userPlants) {
+		this.userPlants = userPlants;
+	}
+	
+	public List<SpeciesComment> getSpeciesComments() {
+		return speciesComments;
+	}
+	
+	public void setSpeciesComments(List<SpeciesComment> speciesComments) {
+		this.speciesComments = speciesComments;
+	}
 	// hash/equals
 	@Override
 	public int hashCode() {

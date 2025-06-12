@@ -22,21 +22,30 @@ public class UserPlant {
 	private Id id;
 	
 	private String name; 
+	
 	@Column(name="acquired_date")
 	private LocalDateTime acquiredDate; 
+	
 	@Column(name="where_acquired")
 	private String whereAcquired; 
+	
 	private String location; 
+	
 	private String notes; 
+	
 	private Boolean alive; 
+	
 	@Column(name="created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt; 
+	
 	@Column(name="update_at")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt; 
+	
 	@Column(name="image_url")
 	private String imageUrl; 
+	
 	private boolean enabled;
 	
 	//Constructor

@@ -55,16 +55,17 @@ class PlantCommentTest {
 			assertNotNull(plantComment.getUser());
 		}
 	 
-//	 @Test
-//	 void test_PlantComment_UserPlant_MTO_mapping() {
-//		 assertNotNull(plantComment.getUserPlant());
-//	 }
-	 
-//	 @Test
-//		void test_PlantComment_OTM_self_join_replies_mapping() {
-//			assertNotNull(plantComment);
-//			assertNotNull(plantComment.getReplies());
-//		}
+	 @Test
+	 void test_PlantComment_UserPlant_MTO_mapping() {
+		 assertNotNull(plantComment.getUserPlant());
+	 }
+		
+	 @Test
+		void test_PlantComment_OTM_self_join_replies_mapping() {
+		assertNotNull(plantComment);
+		assertNotNull(plantComment.getReplies());
+		assertTrue(plantComment.getReplies().size() > 0);
+	}
 	 
 
 }
