@@ -18,7 +18,7 @@ public class CareLog {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
 	private String notes;
 
@@ -48,11 +48,11 @@ public class CareLog {
 
 	//getters/ setters
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

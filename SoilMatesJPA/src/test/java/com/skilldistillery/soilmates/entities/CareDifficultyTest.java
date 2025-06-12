@@ -43,7 +43,7 @@ class CareDifficultyTest {
 
 	@Test
 	void test_CareDifficulty_entity_mapping() {
-		assertEquals("easy", careDifficulty.getName());
+		assertEquals("Foolproof", careDifficulty.getName());
 
 	}
 

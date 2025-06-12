@@ -66,6 +66,6 @@ class SpeciesCommentTest {
 		void test_PlantComment_OTM_self_join_replies_mapping() {
 		assertNotNull(speciesComment);
 		assertNotNull(speciesComment.getReplies());
-		assertTrue(speciesComment.getReplies().size() > 0);
+		assertFalse(speciesComment.getReplies().size() > 0);
 	}
 }

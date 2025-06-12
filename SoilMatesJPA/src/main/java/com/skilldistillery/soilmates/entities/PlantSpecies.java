@@ -19,7 +19,7 @@ public class PlantSpecies {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Id id;
+	private int id;
 
 	private String genus;
 	
@@ -64,11 +64,11 @@ public class PlantSpecies {
 	}
 
 	// Getters/Setters
-	public Id getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Id id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
