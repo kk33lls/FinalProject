@@ -1,4 +1,6 @@
 import { CareLog } from "./care-log";
+import { PlantCollection } from "./plant-collection";
+import { PlantComment } from "./plant-comment";
 import { PlantSpecies } from "./plant-species";
 import { User } from "./user";
 
@@ -33,12 +35,12 @@ export class UserPlant {
   updatedAt: string = '',
   imageUrl: string = '',
   enabled: boolean = true,
-  plantComments: PlantComments[] = [],
+  plantComments: PlantComment[] = [],
   reminders: Reminder[] = [],
   careLogs: CareLog[] = [],
-  userPlantCollections: UserPlantCollection[] = [],
+  userPlantCollections: PlantCollection[] = [],
   plantSpecies: PlantSpecies[] = [],
-  user: User = null,
+  user: User = new User(),
 
   ){
   this.id = id,
