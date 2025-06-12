@@ -40,10 +40,10 @@ public class PlantCollection {
 	
 	private String description;
 	
-//	@ManyToMany
-//	@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
-//	inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
-//	private List<UserPlant> userPlantCollections;
+	@ManyToMany
+	@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
+	private List<UserPlant> userPlantCollections;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -118,6 +118,14 @@ public class PlantCollection {
 //	public void setUserPlantCollections(List<UserPlant> userPlantCollections) {
 //		this.userPlantCollections = userPlantCollections;
 //	}
+
+	public List<UserPlant> getUserPlantCollections() {
+		return userPlantCollections;
+	}
+
+	public void setUserPlantCollections(List<UserPlant> userPlantCollections) {
+		this.userPlantCollections = userPlantCollections;
+	}
 
 	@Override
 	public int hashCode() {

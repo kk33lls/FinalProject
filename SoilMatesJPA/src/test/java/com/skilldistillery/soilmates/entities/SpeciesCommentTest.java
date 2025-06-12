@@ -16,7 +16,11 @@ class SpeciesCommentTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
+<<<<<<< HEAD:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpeciesCommentTest.java
 	private SpeciesComment specialComment;
+=======
+	private SpeciesComment speciesComment;
+>>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpecialCommentTest.java
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,19 +37,41 @@ class SpeciesCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
+<<<<<<< HEAD:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpeciesCommentTest.java
 		specialComment = em.find(SpeciesComment.class, 1);
+=======
+		speciesComment = em.find(SpeciesComment.class, 1);
+>>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpecialCommentTest.java
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		em = null;
+	  speciesComment = null;
 		 
 	}
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
+	 @Test
+	 void test_SpeciesComment_basic_mappings() {
+//		 assertEquals("soemthing", speciesComment.get);
+		 assertNotNull(speciesComment);
+		 assertTrue(speciesComment.isEnabled());
+	 }
+	 
+	 @Test
+	 void test_SpeciesComment_User_MTO_mapping() {
+		 assertNotNull(speciesComment.getUser());
+	 }
+	 
+	 @Test
+	 void test_SpeciesComment_PlantSpecies_MTO_mapping() {
+		 assertNotNull(speciesComment.getPlantSpecies());
+	 }
+		
+	 @Test
+		void test_PlantComment_OTM_self_join_replies_mapping() {
+		assertNotNull(speciesComment);
+		assertNotNull(speciesComment.getReplies());
+		assertTrue(speciesComment.getReplies().size() > 0);
 	}
-
 }
