@@ -25,7 +25,7 @@ class SpecialCommentTest {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	static void tearDownAfterClass() throws Exception 
 		emf.close();
 		emf = null;
 	}
