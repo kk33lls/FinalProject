@@ -25,7 +25,7 @@ public class UserPlant {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Id id;
+	private int id;
 	
 	private String name; 
 	
@@ -41,11 +41,11 @@ public class UserPlant {
 	
 	private Boolean alive; 
 	
-	@Column(name="created_at")
+	@Column(name="created_date")
 	@CreationTimestamp
 	private LocalDateTime createdAt; 
 	
-	@Column(name="update_at")
+	@Column(name="updated_date")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt; 
 	
@@ -83,11 +83,11 @@ public class UserPlant {
 	}
 
 	//Getters/Setters
-	public Id getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Id id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
