@@ -17,14 +17,13 @@ import jakarta.persistence.Persistence;
 
 class ReminderTest {
 
-
-	private static EntityManagerFactory emf; 
+	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Reminder reminder; 
+	private Reminder reminder;
 
-	@BeforeAll //executes once at beginning
+	@BeforeAll // executes once at beginning
 	static void setUpBeforeClass() throws Exception {
-		emf = Persistence.createEntityManagerFactory("SoilMates"); 
+		emf = Persistence.createEntityManagerFactory("SoilMates");
 	}
 
 	@AfterAll // executes once after all
@@ -34,37 +33,29 @@ class ReminderTest {
 
 	@BeforeEach // executes before every test
 	void setUp() throws Exception {
-		em = emf.createEntityManager(); 
+		em = emf.createEntityManager();
 		reminder = em.find(Reminder.class, 1);
 	}
 
-	@AfterEach //executes after every test
+	@AfterEach // executes after every test
 	void tearDown() throws Exception {
 		em.close();
-		reminder = null; 
-	}
-//	@Test
-//	void test_Object_entity_mapping() {
-//	assertEquals ("info", Reminder.method()); 
-//	
-//	}
-//	@Test
-//	void test_Object_entity_mapping() {
-//	    assertNotNull(reminder);
-//	    assertEquals("info", reminder.mehtod());
-//	}
-//
-//	@Test
-//	void test_Object_has_associated_object()) {
-//	    assertNotNull(reminder);
-//	    assertNotNull(reminder.method());
-//	    assertFalse(reminder.method().isEmpty());
-//	}
-//
-//	
-	@Test
-	void test() {
-		fail("Not yet implemented");
+		reminder = null;
 	}
 
+	@Test
+	void test_Reminder_UserPlant_MTO_mapping() {
+		assertNotNull(reminder.getUserPlant());
+	}
+
+	@Test
+	void test_Reminder_CareType_MTO_mapping() {
+		assertNotNull(reminder.getCareType());
+	}
+
+	@Test
+	void test_Reminder_entity_mapping() {
+		assertNotNull(reminder);
+
+	}
 }
