@@ -2,6 +2,7 @@ package com.skilldistillery.soilmates.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -41,23 +42,21 @@ class CareTypeTest {
 		em.close();
 		careType = null; 
 	}
-//	@Test
-//	void test_Object_entity_mapping() {
-//	assertEquals ("info", CareType.method()); 
-//	
-//	}
-//	@Test
-//	void test_Object_entity_mapping() {
-//	    assertNotNull(careType);
-//	    assertEquals("info", careType.mehtod());
-//	}
-//
-//	@Test
-//	void test_Object_has_associated_object()) {
-//	    assertNotNull(userPlant);
-//	    assertNotNull(userPlant.method());
-//	    assertFalse(userPlant.method().isEmpty());
-//	}
+	@Test
+	void test_CareType_mapping() {
+	assertNotNull (careType); 
+	}
+	@Test
+	void test_CareType_Reminder_OTM_mapping() {
+		assertNotNull(careType.getReminders());
+		assertTrue(careType.getReminders().size() > 0);
+	}
+	@Test
+	void test_CareType_CareLog_OTM_mapping() {
+		assertNotNull(careType.getCareLogs());
+		assertTrue(careType.getCareLogs().size() > 0);
+	}
+
 
 }
 
