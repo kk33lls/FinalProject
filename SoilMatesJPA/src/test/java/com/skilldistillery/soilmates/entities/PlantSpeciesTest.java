@@ -1,9 +1,7 @@
 package com.skilldistillery.soilmates.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -43,27 +41,31 @@ class PlantSpeciesTest {
 			em.close();
 			plantSpecies = null; 
 		}
-//		@Test
-//		void test_Object_entity_mapping() {
-//		assertEquals ("info", PlantSpecies.method()); 
-//		
-//		}
-//		@Test
-//		void test_Object_entity_mapping() {
-//		    assertNotNull(plantSpecies);
-//		    assertEquals("info", plantSpecies.method());
-//		}
-//
-//		@Test
-//		void test_Object_has_associated_object()) {
-//		    assertNotNull(plantSpecies);
-//		    assertNotNull(plantSpecies.method());
-//		    assertFalse(plantSpecies.method().isEmpty());
-//		}
+		@Test
+		void test_PlantSpecies_entity_mapping() {
+//		assertEquals("FIXME", PlantSpecies); 
+		
+		}
+		
+		@Test
+		void test_PlantSpecies_UserPlants_OTM_mapping() {
+			assertNotNull(plantSpecies.getUserPlants());
+			assertTrue(plantSpecies.getUserPlants().size() > 0);
+		}
+		@Test
+		void test_PlantSpecies_SpeciesComment_OTM_mapping() {
+			assertNotNull(plantSpecies.getSpeciesComments());
+			assertTrue(plantSpecies.getSpeciesComments().size() > 0);
+		}
+		
+		@Test
+		void test_PlantSpecies_CareDifficulty_MTO_mapping() {
+			assertNotNull(plantSpecies.getCareDifficulty());
+		}
+		
+		
+		
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+
 
 }

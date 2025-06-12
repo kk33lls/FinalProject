@@ -50,12 +50,12 @@ class PlantCollectionTest {
 		assertNotNull(plantCollection);
 		 
 	 }
-//	 @Test
-//		void test_PlantCollection_UserPlant_MTM_mapping() {
-//			assertNotNull(plantCollection);
-//			assertNotNull(plantCollection.getUserPlantCollections());
-//			assertTrue(plantCollection.getUserPlantCollections().size()  > 0);
-//		}
+	 @Test
+		void test_PlantCollection_UserPlant_MTM_mapping() {
+			assertNotNull(plantCollection);
+			assertNotNull(plantCollection.getUserPlantCollections());
+			assertTrue(plantCollection.getUserPlantCollections().size()  > 0);
+		}
 
 	 @Test
 		void test_PlantCollection_User_MTO_mapping() {
