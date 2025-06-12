@@ -12,8 +12,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class CareDifficulty {
-	
+class CareDifficultyTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private CareDifficulty careDifficulty;
@@ -25,8 +25,8 @@ class CareDifficulty {
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		 emf.close();
-		 emf = null;
+		emf.close();
+		emf = null;
 	}
 
 	@BeforeEach
@@ -42,8 +42,15 @@ class CareDifficulty {
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_CareDifficulty_entity_mapping() {
+		assertEquals("easy", careDifficulty.getName());
+
+	}
+
+	@Test
+	void test__UserPlants_OTM_mapping() {
+		assertNotNull(careDifficulty.getPlantSpeciesCareDifficulties());
+		assertTrue(careDifficulty.getPlantSpeciesCareDifficulties().size() > 0);
 	}
 
 }

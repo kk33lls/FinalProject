@@ -1,6 +1,7 @@
 package com.skilldistillery.soilmates.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -8,11 +9,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
 @Entity
+<<<<<<< HEAD:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpeciesComment.java
 @Table(name="special_comment")
+=======
+@Table(name="species_comment")
+>>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpecialComment.java
 public class SpeciesComment {
 	
 	@Id
@@ -32,14 +40,32 @@ public class SpeciesComment {
 	
 	private boolean enabled;
 	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="plant_species_id")
+	private PlantSpecies plantSpecies;
+	
+	@ManyToOne
+	@JoinColumn(name = "in_reply_to_id")
+	private SpeciesComment reply;
 
+<<<<<<< HEAD:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpeciesComment.java
+=======
+	@OneToMany(mappedBy = "reply")
+	private List<SpeciesComment> replies;
+	
+
+>>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpecialComment.java
 	public SpeciesComment() {
 		super();
 	}
 
 	@Override
 	public String toString() {
-		return "SpecialComment [id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", comment="
+		return "SpeciesComment [id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", comment="
 				+ comment + ", imageUrl=" + imageUrl + ", enabled=" + enabled + "]";
 	}
 
@@ -89,6 +115,38 @@ public class SpeciesComment {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public PlantSpecies getPlantSpecies() {
+		return plantSpecies;
+	}
+
+	public void setPlantSpecies(PlantSpecies plantSpeciesComment) {
+		this.plantSpecies = plantSpeciesComment;
+	}
+
+	public SpeciesComment getReply() {
+		return reply;
+	}
+
+	public void setReply(SpeciesComment reply) {
+		this.reply = reply;
+	}
+
+	public List<SpeciesComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<SpeciesComment> replies) {
+		this.replies = replies;
 	}
 
 	@Override

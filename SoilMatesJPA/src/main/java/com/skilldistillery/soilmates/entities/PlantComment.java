@@ -44,9 +44,9 @@ public class PlantComment {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-//	@ManyToOne
-//	@JoinColumn(name = "user_plant_id")
-//	private UserPlant userPlant;
+	@ManyToOne
+	@JoinColumn(name = "user_plant_id")
+	private UserPlant userPlant;
 	
 	@ManyToOne
 	@JoinColumn(name = "in_reply_to_id")
@@ -115,13 +115,13 @@ public class PlantComment {
 		this.user = user;
 	}
 
-//	public UserPlant getUserPlant() {
-//		return userPlant;
-//	}
-//
-//	public void setUserPlant(UserPlant userPlant) {
-//		this.userPlant = userPlant;
-//	}
+	public UserPlant getUserPlant() {
+		return userPlant;
+	}
+
+	public void setUserPlant(UserPlant userPlant) {
+		this.userPlant = userPlant;
+	}
 
 	public PlantComment getReply() {
 		return reply;
