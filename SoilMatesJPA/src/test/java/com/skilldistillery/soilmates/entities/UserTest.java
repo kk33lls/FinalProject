@@ -30,8 +30,6 @@ public class UserTest {
 		 emf.close();
 		 emf = null;
 	 }
-
-
 	 @BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();
