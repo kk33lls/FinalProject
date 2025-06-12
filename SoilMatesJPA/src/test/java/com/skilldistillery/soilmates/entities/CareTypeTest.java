@@ -1,6 +1,6 @@
 package com.skilldistillery.soilmates.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,7 +23,7 @@ class CareTypeTest {
 
 	@BeforeAll //executes once at beginning
 	static void setUpBeforeClass() throws Exception {
-		emf = Persistence.createEntityManagerFactory("SoilMates"); 
+		emf = Persistence.createEntityManagerFactory("SoilMatesJPA"); 
 	}
 
 	@AfterAll // executes once after all

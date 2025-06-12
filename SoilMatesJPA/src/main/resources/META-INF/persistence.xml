@@ -4,6 +4,15 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	<class>com.skilldistillery.soilmates.entities.User</class>
+	<class>com.skilldistillery.soilmates.entities.UserPlant</class>
+	<class>com.skilldistillery.soilmates.entities.SpeciesComment</class>
+	<class>com.skilldistillery.soilmates.entities.Reminder</class>
+	<class>com.skilldistillery.soilmates.entities.PlantSpecies</class>
+	<class>com.skilldistillery.soilmates.entities.PlantComment</class>
+	<class>com.skilldistillery.soilmates.entities.PlantCollection</class>
+	<class>com.skilldistillery.soilmates.entities.CareType</class>
+	<class>com.skilldistillery.soilmates.entities.CareLog</class>
+	<class>com.skilldistillery.soilmates.entities.Difficulty</class>
 	
 	
     <properties>

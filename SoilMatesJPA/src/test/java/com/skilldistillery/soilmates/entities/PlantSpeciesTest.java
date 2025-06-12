@@ -22,7 +22,7 @@ class PlantSpeciesTest {
 
 		@BeforeAll //executes once at beginning
 		static void setUpBeforeClass() throws Exception {
-			emf = Persistence.createEntityManagerFactory("SoilMates"); 
+			emf = Persistence.createEntityManagerFactory("SoilMatesJPA"); 
 		}
 
 		@AfterAll // executes once after all
