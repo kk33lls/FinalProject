@@ -1,7 +1,6 @@
 package com.skilldistillery.soilmates.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,11 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class UserTest {
+class PlantCollectionTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private PlantCollection plantCollection;
 	
 	 @BeforeAll
 	 static void setUpBeforeClass() throws Exception {
@@ -35,21 +34,32 @@ public class UserTest {
 	 @BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();
-		 user = em.find(User.class, 1);
+		 plantCollection = em.find(PlantCollection.class, 1);
 	 }
 
 
 	 @AfterEach
 	 void tearDown() throws Exception {
 		 em.close();
-		 user = null;
+		plantCollection = null;
 	 }
 	 
 	 @Test
-	 void test_User_basic_mappings() {
-		 assertEquals("test", user.getUsername());
-		 assertEquals("admin", user.getRole());
-		 assertTrue(user.isEnabled());
+	 void test_PlantCollection_basic_mappings() {
+//		 assertEquals("soemthing", plantComment.getUsername());
+		assertNotNull(plantCollection);
+		 
 	 }
+//	 @Test
+//		void test_PlantCollection_UserPlant_MTM_mapping() {
+//			assertNotNull(plantCollection);
+//			assertNotNull(plantCollection.getUserPlantCollections());
+//			assertTrue(plantCollection.getUserPlantCollections().size()  > 0);
+//		}
+
+	 @Test
+		void test_PlantCollection_User_MTO_mapping() {
+			assertNotNull(plantCollection.getUser());
+		}
 
 }
