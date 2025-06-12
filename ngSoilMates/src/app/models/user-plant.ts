@@ -1,2 +1,63 @@
+import { CareLog } from "./care-log";
+import { PlantSpecies } from "./plant-species";
+import { User } from "./user";
+
 export class UserPlant {
+  id: number;
+  name: string;
+  acquiredDate: string;
+  whereAcquired: string;
+  location: string;
+  notes: string;
+  alive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  imageUrl: string;
+  enabled: boolean;
+  plantComments: PlantComments[];
+  reminders: Reminder[];
+  careLogs: CareLog[];
+  userPlantCollections: UserPlantCollection[];
+  plantSpecies: PlantSpecies[];
+  user: User;
+
+  constructor(
+  id: number = 0,
+  name: string = '',
+  acquiredDate: string = '',
+  whereAcquired: string = '',
+  location: string = '',
+  notes: string = '',
+  alive: boolean = true,
+  createdAt: string = '',
+  updatedAt: string = '',
+  imageUrl: string = '',
+  enabled: boolean = true,
+  plantComments: PlantComments[] = [],
+  reminders: Reminder[] = [],
+  careLogs: CareLog[] = [],
+  userPlantCollections: UserPlantCollection[] = [],
+  plantSpecies: PlantSpecies[] = [],
+  user: User = null,
+
+  ){
+  this.id = id,
+  this.name = name;
+  this.acquiredDate = acquiredDate;
+  this.whereAcquired = whereAcquired;
+  this.location = location;
+  this.notes = notes;
+  this.alive = alive;
+  this.createdAt = createdAt;
+  this.updatedAt = updatedAt;
+  this.imageUrl = imageUrl;
+  this.enabled = enabled;
+  this.plantComments = plantComments;
+  this.reminders = reminders;
+  this.careLogs = careLogs;
+  this.userPlantCollections = userPlantCollections;
+  this.plantSpecies = plantSpecies;
+  this.user = user;
+  }
+
 }
