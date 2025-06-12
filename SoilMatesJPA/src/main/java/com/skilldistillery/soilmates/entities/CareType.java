@@ -1,8 +1,7 @@
 package com.skilldistillery.soilmates.entities;
 
+import java.util.List;
 import java.util.Objects;
-
-import com.sun.tools.javac.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
