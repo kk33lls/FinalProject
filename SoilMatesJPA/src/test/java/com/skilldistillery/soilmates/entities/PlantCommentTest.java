@@ -1,7 +1,6 @@
 package com.skilldistillery.soilmates.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,11 +12,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class UserTest {
-	
+class PlantCommentTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private PlantComment plantComment;
 	
 	 @BeforeAll
 	 static void setUpBeforeClass() throws Exception {
@@ -30,24 +28,43 @@ public class UserTest {
 		 emf.close();
 		 emf = null;
 	 }
+
+
 	 @BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();
-		 user = em.find(User.class, 1);
+		 plantComment = em.find(PlantComment.class, 1);
 	 }
 
 
 	 @AfterEach
 	 void tearDown() throws Exception {
 		 em.close();
-		 user = null;
+		plantComment = null;
 	 }
 	 
 	 @Test
-	 void test_User_basic_mappings() {
-		 assertEquals("test", user.getUsername());
-		 assertEquals("admin", user.getRole());
-		 assertTrue(user.isEnabled());
+	 void test_PlantComment_basic_mappings() {
+//		 assertEquals("soemthing", plantComment.getUsername());
+		 assertNotNull(plantComment);
+		 assertTrue(plantComment.isEnabled());
 	 }
+	 
+	 @Test
+		void test_PlantComment_User_MTO_mapping() {
+			assertNotNull(plantComment.getUser());
+		}
+	 
+//	 @Test
+//	 void test_PlantComment_UserPlant_MTO_mapping() {
+//		 assertNotNull(plantComment.getUserPlant());
+//	 }
+	 
+//	 @Test
+//		void test_PlantComment_OTM_self_join_replies_mapping() {
+//			assertNotNull(plantComment);
+//			assertNotNull(plantComment.getReplies());
+//		}
+	 
 
 }
