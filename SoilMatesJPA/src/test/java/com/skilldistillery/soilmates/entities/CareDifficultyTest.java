@@ -12,20 +12,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class SpecialCommentTest {
-	
+class CareDifficultyTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private SpecialComment specialComment;
+	private CareDifficulty careDifficulty;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		 emf = Persistence.createEntityManagerFactory("SoilMatesJPA");
-
+		emf = Persistence.createEntityManagerFactory("SoilMatesJPA");
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() throws Exception {
 		emf.close();
 		emf = null;
 	}
@@ -33,19 +32,25 @@ class SpecialCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		specialComment = em.find(SpecialComment.class, 1);
+		careDifficulty = em.find(CareDifficulty.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
 		em = null;
-		 
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_CareDifficulty_entity_mapping() {
+		assertEquals("easy", careDifficulty.getName());
+
+	}
+
+	@Test
+	void test__UserPlants_OTM_mapping() {
+		assertNotNull(careDifficulty.getPlantSpeciesCareDifficulties());
+		assertTrue(careDifficulty.getPlantSpeciesCareDifficulties().size() > 0);
 	}
 
 }

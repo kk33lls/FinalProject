@@ -1,5 +1,6 @@
 package com.skilldistillery.soilmates.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,8 +8,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="care_difficulty")
 public class CareDifficulty {
 	
 	@Id
@@ -21,6 +25,10 @@ public class CareDifficulty {
 	
 	@Column(name="image_url")
 	private String imageUrl;
+	
+	@OneToMany(mappedBy="careDifficulty")
+	private List<PlantSpecies> plantSpeciesCareDifficulties;
+	
 
 	public CareDifficulty() {
 		super();
@@ -56,6 +64,14 @@ public class CareDifficulty {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public List<PlantSpecies> getPlantSpeciesCareDifficulties() {
+		return plantSpeciesCareDifficulties;
+	}
+
+	public void setPlantSpeciesCareDifficulties(List<PlantSpecies> plantSpeciesCareDifficulties) {
+		this.plantSpeciesCareDifficulties = plantSpeciesCareDifficulties;
 	}
 
 	@Override
