@@ -4,7 +4,12 @@
   password: string;
   enabled: boolean;
   role: string;
-  email: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  imageUrl: string;
 
   constructor(
     id: number = 0,
@@ -12,7 +17,12 @@
     password: string = "",
     enabled: boolean = true,
     role: string = "",
-    email: string ="",
+    firstName: string = "",
+    lastName: string = "",
+    email: string = "",
+    createdAt: string = "",
+    updatedAt: string = "",
+    imageUrl: string = "",
 
   ){
     this.id = id;
@@ -20,6 +30,11 @@
     this.password = password;
     this.enabled = enabled;
     this.role = role;
+    this.firstName =  firstName;
+    this.lastName = lastName;
     this.email = email;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.imageUrl = imageUrl
   }
 }
