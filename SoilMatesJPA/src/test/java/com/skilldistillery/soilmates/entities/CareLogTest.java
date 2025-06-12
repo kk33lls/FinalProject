@@ -43,27 +43,18 @@ class CareLogTest {
 		em.close();
 		careLog = null; 
 	}
-//	@Test
-//	void test_Object_entity_mapping() {
-//	assertEquals ("info", CareLog.method()); 
-//	
-//	}
-//	@Test
-//	void test_Object_entity_mapping() {
-//	    assertNotNull(careLog);
-//	    assertEquals("info", careLog.mehtod());
-//	}
-//
-//	@Test
-//	void test_Object_has_associated_object()) {
-//	    assertNotNull(careLog);
-//	    assertNotNull(careLog.method());
-//	    assertFalse(careLog.method().isEmpty());
-//	}
-
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_CareLog_Mapping() {
+		assertNotNull(careLog);
+	}
+	
+	@Test
+	void test_CareLog_UserPlant_MTO_mapping() {
+		assertNotNull(careLog.getUserPlant());
+	}
+	@Test
+	void test_CareLog_CareType_MTO_mapping() {
+		assertNotNull(careLog.getCareType());
 	}
 
 }

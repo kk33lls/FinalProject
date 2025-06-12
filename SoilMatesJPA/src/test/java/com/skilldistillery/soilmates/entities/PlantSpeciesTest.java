@@ -43,8 +43,7 @@ class PlantSpeciesTest {
 		}
 		@Test
 		void test_PlantSpecies_entity_mapping() {
-//		assertEquals("FIXME", PlantSpecies); 
-		
+			assertNotNull(plantSpecies);
 		}
 		
 		@Test

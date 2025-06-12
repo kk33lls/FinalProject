@@ -1,6 +1,7 @@
 package com.skilldistillery.soilmates.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
@@ -49,5 +50,24 @@ public class UserTest {
 		 assertEquals("admin", user.getRole());
 		 assertTrue(user.isEnabled());
 	 }
-
+	 @Test
+		void test_User_UserPlants_OTM_mapping() {
+			assertNotNull(user.getUserPlants());
+			assertTrue(user.getUserPlants().size() > 0);
+		}
+	 @Test
+		void test_User_PlantCollection_OTM_mapping() {
+			assertNotNull(user.getPlantCollections());
+			assertTrue(user.getPlantCollections().size() > 0);
+		}
+	 @Test
+		void test_User_PlantComment_OTM_mapping() {
+			assertNotNull(user.getPlantComments());
+			assertTrue(user.getPlantComments().size() > 0);
+		}
+	 @Test
+		void test_User_SpeciesComment_OTM_mapping() {
+			assertNotNull(user.getSpeciesComments());
+			assertTrue(user.getSpeciesComments().size() > 0);
+		}
 }

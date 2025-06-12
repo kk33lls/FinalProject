@@ -1,6 +1,7 @@
 package com.skilldistillery.soilmates.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +53,28 @@ public class UserPlant {
 	private String imageUrl; 
 	
 	private boolean enabled;
+	
+	@OneToMany(mappedBy="userPlant")
+	private List<PlantComment> plantComments;
+	
+	@OneToMany(mappedBy = "userPlant")
+	private List<Reminder> reminders;
+	
+	@OneToMany(mappedBy = "userPlant")
+	private List<CareLog> careLogs;
+	
+	@ManyToMany
+	@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
+	private List<UserPlant> userPlantCollections;
+	
+	@ManyToOne
+	@JoinColumn(name="plant_species_id")
+	private PlantSpecies plantSpecies;
+
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	//Constructor
 
@@ -146,6 +174,54 @@ public class UserPlant {
 	
 		// Hash/Equals
 	
+	public List<PlantComment> getPlantComments() {
+		return plantComments;
+	}
+
+	public void setPlantComments(List<PlantComment> plantComments) {
+		this.plantComments = plantComments;
+	}
+
+	public List<Reminder> getReminders() {
+		return reminders;
+	}
+
+	public void setReminders(List<Reminder> reminders) {
+		this.reminders = reminders;
+	}
+
+	public List<CareLog> getCareLogs() {
+		return careLogs;
+	}
+
+	public void setCareLogs(List<CareLog> careLogs) {
+		this.careLogs = careLogs;
+	}
+
+	public List<UserPlant> getUserPlantCollections() {
+		return userPlantCollections;
+	}
+
+	public void setUserPlantCollections(List<UserPlant> userPlantCollections) {
+		this.userPlantCollections = userPlantCollections;
+	}
+
+	public PlantSpecies getPlantSpecies() {
+		return plantSpecies;
+	}
+
+	public void setPlantSpecies(PlantSpecies plantSpecies) {
+		this.plantSpecies = plantSpecies;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(acquiredDate, alive, createdAt, enabled, id, imageUrl, location, name, notes, updatedAt,
