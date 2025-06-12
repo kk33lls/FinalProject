@@ -1,6 +1,7 @@
 package com.skilldistillery.soilmates.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -50,11 +52,62 @@ public class User {
 	
 	
 //mapping
+	@OneToMany(mappedBy="user")
+	private List<UserPlant> userPlants;
+	
+	@OneToMany(mappedBy="user")
+	private List<SpeciesComment> speciesComments;
+	
+	@OneToMany(mappedBy="user")
+	private List<PlantCollection> plantCollections;
+	
+	@OneToMany(mappedBy="user")
+	private List<PlantComment> plantComments;
 	
 	
 	
 //Constructor
 	
+	public List<UserPlant> getUserPlants() {
+		return userPlants;
+	}
+
+
+	public void setUserPlants(List<UserPlant> userPlants) {
+		this.userPlants = userPlants;
+	}
+
+
+	public List<SpeciesComment> getSpeciesComments() {
+		return speciesComments;
+	}
+
+
+	public void setSpeciesComments(List<SpeciesComment> speciesComments) {
+		this.speciesComments = speciesComments;
+	}
+
+
+	public List<PlantCollection> getPlantCollections() {
+		return plantCollections;
+	}
+
+
+	public void setPlantCollections(List<PlantCollection> plantCollections) {
+		this.plantCollections = plantCollections;
+	}
+
+
+	public List<PlantComment> getPlantComments() {
+		return plantComments;
+	}
+
+
+	public void setPlantComments(List<PlantComment> plantComments) {
+		this.plantComments = plantComments;
+	}
+
+
 	public User() {
 		super();
 		
