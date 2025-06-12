@@ -16,11 +16,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-<<<<<<< HEAD:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpeciesComment.java
-@Table(name="special_comment")
-=======
 @Table(name="species_comment")
->>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpecialComment.java
 public class SpeciesComment {
 	
 	@Id
@@ -52,13 +48,12 @@ public class SpeciesComment {
 	@JoinColumn(name = "in_reply_to_id")
 	private SpeciesComment reply;
 
-<<<<<<< HEAD:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpeciesComment.java
-=======
+
 	@OneToMany(mappedBy = "reply")
 	private List<SpeciesComment> replies;
 	
 
->>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/main/java/com/skilldistillery/soilmates/entities/SpecialComment.java
+
 	public SpeciesComment() {
 		super();
 	}
