@@ -16,11 +16,8 @@ class SpeciesCommentTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-<<<<<<< HEAD:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpeciesCommentTest.java
-	private SpeciesComment specialComment;
-=======
 	private SpeciesComment speciesComment;
->>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpecialCommentTest.java
+
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -37,11 +34,8 @@ class SpeciesCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-<<<<<<< HEAD:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpeciesCommentTest.java
-		specialComment = em.find(SpeciesComment.class, 1);
-=======
+
 		speciesComment = em.find(SpeciesComment.class, 1);
->>>>>>> 7361098dba2c3902d4638947c71f0fb24bba7069:SoilMatesJPA/src/test/java/com/skilldistillery/soilmates/entities/SpecialCommentTest.java
 	}
 
 	@AfterEach
