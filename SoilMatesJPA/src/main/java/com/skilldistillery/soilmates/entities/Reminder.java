@@ -3,6 +3,8 @@ package com.skilldistillery.soilmates.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,11 +18,11 @@ public class Reminder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
+	private int id;
+	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-
+	
 	@Column(name = "reminder_date")
 	private LocalDateTime reminderDate;
 
@@ -50,11 +52,11 @@ public class Reminder {
 	}
 
 	// getters/setters
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

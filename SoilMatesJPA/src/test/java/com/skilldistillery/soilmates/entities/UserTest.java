@@ -46,8 +46,8 @@ public class UserTest {
 	 
 	 @Test
 	 void test_User_basic_mappings() {
-		 assertEquals("test", user.getUsername());
-		 assertEquals("admin", user.getRole());
+		 assertEquals("1", user.getUsername());
+		 assertEquals("role", user.getRole());
 		 assertTrue(user.isEnabled());
 	 }
 	 @Test
