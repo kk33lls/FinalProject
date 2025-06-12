@@ -12,11 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class SpecialCommentTest {
+class SpeciesCommentTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private SpecialComment specialComment;
+	private SpeciesComment specialComment;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -25,7 +25,7 @@ class SpecialCommentTest {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() throws Exception {
 		emf.close();
 		emf = null;
 	}
@@ -33,7 +33,7 @@ class SpecialCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		specialComment = em.find(SpecialComment.class, 1);
+		specialComment = em.find(SpeciesComment.class, 1);
 	}
 
 	@AfterEach

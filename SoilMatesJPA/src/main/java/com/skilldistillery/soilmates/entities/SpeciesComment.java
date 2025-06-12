@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="special_comment")
-public class SpecialComment {
+public class SpeciesComment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class SpecialComment {
 	private boolean enabled;
 	
 
-	public SpecialComment() {
+	public SpeciesComment() {
 		super();
 	}
 
@@ -104,11 +104,11 @@ public class SpecialComment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SpecialComment other = (SpecialComment) obj;
+		SpeciesComment other = (SpeciesComment) obj;
 		return id == other.id;
 	}
 
-	public SpecialComment(int id, LocalDateTime createdAt, LocalDateTime updatedAt, String comment, String imageUrl,
+	public SpeciesComment(int id, LocalDateTime createdAt, LocalDateTime updatedAt, String comment, String imageUrl,
 			boolean enabled) {
 		super();
 		this.id = id;
