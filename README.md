@@ -17,17 +17,18 @@
  - JavaScript
  - Bootstrap
  - html/CSS
+ - Angular
 
 
  ## SQL Diagram
 
-
+![diagram](images/diagram.png)
 
  ## Entities & Relationships
 
 
-    1. User: 
-
+    User: 
+    plant
 
 
  ## REST API Endpoints

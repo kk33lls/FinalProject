@@ -66,8 +66,9 @@ class UserPlantTest {
 	
 	@Test
 	void test_UserPlant_PlantCollection_MTM_mapping() {
-		assertNotNull(userPlant.getUserPlantCollections());
-		assertTrue(userPlant.getUserPlantCollections().size() > 0);
+		userPlant = em.find(UserPlant.class, 2);
+		assertNotNull(userPlant.getPlantCollections());
+		assertTrue(userPlant.getPlantCollections().size() > 0);
 	}
 	
 	@Test
