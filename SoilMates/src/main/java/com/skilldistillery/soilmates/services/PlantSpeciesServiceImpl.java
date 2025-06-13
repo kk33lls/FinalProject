@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.soilmates.entities.PlantSpecies;
 import com.skilldistillery.soilmates.repositories.PlantSpeciesRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class PlantSpeciesServiceImpl implements PlantSpeciesService {
 	
 	@Autowired
@@ -17,6 +20,16 @@ public class PlantSpeciesServiceImpl implements PlantSpeciesService {
 	@Override
 	public List<PlantSpecies> keywordSearch(String keyword) {
 		return speciesRepo.searchByCommonNamesContainsOrSpeciesContainsOrGenusContains(keyword, keyword, keyword);
+	}
+
+	@Override
+	public List<PlantSpecies> findAll() {
+		return speciesRepo.findAll();
+	}
+
+	@Override
+	public PlantSpecies findById(int id) {
+		return speciesRepo.findById(id);
 	}
 
 }
