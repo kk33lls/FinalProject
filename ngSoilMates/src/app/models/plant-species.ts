@@ -9,12 +9,12 @@ export class PlantSpecies {
   commonNames: string;
   description: string;
   lightRequirements: string;
-  waterFrequesncy: string;
+  waterFrequency: string;
   nativeTo: string;
   temperatureRange: string;
   imageUrl: string;
   enabled: boolean;
-  careDifficulty: CareDifficulty[];
+  careDifficulty: CareDifficulty;
   userPlants: UserPlant[];
   speciesComments: SpeciesComment[];
 
@@ -25,12 +25,12 @@ export class PlantSpecies {
     commonNames: string = '',
     description: string = '',
     lightRequirements: string = '',
-    waterFrequesncy: string = '',
+    waterFrequency: string = '',
     nativeTo: string = '',
     temperatureRange: string = '',
     imageUrl: string = '',
     enabled: boolean = true,
-    careDifficulty: CareDifficulty[] = [],
+    careDifficulty: CareDifficulty = new CareDifficulty(),
     userPlants: UserPlant[] = [],
     speciesComments: SpeciesComment[] = []
   ) {
@@ -40,7 +40,7 @@ export class PlantSpecies {
     this.commonNames = commonNames;
     this.description = description;
     this.lightRequirements = lightRequirements;
-    this.waterFrequesncy = waterFrequesncy;
+    this.waterFrequency = waterFrequency;
     this.nativeTo = nativeTo;
     this.temperatureRange = temperatureRange;
     this.imageUrl = imageUrl;
