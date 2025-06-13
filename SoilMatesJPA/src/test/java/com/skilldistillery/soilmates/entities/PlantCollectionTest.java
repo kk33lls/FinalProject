@@ -53,8 +53,8 @@ class PlantCollectionTest {
 	 @Test
 		void test_PlantCollection_UserPlant_MTM_mapping() {
 			assertNotNull(plantCollection);
-			assertNotNull(plantCollection.getUserPlantCollections());
-			assertTrue(plantCollection.getUserPlantCollections().size()  > 0);
+			assertNotNull(plantCollection.getUserPlants());
+			assertTrue(plantCollection.getUserPlants().size()  > 0);
 		}
 
 	 @Test

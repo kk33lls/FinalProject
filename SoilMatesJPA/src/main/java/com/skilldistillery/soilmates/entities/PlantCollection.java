@@ -43,7 +43,7 @@ public class PlantCollection {
 	@ManyToMany
 	@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
-	private List<UserPlant> userPlantCollections;
+	private List<UserPlant> userPlants;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -119,12 +119,12 @@ public class PlantCollection {
 //		this.userPlantCollections = userPlantCollections;
 //	}
 
-	public List<UserPlant> getUserPlantCollections() {
-		return userPlantCollections;
+	public List<UserPlant> getUserPlants() {
+		return userPlants;
 	}
 
-	public void setUserPlantCollections(List<UserPlant> userPlantCollections) {
-		this.userPlantCollections = userPlantCollections;
+	public void setUserPlants(List<UserPlant> userPlantCollections) {
+		this.userPlants = userPlantCollections;
 	}
 
 	@Override

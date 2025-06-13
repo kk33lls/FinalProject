@@ -63,10 +63,10 @@ public class UserPlant {
 	@OneToMany(mappedBy = "userPlant")
 	private List<CareLog> careLogs;
 	
-	@ManyToMany
-	@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
-	inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
-	private List<UserPlant> userPlantCollections;
+	@ManyToMany(mappedBy="userPlants")
+	//@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
+	//inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
+	private List<PlantCollection> plantCollections;
 	
 	@ManyToOne
 	@JoinColumn(name="plant_species_id")
@@ -198,12 +198,12 @@ public class UserPlant {
 		this.careLogs = careLogs;
 	}
 
-	public List<UserPlant> getUserPlantCollections() {
-		return userPlantCollections;
+	public List<PlantCollection> getPlantCollections() {
+		return plantCollections;
 	}
 
-	public void setUserPlantCollections(List<UserPlant> userPlantCollections) {
-		this.userPlantCollections = userPlantCollections;
+	public void setPlantCollections(List<PlantCollection> userPlantCollections) {
+		this.plantCollections = userPlantCollections;
 	}
 
 	public PlantSpecies getPlantSpecies() {
