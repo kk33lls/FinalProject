@@ -14,7 +14,7 @@ private url = environment.baseUrl + 'api/plantSpecies';
 constructor(private http: HttpClient, private auth: AuthService) { }
 
 index(): Observable<PlantSpecies[]> {
-  return this.http.get<PlantSpecies[]>(this.url, this.getHttpOptions()).pipe(
+  return this.http.get<PlantSpecies[]>(this.url).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError(
@@ -25,7 +25,7 @@ index(): Observable<PlantSpecies[]> {
   }
 
 keywordSearch(keyword: string): Observable<PlantSpecies[]> {
-    return this.http.get<PlantSpecies[]>(this.url + '/search/' + keyword, this.getHttpOptions()).pipe(
+    return this.http.get<PlantSpecies[]>(this.url + '/search/' + keyword).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -36,7 +36,7 @@ keywordSearch(keyword: string): Observable<PlantSpecies[]> {
   }
 
 viewDetails(speciesId: number): Observable<PlantSpecies> {
-    return this.http.get<PlantSpecies>(this.url + '/' + speciesId, this.getHttpOptions()).pipe(
+    return this.http.get<PlantSpecies>(this.url + '/' + speciesId).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
