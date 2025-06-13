@@ -14,8 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 export class Navigation {
   isCollapsed: boolean = false;
 
-  login(): boolean {
+  constructor(private auth: AuthService) {}
+
+  loggedIn(): boolean {
     return this.auth.checkLogin();
   }
-  constructor(private auth: AuthService) {}
 }

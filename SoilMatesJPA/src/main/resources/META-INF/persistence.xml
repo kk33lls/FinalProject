@@ -12,7 +12,7 @@
 	<class>com.skilldistillery.soilmates.entities.PlantCollection</class>
 	<class>com.skilldistillery.soilmates.entities.CareType</class>
 	<class>com.skilldistillery.soilmates.entities.CareLog</class>
-	<class>com.skilldistillery.soilmates.entities.Difficulty</class>
+	<class>com.skilldistillery.soilmates.entities.CareDifficulty</class>
 	
 	
     <properties>

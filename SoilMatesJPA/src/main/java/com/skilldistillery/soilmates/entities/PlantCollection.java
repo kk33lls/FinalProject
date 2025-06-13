@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +45,7 @@ public class PlantCollection {
 	@ManyToMany
 	@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
+	@JsonIgnoreProperties({"plantCollections"})
 	private List<UserPlant> userPlants;
 	
 	@ManyToOne
