@@ -1,0 +1,19 @@
+<div>
+  <div>
+    <h1>{{plantSpecies.genus}}, {{plantSpecies.species}}, {{plantSpecies.commonNames}}</h1>
+    <p>Description: {{plantSpecies.description}}</p>
+    <img [src]="plantSpecies.imageUrl" alt="Image of {{plantSpecies.genus}} {{plantSpecies.species}}">
+  </div>
+  <div>
+    <h4>Native To: {{plantSpecies.nativeTo}}</h4>
+  </div>
+  <div>
+    <h2>Plant Care Information</h2>
+    <ul>
+      <li>Care Difficulty: {{plantSpecies.careDifficulty}}</li>
+      <li>Water Frequency: {{plantSpecies.waterFrequesncy}}</li>
+      <li>Sunlight Requirements: {{plantSpecies.lightRequirements}}</li>
+      <li>Temperature Range: {{plantSpecies.temperatureRange}}</li>
+    </ul>
+  </div>
+</div>
