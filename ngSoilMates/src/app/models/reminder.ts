@@ -1,4 +1,5 @@
-import { UserPlant } from "./user-plant";
+import { CareType } from './care-type';
+import { UserPlant } from './user-plant';
 
 export class Reminder {
   id: number;
@@ -10,36 +11,29 @@ export class Reminder {
   imageUrl: string;
   enabled: boolean;
   userPlant: UserPlant;
-  // careType: CareType;
+  careType: CareType;
 
   constructor(
-  id: number = 0,
-  createdAt: string = "",
-  reminderDate: string = "",
-  title: string = "",
-  notes: string = "",
-  completed: boolean = true,
-  imageUrl: string = "",
-  enabled: boolean = true,
-  userPlant: UserPlant = new UserPlant(),
-  // careType: CareType = "",
-
-  ){
-  this.id = id;
-  this.createdAt =createdAt;
-  this.reminderDate = reminderDate;
-  this.title = title;
-  this.notes = notes;
-  this.completed = completed;
-  this.imageUrl = imageUrl;
-  this.enabled = enabled;
-  this.userPlant = userPlant;
-  // this.careType = careType;
-
-
-
+    id: number = 0,
+    createdAt: string = '',
+    reminderDate: string = '',
+    title: string = '',
+    notes: string = '',
+    completed: boolean = true,
+    imageUrl: string = '',
+    enabled: boolean = true,
+    userPlant: UserPlant = new UserPlant(),
+    careType: CareType = new CareType()
+  ) {
+    this.id = id;
+    this.createdAt = createdAt;
+    this.reminderDate = reminderDate;
+    this.title = title;
+    this.notes = notes;
+    this.completed = completed;
+    this.imageUrl = imageUrl;
+    this.enabled = enabled;
+    this.userPlant = userPlant;
+    this.careType = careType;
   }
-
-
-
 }

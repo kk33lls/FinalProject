@@ -2,6 +2,7 @@ import { CareLog } from "./care-log";
 import { PlantCollection } from "./plant-collection";
 import { PlantComment } from "./plant-comment";
 import { PlantSpecies } from "./plant-species";
+import { Reminder } from "./reminder";
 import { User } from "./user";
 
 export class UserPlant {
@@ -16,11 +17,11 @@ export class UserPlant {
   updatedAt: string;
   imageUrl: string;
   enabled: boolean;
-  plantComments: PlantComments[];
+  plantComments: PlantComment[];
   reminders: Reminder[];
   careLogs: CareLog[];
-  userPlantCollections: UserPlantCollection[];
-  plantSpecies: PlantSpecies[];
+  plantCollections: PlantCollection[];
+  plantSpecies: PlantSpecies;
   user: User;
 
   constructor(
@@ -38,8 +39,8 @@ export class UserPlant {
   plantComments: PlantComment[] = [],
   reminders: Reminder[] = [],
   careLogs: CareLog[] = [],
-  userPlantCollections: PlantCollection[] = [],
-  plantSpecies: PlantSpecies[] = [],
+  plantCollections: PlantCollection[] = [],
+  plantSpecies: PlantSpecies = new PlantSpecies(),
   user: User = new User(),
 
   ){
@@ -57,7 +58,7 @@ export class UserPlant {
   this.plantComments = plantComments;
   this.reminders = reminders;
   this.careLogs = careLogs;
-  this.userPlantCollections = userPlantCollections;
+  this.plantCollections = plantCollections;
   this.plantSpecies = plantSpecies;
   this.user = user;
   }
