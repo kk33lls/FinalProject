@@ -1,1 +1,14 @@
-<p>home works!</p>
+<form >
+  <label for="plantSpecies">Search for a plant</label>
+
+  <input type="text" name="plantSpecies" [(ngModel)]="searchTerm">
+  <button class="btn btn-primary" (click)="findPlantSpecies(searchTerm)">Search</button>
+
+</form>
+<div>
+  <ul>
+    @for (species of plantSpeciesSearchResults; track $index) {
+      <li>{{species.commonNames}} {{species.genus}} {{species.species}}</li>
+    }
+  </ul>
+</div>
