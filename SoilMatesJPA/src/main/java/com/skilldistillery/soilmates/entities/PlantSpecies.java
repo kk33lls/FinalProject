@@ -3,6 +3,8 @@ package com.skilldistillery.soilmates.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -52,9 +54,11 @@ public class PlantSpecies {
 	private CareDifficulty careDifficulty;
 	
 	@OneToMany(mappedBy="plantSpecies")
+	@JsonIgnore
 	private List<UserPlant> userPlants;
 	
 	@OneToMany(mappedBy="plantSpecies")
+	@JsonIgnore
 	private List<SpeciesComment> speciesComments;
 
 
