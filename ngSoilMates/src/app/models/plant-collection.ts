@@ -1,4 +1,5 @@
 import { User } from "./user";
+import { UserPlant } from "./user-plant";
 
 export class PlantCollection {
   id: number;
@@ -7,7 +8,7 @@ export class PlantCollection {
   imageUrl: string;
   name: string;
   description: string;
-  userPlantCollection: UserPlantCollection[];
+  userPlants: UserPlant[];
   user: User;
 
   constructor(
@@ -17,8 +18,8 @@ export class PlantCollection {
   imageUrl: string = '',
   name: string = '',
   description: string = '',
-  userPlantCollection: UserPlantCollection[] = [],
-  user: User = null,
+  userPlants: UserPlant[] = [],
+  user: User = new User(),
   ){
   this.id = id;
   this.createdAt =createdAt;
@@ -26,7 +27,7 @@ export class PlantCollection {
   this.imageUrl =imageUrl;
   this.name =name;
   this.description = description;
-  this.userPlantCollection = userPlantCollection;
+  this.userPlants = userPlants;
   this.user =user;
   }
 }
