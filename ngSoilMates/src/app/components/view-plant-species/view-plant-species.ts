@@ -12,15 +12,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class ViewPlantSpecies {
 
-  plantSpecies: PlantSpecies = new PlantSpecies();
-  plantSpeciesDetailView: PlantSpecies[] = [];
-  selected: PlantSpecies | null = null;
+  selected: PlantSpecies = new PlantSpecies();
 
   constructor(private router: Router, private plantSpeciesService: PlantSpeciesService, private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
-  this.reload();
-
    this.activatedRoute.paramMap.subscribe({
     next: (params) => {
       let speciesIdStr = params.get("speciesId");
@@ -48,18 +44,6 @@ export class ViewPlantSpecies {
       this.router.navigateByUrl("notFound")
     }
   });
-  }
-
-  reload() {
-    this.plantSpeciesService.index().subscribe({
-      next: (speciesList) => {
-        this.plantSpeciesDetailView = speciesList;
-      },
-      error: (err) => {
-        console.log(err);
-        console.log('view-plant-species.ts Component: error loading species');
-      }
-    });
   }
 
   displayPlantSpecies(plantSpecies: PlantSpecies): void{

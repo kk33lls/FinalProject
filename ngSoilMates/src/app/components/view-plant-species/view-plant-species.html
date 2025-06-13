@@ -1,19 +1,23 @@
 <div>
   <div>
-    <h1>{{plantSpecies.genus}}, {{plantSpecies.species}}, {{plantSpecies.commonNames}}</h1>
-    <p>Description: {{plantSpecies.description}}</p>
-    <img [src]="plantSpecies.imageUrl" alt="Image of {{plantSpecies.genus}} {{plantSpecies.species}}">
+    <h1>{{selected.genus}}, {{selected.species}}, {{selected.commonNames}}</h1>
+    <p>Description: {{selected.description}}</p>
+    <img [src]="selected.imageUrl" alt="Image of {{selected.genus}} {{selected.species}}">
   </div>
   <div>
-    <h4>Native To: {{plantSpecies.nativeTo}}</h4>
+    <h4>Native To: {{selected.nativeTo}}</h4>
+  </div>
+  <div>
+    <h2>Plant Care Information</h2>
+    <h4>Level of difficulty: {{selected.careDifficulty.name}}</h4>
+    <p>{{selected.careDifficulty.description}}</p>
   </div>
   <div>
     <h2>Plant Care Information</h2>
     <ul>
-      <li>Care Difficulty: {{plantSpecies.careDifficulty}}</li>
-      <li>Water Frequency: {{plantSpecies.waterFrequesncy}}</li>
-      <li>Sunlight Requirements: {{plantSpecies.lightRequirements}}</li>
-      <li>Temperature Range: {{plantSpecies.temperatureRange}}</li>
+      <li>Water Frequency: {{selected.waterFrequency}}</li>
+      <li>Sunlight Requirements: {{selected.lightRequirements}}</li>
+      <li>Temperature Range: {{selected.temperatureRange}}</li>
     </ul>
   </div>
 </div>
