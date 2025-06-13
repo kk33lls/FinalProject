@@ -6,4 +6,8 @@ import com.skilldistillery.soilmates.entities.PlantSpecies;
 
 public interface PlantSpeciesService {
 	List<PlantSpecies> keywordSearch(String keyword);
+	
+	List<PlantSpecies> findAll();
+	 
+	PlantSpecies findById (int id);
 }
