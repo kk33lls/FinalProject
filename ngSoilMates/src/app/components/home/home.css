@@ -1,0 +1,27 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+nav.navbar {
+  z-index: 1000;
+}
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.7); /* Soft white with transparency */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+.transparent {
+  background-color: transparent;
+}
+.table-hover tbody tr:hover {
+  background-color: #f0f9eb;
+}
+
+form input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(140, 198, 62, 0.25);
+}

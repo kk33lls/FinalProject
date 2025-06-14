@@ -1,28 +1,55 @@
-<form >
-    <div class="row">
-    <div class="col">
-      <label for="username">Username</label>
-      <input class="form-control"
-        type="text"
-        [(ngModel)]="newUser.username"
-        name="username"
-        id="username"
-      />
+<div class="d-flex justify-content-center align-items-center vh-90 bg-light bg-transparent">
+  <form
+    (ngSubmit)="register(newUser)"
+    class="glass-panel w-100"
+    style="max-width: 600px;"
+  >
+    <div class="mb-4 text-center">
+      <h2 class="fw-bold text-success">Create Your Account</h2>
     </div>
-    <div class="col">
-      <label for="password">Password</label>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label for="username" class="form-label">Username</label>
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          [(ngModel)]="newUser.username"
+          name="username"
+          id="username"
+          placeholder="Username"
+          required
+        />
+      </div>
+      <div class="col">
+        <label for="password" class="form-label">Password</label>
+        <input
+          class="form-control form-control-lg"
+          type="password"
+          [(ngModel)]="newUser.password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="email" class="form-label">Email</label>
       <input
-      class="form-control"
-        type="password"
-        [(ngModel)]="newUser.password"
-        name="password"
-        id="password"
+        class="form-control form-control-lg"
+        type="email"
+        [(ngModel)]="newUser.email"
+        name="email"
+        id="email"
+        placeholder="you@example.com"
+        required
       />
     </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn-glow w-100">Register Account</button>
     </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input class="form-control" type="text" [(ngModel)]="newUser.email" name="email"  />
-    </div>
-    <button class="btn btn-success" (click)="register(newUser)">Register Account</button>
   </form>
+</div>
