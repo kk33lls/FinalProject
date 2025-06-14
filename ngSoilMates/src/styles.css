@@ -5,9 +5,19 @@ body {
   color: #ffffff;
   font-family: sans-serif;
 }
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
 
 .body-bg3 {
-  background: url('../public/images/background/vd.gif') no-repeat center center fixed;
+  background: url('../public/images/background/vd.mp4') repeat center center fixed;
   background-size: cover;
   color: #ffffff00;
   font-family: 'Segoe UI', sans-serif;
