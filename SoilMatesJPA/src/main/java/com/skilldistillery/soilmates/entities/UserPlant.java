@@ -64,8 +64,6 @@ public class UserPlant {
 	private List<CareLog> careLogs;
 	
 	@ManyToMany(mappedBy="userPlants")
-	//@JoinTable(name = "collection_has_plant", joinColumns = @JoinColumn(name = "plant_collection_id"), 
-	//inverseJoinColumns = @JoinColumn(name = "user_plant_id"))
 	private List<PlantCollection> plantCollections;
 	
 	@ManyToOne

@@ -20,3 +20,10 @@ glass-panel {
 .card-text, .text-muted {
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
 }
+img {
+  width: 200px;
+  padding-right: 10px;
+  vertical-align: right;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+
+}
