@@ -36,9 +36,11 @@
         }
         @if (loggedIn()) {
           <li class="nav-item">
+            <a class="nav-link text-dark btn-glow" [routerLink]="['profile']">Profile</a>
+          </li>
+          <li class="nav-item">
             <app-logout></app-logout>
           </li>
-
         }
       </ul>
     </div>
