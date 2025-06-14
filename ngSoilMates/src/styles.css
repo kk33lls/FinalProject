@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 body {
 
@@ -6,6 +6,7 @@ body {
   color: #ffffff;
   font-family: sans-serif;
 }
+
 #bg-video {
   position: fixed;
   top: 0;
@@ -354,7 +355,7 @@ input:checked + .slider::before {
   box-shadow: var(--glow);
 }
 .glass-panel {
-  background-color: rgba(255, 255, 255, 0.7); /* Soft white with transparency */
+  background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -387,4 +388,4 @@ form input:focus {
   box-shadow: 0 0 16px rgba(140, 198, 62, 0.8);
   transform: translateY(-1px);
 }
-
+*/
