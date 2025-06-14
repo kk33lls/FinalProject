@@ -8,8 +8,8 @@
 <!-- Centered Search Form -->
 <div class="d-flex justify-content-center align-items-center vh-90 bg-light flex-column text-center bg-transparent">
   <h1 class="mb-4 display-4 fw-bold hero-title ">Soil Mates 🌿</h1>
-<audio id="bgAudio" src="images/background/bg.mp3" autoplay></audio>
-  <form (ngSubmit)="findPlantSpecies(searchTerm)" class="w-75 w-md-50 mb-5 " style="max-width: 700px">
+<!-- <audio id="bgAudio" src="images/background/bg.mp3" autoplay></audio> -->
+  <form  class="w-75 w-md-50 mb-5 " style="max-width: 700px">
     <div class="input-group shadow">
       <input
         type="text"
@@ -19,7 +19,7 @@
         placeholder="Search by name, genus, or species..."
         required
       />
-      <button type="submit" class="btn btn-success btn-lg">Search</button>
+      <button type="submit" class="btn btn-success btn-lg" (click)="findPlantSpecies(searchTerm)">Search</button>
     </div>
   </form>
 
@@ -34,13 +34,6 @@
       <th>Common Name</th>
       <th>Genus</th>
       <th>Species</th>
-      <th>Description</th>
-      <th>Light</th>
-      <th>Water</th>
-      <th>Origin</th>
-      <th>Temp</th>
-      <th>Difficulty</th>
-      <th>Enabled</th>
     </tr>
   </thead>
   <tbody>
@@ -57,7 +50,7 @@
         </td>
         <td>
           <a
-            [routerLink]="['/viewPlantSpecies', species.id]"
+            [routerLink]="['/viewPlantSpecies/' + species.id]"
             class="text-decoration-none text-success fw-bold"
           >
             {{ species.commonNames }}
@@ -65,21 +58,6 @@
         </td>
         <td>{{ species.genus }}</td>
         <td>{{ species.species }}</td>
-        <td class="small">{{ species.description }}</td>
-        <td>{{ species.lightRequirements }}</td>
-        <td>{{ species.waterFrequency }}</td>
-        <td>{{ species.nativeTo }}</td>
-        <td>{{ species.temperatureRange }}</td>
-        <td>{{ species.careDifficulty }}</td>
-        <td>
-          <span
-            class="badge"
-            [class.bg-success]="species.enabled"
-            [class.bg-secondary]="!species.enabled"
-          >
-            {{ species.enabled ? 'Yes' : 'No' }}
-          </span>
-        </td>
       </tr>
     }
   </tbody>
