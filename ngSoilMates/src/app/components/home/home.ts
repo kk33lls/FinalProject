@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PlantSpeciesService } from '../../services/plant-species-service';
+
 import { Navigation } from "../navigation/navigation";
 
 @Component({
   selector: 'app-home',
   imports: [FormsModule, RouterLink, Navigation],
+
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
