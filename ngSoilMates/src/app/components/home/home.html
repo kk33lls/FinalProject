@@ -1,25 +1,89 @@
 
-  <div>
-    <div class="d-flex justify-content-center align-items-center">
-    <form class="centered-form">
-      <label for="plantSpecies"></label>
 
-      <input type="text" name="plantSpecies" [(ngModel)]="searchTerm" />
-      <button class="btn btn-primary px-3" (click)="findPlantSpecies(searchTerm)">
-        Search
-      </button>
-    </form>
-    <div>
-      </div>
-      <ul>
-        @for (species of plantSpeciesSearchResults; track $index) {
-        <li>
-          <a [routerLink]="['/viewPlantSpecies/' + species.id]">
-            {{species.commonNames}} {{species.genus}} {{species.species}}</a
-          >
-        </li>
-        }
-      </ul>
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="images/background/vd.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<!-- Centered Search Form -->
+<div class="d-flex justify-content-center align-items-center vh-90 bg-light flex-column text-center bg-transparent">
+  <h1 class="mb-4 display-4 fw-bold hero-title ">Soil Mates 🌿</h1>
+<audio id="bgAudio" src="images/background/bg.mp3" autoplay></audio>
+  <form (ngSubmit)="findPlantSpecies(searchTerm)" class="w-75 w-md-50 mb-5 " style="max-width: 700px">
+    <div class="input-group shadow">
+      <input
+        type="text"
+        name="plantSpecies"
+        [(ngModel)]="searchTerm"
+        class="form-control form-control-lg"
+        placeholder="Search by name, genus, or species..."
+        required
+      />
+      <button type="submit" class="btn btn-success btn-lg">Search</button>
     </div>
-  </div>
+  </form>
 
+  <!-- Results -->
+@if (plantSpeciesSearchResults.length > 0) {
+  <div class="w-75 table-responsive shadow rounded bg-white p-4 outer-table">
+    <h2 class="h5 mb-3 text-muted">Search Results</h2>
+   <table class="table table-hover align-middle text-start">
+  <thead class="table-light">
+    <tr>
+      <th>Image</th>
+      <th>Common Name</th>
+      <th>Genus</th>
+      <th>Species</th>
+      <th>Description</th>
+      <th>Light</th>
+      <th>Water</th>
+      <th>Origin</th>
+      <th>Temp</th>
+      <th>Difficulty</th>
+      <th>Enabled</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (species of plantSpeciesSearchResults; track $index) {
+      <tr>
+        <td>
+          <img
+            [src]="species.imageUrl"
+            alt="Plant image"
+            width="60"
+            height="60"
+            class="rounded"
+          />
+        </td>
+        <td>
+          <a
+            [routerLink]="['/viewPlantSpecies', species.id]"
+            class="text-decoration-none text-success fw-bold"
+          >
+            {{ species.commonNames }}
+          </a>
+        </td>
+        <td>{{ species.genus }}</td>
+        <td>{{ species.species }}</td>
+        <td class="small">{{ species.description }}</td>
+        <td>{{ species.lightRequirements }}</td>
+        <td>{{ species.waterFrequency }}</td>
+        <td>{{ species.nativeTo }}</td>
+        <td>{{ species.temperatureRange }}</td>
+        <td>{{ species.careDifficulty }}</td>
+        <td>
+          <span
+            class="badge"
+            [class.bg-success]="species.enabled"
+            [class.bg-secondary]="!species.enabled"
+          >
+            {{ species.enabled ? 'Yes' : 'No' }}
+          </span>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+  </div>
+}

@@ -1,14 +1,47 @@
-<form>
-  <div class="form-group">
 
-    <label for="username">Username:</label>
-    <input type="text" name="username" placeholder="Username" [(ngModel)]="loginUser.username">
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="images/background/vd.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
+<div class="d-flex justify-content-center align-items-center vh-900 bg-light  bg-transparent">
+  <form
+    (ngSubmit)="login(loginUser)"
+    class="glass-panel w-100"
+    style="max-width: 400px;"
+  >
+    <div class="mb-4 text-center trans">
+      <h2 class="fw-bold text-success">Login</h2>
+    </div>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" placeholder="Password" [(ngModel)]="loginUser.password">
-    <button class="btn btn-primary" (click)="login(loginUser)">Login</button>
+    <div class="mb-3">
+      <label for="username" class="form-label fw-semibold">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-control form-control-lg"
+        placeholder="Enter your username"
+        [(ngModel)]="loginUser.username"
+        required
+      />
+    </div>
 
+    <div class="mb-4">
+      <label for="password" class="form-label fw-semibold">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control form-control-lg"
+        placeholder="Enter your password"
+        [(ngModel)]="loginUser.password"
+        required
+      />
+    </div>
 
-  </div>
-</form>
+    <div class="text-center">
+      <button type="submit" class="btn-glow w-100">Login</button>
+    </div>
+  </form>
+</div>

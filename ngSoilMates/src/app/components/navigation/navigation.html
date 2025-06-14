@@ -1,36 +1,44 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary">
+
+<nav class="navbar navbar-expand-sm bg-transparent px-4">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['/home']">Home</a>
+
+    <a class="navbar-brand fw-bold text-dark" [routerLink]="['/home']">
+      <img src="images/logo.png" alt="Logo" height="200" />
+    </a>
+
 
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
+
+      (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed"
       aria-label="Toggle navigation"
-      (click)="isCollapsed = !isCollapsed"
+
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div
-      class="collapse navbar-collapse"
+
       id="navbarSupportedContent"
+      class="collapse navbar-collapse"
       [ngbCollapse]="isCollapsed"
     >
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        @if (! loggedIn()) {
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/register']">Register</a>
-        </li>
-        } @if (loggedIn()) {
-        <li class="nav-item"><app-logout></app-logout></li>
-        } @if (! loggedIn()) {
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>
+      <ul class="navbar-nav ms-auto d-flex gap-3">
+        @if (!loggedIn()) {
+          <li class="nav-item">
+            <a class="nav-link text-dark btn-glow" [routerLink]="['/register']">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark btn-glow" [routerLink]="['/login']">Login</a>
+          </li>
+        }
+        @if (loggedIn()) {
+          <li class="nav-item">
+            <app-logout></app-logout>
+          </li>
+
         }
       </ul>
     </div>
