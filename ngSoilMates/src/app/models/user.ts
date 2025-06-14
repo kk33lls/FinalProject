@@ -11,6 +11,7 @@ import { UserPlant } from './user-plant';
   createdAt: string;
   updatedAt: string;
   imageUrl: string;
+  biography: string;
   userPlants: UserPlant[];
 
   constructor(
@@ -25,6 +26,7 @@ import { UserPlant } from './user-plant';
     createdAt: string = "",
     updatedAt: string = "",
     imageUrl: string = "",
+    biography: string = "",
     userPlants: UserPlant [] = [],
 
   ){
@@ -39,6 +41,7 @@ import { UserPlant } from './user-plant';
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.imageUrl = imageUrl;
+    this.biography = biography;
     this.userPlants = userPlants
   }
 }

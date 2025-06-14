@@ -1,22 +1,70 @@
-<div class="container mt-5 hero-info">
-//  <img src="" alt="">
-  <p>Username: {{user.username}}</p>
+<!-- @if (! editUser) { -->
+<!-- <div class="container mt-5 hero-info">
+  <div class="row">
+    <p>Username: {{user.username}}</p>
 
-  <p>First Name: {{user.firstName}}</p>
-  <p>Last Name: {{user.lastName}}</p>
-  <p>Email: {{user.email}}</p>
+    <p>First Name: {{user.firstName}}</p>
+    <p>Last Name: {{user.lastName}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Biography: {{user.biography}}</p>
 
-  <p>Member since: {{user.createdAt}}</p>
-</div>
+    <p>Member since: {{user.createdAt}}</p>
+  </div>
+  <div class="col-md-4">
+    <img [src]="user.imageUrl" [alt]="'Image of' + user.username" />
+  </div>
+  <button class="btn btn-success btn-lg" (click)="setEditUser()">
+    Update
+  </button>
+</div> -->
+@if (! editUser) {
+  <div class="container mt-5 hero-info">
+    <div class="row">
+      <div class="col-md-8">
+        <p>Username: {{user.username}}</p>
+        <p>First Name: {{user.firstName}}</p>
+        <p>Last Name: {{user.lastName}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>Biography: {{user.biography}}</p>
+        <p>Member since: {{user.createdAt}}</p>
+      </div>
+      <div class="col-md-4">
+        <img [src]="user.imageUrl" [alt]="'Image of ' + user.username" class="img-fluid" />
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <button class="btn btn-success btn-lg" (click)="setEditUser()">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+} @if (editUser) {
+<h1>Update Profile Information</h1>
+<form>
+  <label for="firstName" class="hero-info">First Name:</label>
+  <input type="text" name="firstName" [(ngModel)]="editUser.firstName" /><br />
+
+  <label for="lastName" class="hero-info">Last Name:</label>
+  <input type="text" name="lastName" [(ngModel)]="editUser.lastName" /><br />
+
+  <label for="email" class="hero-info">Email:</label>
+  <input type="text" name="email" [(ngModel)]="editUser.email" /><br />
+
+  <label for="biography" class="hero-info">Biography</label>
+  <input type="text" name="biography" [(ngModel)]="editUser.biography" /><br />
+
+  <label for="imageUrl" class="hero-info">Upload Image URL:</label>
+  <input type="text" name="imageUrl" [(ngModel)]="editUser.imageUrl" /><br />
+
+  <button class="btn btn-success btn-lg" (click)="updateUser(editUser)">
+    Submit
+  </button>
+</form>
+}
 
 <div class="container mt-5">
-<h2 class="text-center mb-4 hero-title">Your Plants 🪴</h2>
-<div class=" row row-cols-1 row-cols-md-3 g-4">
-
-
-
+  <h2 class="text-center mb-4 hero-title">Your Plants 🪴</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4"></div>
 </div>
-
-</div>
-
-

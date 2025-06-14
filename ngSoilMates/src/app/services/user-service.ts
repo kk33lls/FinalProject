@@ -5,30 +5,32 @@ import { User } from '../models/user';
 import { AuthService } from './auth-service';
 import { environment } from '../../environments/environment';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private url = environment.baseUrl + 'api/users/id';
+  private url = environment.baseUrl + 'api/users';
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
-  viewUserDetails(userId: number): Observable<User> {
-    return this.http.get<User>(this.url + '/' + userId).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error('PlantSpeciesService.viewDetails(): error retrieving plant species: ' + err)
-        );
-      })
-    );
+  update(updatedUser: User, userId: number): Observable<User> {
+    return this.http.put<User>(this.url + '/' + userId, updatedUser, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () => new Error('UserService.update(): error updating user: ' + err)
+          );
+        })
+      );
   }
-  addPlantToUser(userPlantId: number): Observable<User> {
-    return this.http.get<User>(this.url + "/" + userId).pipe(
-      
-    )
+  getHttpOptions() {
+    let httpOptions = {
+      headers: {
+        Authorization: 'Basic ' + this.auth.getCredentials(),
+        'X-Requested-with': 'XMLHttpRequest',
+      },
+    };
+    return httpOptions;
   }
-
-
 }
