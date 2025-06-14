@@ -3,7 +3,7 @@
 body {
 
   background-color: #ffffff;
-  color: #ffffff;
+  color: #000000;
   font-family: sans-serif;
 }
 
@@ -289,7 +289,7 @@ body, html {
   --dark-green: #4b7b4d;
   --navy: #104547;
   --gray: #404041;
-  --white: #ffffff;
+  --white: #1f1a1a;
   --glow: 0 0 10px rgba(140, 198, 62, 0.6);
 }
 
