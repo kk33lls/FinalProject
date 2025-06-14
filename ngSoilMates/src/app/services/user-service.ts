@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private url = environment.baseUrl + 'api/users';
+  private url = environment.baseUrl + 'api/users/id';
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -23,6 +23,11 @@ export class UserService {
         );
       })
     );
+  }
+  addPlantToUser(userPlantId: number): Observable<User> {
+    return this.http.get<User>(this.url + "/" + userId).pipe(
+      
+    )
   }
 
 

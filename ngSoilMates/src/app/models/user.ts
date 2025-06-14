@@ -1,3 +1,4 @@
+import { UserPlant } from './user-plant';
   export class User {
   id: number;
   username: string;
@@ -10,6 +11,7 @@
   createdAt: string;
   updatedAt: string;
   imageUrl: string;
+  userPlants: UserPlant[];
 
   constructor(
     id: number = 0,
@@ -23,6 +25,7 @@
     createdAt: string = "",
     updatedAt: string = "",
     imageUrl: string = "",
+    userPlants: UserPlant [] = [],
 
   ){
     this.id = id;
@@ -35,6 +38,7 @@
     this.email = email;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.imageUrl = imageUrl
+    this.imageUrl = imageUrl;
+    this.userPlants = userPlants
   }
 }

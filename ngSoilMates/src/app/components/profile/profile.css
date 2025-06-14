@@ -12,3 +12,11 @@ glass-panel {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+.card-title {
+  font-size: 1.25rem;
+  text-shadow: 0 0 3px #8cc63e, 0 0 6px #4b7b4d;
+}
+
+.card-text, .text-muted {
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+}

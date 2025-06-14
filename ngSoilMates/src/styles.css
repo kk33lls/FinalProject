@@ -2,7 +2,7 @@
 
 body {
 
-  background-color: #ffffff;
+  background-color: #fcfcfc;
   color: #000000;
   font-family: sans-serif;
 }
@@ -118,7 +118,7 @@ body, html {
   height: 100%;
   margin: 0;
 
-  background-color: #ffffff;
+  background-color: #ada985;
   color: #82db2e;
 
   font-family: 'Segoe UI', sans-serif;
@@ -140,6 +140,12 @@ body, html {
   color: #355831;
 }
 
+.hero-info {
+  font-size: 1rem;
+  font-weight: 800;
+  text-shadow: var(--glow);
+  color: #42853b;
+}
 .hero-highlight {
   color: #c6ff00;
 }
@@ -173,7 +179,7 @@ body, html {
   flex-direction: column;
   min-height: 100vh;
   background-color: #121212;
-  color: #F4F4F4;
+  color: #8f9568;
 }
 
 .ghost-main {
@@ -374,7 +380,7 @@ form input:focus {
 }
 .btn-glow {
   background-color: #8cc63e;
-  color: white;
+  color: rgb(64, 152, 72);
   font-weight: bold;
   border: none;
   border-radius: 10px;
