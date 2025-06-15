@@ -1,7 +1,8 @@
 
+import { AfterViewInit, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { User } from '../../models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user-service';
 import { AuthService } from '../../services/auth-service';
 import { PlantSpecies } from '../../models/plant-species';
@@ -10,14 +11,17 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './profile.html',
-  styleUrl: './profile.css'
+  styleUrl: './profile.css',
+
 })
-export class Profile {
+export class Profile implements OnInit, AfterViewInit{
   user: User = new User();
   userPlants: UserPlant[] = []
   editUser: User | null = null;
+  searchTerm: string = '';
+  @ViewChild('floatingCard') floatingCardRef!: ElementRef;
 
   constructor(
     private auth: AuthService,
@@ -30,6 +34,39 @@ export class Profile {
   this.loadUser();
   // this.loadPlants();
   }
+  //***floating logic***//
+    ngAfterViewInit(): void {
+    const card = this.floatingCardRef.nativeElement;
+
+    if (!card) return;
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    card.addEventListener('mousedown', (e: MouseEvent) => {
+      isDragging = true;
+      offsetX = e.clientX - card.offsetLeft;
+      offsetY = e.clientY - card.offsetTop;
+      card.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      card.style.cursor = 'grab';
+    });
+
+    document.addEventListener('mousemove', (e: MouseEvent) => {
+      if (isDragging) {
+        card.style.left = `${e.clientX - offsetX}px`;
+        card.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+  }
+goToSearch(): void {
+  this.router.navigate(['/home'], { queryParams: { search: this.searchTerm } });
+}
+//** End Floating logic */
 
   loadUser(): void{
     this.auth.getLoggedInUser().subscribe({
@@ -60,6 +97,9 @@ export class Profile {
       },
     });
   }
+
+
+
 //  loadPlants(): void {
 //   this.userPlantService.getUserPlants().subscribe({
 //     next: (plants) => {
