@@ -11,14 +11,15 @@ import com.skilldistillery.soilmates.entities.UserPlant;
 import com.skilldistillery.soilmates.repositories.PlantSpeciesRepository;
 import com.skilldistillery.soilmates.repositories.UserPlantRepository;
 import com.skilldistillery.soilmates.repositories.UserRepository;
+
 @Service
 public class UserPlantServiceImpl implements UserPlantService {
 	@Autowired
 	UserPlantRepository userPlantRepo;
-	
+
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	PlantSpeciesRepository plantSpeciesRepo;
 
@@ -36,6 +37,40 @@ public class UserPlantServiceImpl implements UserPlantService {
 
 	@Override
 	public List<UserPlant> displayUserPlants(String username) {
-		return userPlantRepo.findByUser_Username(username);
+		return userPlantRepo.findByUser_UsernameAndEnabledTrue(username);
+	}
+
+	@Override
+	public boolean delete(String username, int userPlantId) {
+		UserPlant plantToDelete = userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+		if (plantToDelete != null) {
+			plantToDelete.setEnabled(false);
+			userPlantRepo.saveAndFlush(plantToDelete);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public UserPlant show(String username, int userPlantId) {
+		return userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+	}
+
+	@Override
+	public UserPlant update(String username, int userPlantId, UserPlant userPlant) {
+		UserPlant managedPlant = userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+		if (managedPlant != null) {
+			managedPlant.setAcquiredDate(userPlant.getAcquiredDate());
+			managedPlant.setAlive(userPlant.getAlive());
+			managedPlant.setImageUrl(userPlant.getImageUrl());
+			managedPlant.setLocation(userPlant.getLocation());
+			managedPlant.setName(userPlant.getName());
+			managedPlant.setNotes(userPlant.getNotes());
+
+			userPlantRepo.saveAndFlush(managedPlant);
+
+			return managedPlant;
+		}
+		return null;
 	}
 }
