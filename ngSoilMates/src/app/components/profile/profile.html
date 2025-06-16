@@ -121,7 +121,7 @@
     <div class="card" style="width: 18rem">
       <img [src]="userPlant.imageUrl" alt="{{userPlant.name}}" />
       <div class="card-body">
-        <p>{{userPlant.name}}</p>
+        <p><a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/viewUserPlant/' + userPlant.id]">{{userPlant.name}}</a></p>
       </div>
     </div>
   }

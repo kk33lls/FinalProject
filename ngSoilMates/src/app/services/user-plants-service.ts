@@ -36,6 +36,16 @@ export class UserPlantsService {
           })
         );
 }
+viewDetails(userPlantId: number): Observable<UserPlant> {
+    return this.http.get<UserPlant>(this.url + '/' + userPlantId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('UserPlantService.viewDetails(): error retrieving user plant: ' + err)
+        );
+      })
+    );
+  }
   getHttpOptions() {
     let httpOptions = {
       headers: {
