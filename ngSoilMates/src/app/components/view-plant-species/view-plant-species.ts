@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user-service';
 import { PlantSpeciesService } from './../../services/plant-species-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlantSpecies } from './../../models/plant-species';
@@ -14,7 +15,7 @@ export class ViewPlantSpecies {
 
   selected: PlantSpecies = new PlantSpecies();
 
-  constructor(private router: Router, private plantSpeciesService: PlantSpeciesService, private activatedRoute: ActivatedRoute){}
+  constructor(private router: Router, private plantSpeciesService: PlantSpeciesService, private userService: UserService,  private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
    this.activatedRoute.paramMap.subscribe({
@@ -45,7 +46,16 @@ export class ViewPlantSpecies {
     }
   });
   }
-
+togglePlantAdd(species: PlantSpecies): void {
+  this.userService.addPlantToUser(species.id).subscribe({
+    next: () => {
+      console.log(`Plant ${species.commonNames} added to profile`);
+    },
+    error: (err) => {
+      console.error('Error adding plant:', err);
+    }
+  });
+}
   displayPlantSpecies(plantSpecies: PlantSpecies): void{
     this.selected = plantSpecies;
   }

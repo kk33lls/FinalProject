@@ -1,34 +1,49 @@
 
 
-<video autoplay muted loop playsinline id="bg-video">
+<video autoplay muted playsinline id="bg-video">
   <source src="images/background/vd.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video><div>
 
-  <div class="container py-5 text-light">
+ <div class="container py-5 text-light">
   <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
     <div class="row g-0">
+      <!-- Left: Image -->
       <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
         <img
           [src]="selected.imageUrl"
           alt="Image of {{ selected.genus }} {{ selected.species }}"
           class="img-fluid rounded shadow"
-          style="max-height: 300px; object-fit: contain;"
+          style="max-height: 350px; object-fit: contain;"
         />
       </div>
-      <div class="col-md-8 p-4">
-        <h2 class=" hero-title ;">{{ selected.commonNames }}</h2>
-        <h4 class="mb-3">Level of difficulty: {{ selected.careDifficulty.name }}</h4>
-        <p>{{ selected.careDifficulty.description }}</p>
-        <hr />
-        <p><strong>Genus:</strong> {{ selected.genus }}</p>
-        <p><strong>Species:</strong> {{ selected.species }}</p>
-        <p><strong>Description:</strong> {{ selected.description }}</p>
-        <p><strong>Light Requirements:</strong> {{ selected.lightRequirements }}</p>
-        <p><strong>Water Frequency:</strong> {{ selected.waterFrequency }}</p>
-        <p><strong>Native To:</strong> {{ selected.nativeTo }}</p>
-        <p><strong>Temperature Range:</strong> {{ selected.temperatureRange }}</p>
 
+      <!-- Right: Info -->
+      <div class="col-md-8 p-4 d-flex flex-column justify-content-between">
+        <div>
+          <h2 class="hero-title mb-3">{{ selected.commonNames }}</h2>
+          <h5 class="mb-2"><strong>Difficulty:</strong> {{ selected.careDifficulty.name }}</h5>
+          <p class="text-muted">{{ selected.careDifficulty.description }}</p>
+          <hr />
+          <p><strong>Genus:</strong> {{ selected.genus }}</p>
+          <p><strong>Species:</strong> {{ selected.species }}</p>
+          <p><strong>Description:</strong> {{ selected.description }}</p>
+          <p><strong>Light:</strong> {{ selected.lightRequirements }}</p>
+          <p><strong>Water:</strong> {{ selected.waterFrequency }}</p>
+          <p><strong>Native To:</strong> {{ selected.nativeTo }}</p>
+          <p><strong>Temp Range:</strong> {{ selected.temperatureRange }}</p>
+        </div>
+
+        <!-- Bottom Right: Add Toggle -->
+        <div class="d-flex justify-content-end align-items-center mt-4">
+          <div class="text-end">
+            <label class="switch">
+              <input type="checkbox" (change)="togglePlantAdd(selected)">
+              <span class="slider"></span>
+            </label>
+            <p class="mt-2 text-muted small">Add to My Plants</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

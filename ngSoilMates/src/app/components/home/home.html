@@ -1,12 +1,10 @@
-
-
-<video autoplay muted loop playsinline id="bg-video">
+<video autoplay muted playsinline id="bg-video">
   <source src="images/background/vd.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
 <!-- Centered Search Form -->
-<div class="d-flex justify-content-center align-items-center vh-90 bg-light flex-column text-center bg-transparent">
+<div class="d-flex justify-content-center align-items-center min-vh-80 flex-column text-center bg-transparent">
   <h1 class="mb-4 display-4 fw-bold hero-title ">Soil Mates 🌿</h1>
 <!-- <audio id="bgAudio" src="images/background/bg.mp3" autoplay></audio> -->
   <form  class="w-75 w-md-50 mb-5 " style="max-width: 700px">
@@ -34,33 +32,40 @@
       <th>Common Name</th>
       <th>Genus</th>
       <th>Species</th>
+       <th>Add</th>
     </tr>
   </thead>
   <tbody>
-    @for (species of plantSpeciesSearchResults; track $index) {
-      <tr>
-        <td>
-          <img
-            [src]="species.imageUrl"
-            alt="Plant image"
-            width="60"
-            height="60"
-            class="rounded"
-          />
-        </td>
-        <td>
-          <a
-            [routerLink]="['/viewPlantSpecies/' + species.id]"
-            class="text-decoration-none text-success fw-bold"
-          >
-            {{ species.commonNames }}
-          </a>
-        </td>
-        <td>{{ species.genus }}</td>
-        <td>{{ species.species }}</td>
-      </tr>
-    }
-  </tbody>
+  @for (species of plantSpeciesSearchResults; track $index) {
+    <tr>
+      <td>
+        <img
+          [src]="species.imageUrl"
+          alt="Plant image"
+          width="60"
+          height="60"
+          class="rounded"
+        />
+      </td>
+      <td>
+        <a
+          [routerLink]="['/viewPlantSpecies', species.id]"
+          class="text-decoration-none text-success fw-bold"
+        >
+          {{ species.commonNames }}
+        </a>
+      </td>
+      <td>{{ species.genus }}</td>
+      <td>{{ species.species }}</td>
+      <td class="text-center">
+        <label class="switch">
+          <input type="checkbox" (change)="togglePlantAdd(species)">
+          <span class="slider"></span>
+        </label>
+      </td>
+    </tr>
+  }
+</tbody>
 </table>
 
   </div>

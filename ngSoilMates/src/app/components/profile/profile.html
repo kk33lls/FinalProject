@@ -1,70 +1,123 @@
-<!-- @if (! editUser) { -->
-<!-- <div class="container mt-5 hero-info">
-  <div class="row">
-    <p>Username: {{user.username}}</p>
+<video autoplay muted playsinline id="bg-video">
+  <source src="images/background/vd.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
-    <p>First Name: {{user.firstName}}</p>
-    <p>Last Name: {{user.lastName}}</p>
-    <p>Email: {{user.email}}</p>
-    <p>Biography: {{user.biography}}</p>
+<h2 class="text-center mb-4 hero-title">Your Plants 🪴</h2>
 
-    <p>Member since: {{user.createdAt}}</p>
-  </div>
-  <div class="col-md-4">
-    <img [src]="user.imageUrl" [alt]="'Image of' + user.username" />
-  </div>
-  <button class="btn btn-success btn-lg" (click)="setEditUser()">
-    Update
-  </button>
-</div> -->
-@if (! editUser) {
-  <div class="container mt-5 hero-info">
-    <div class="row">
-      <div class="col-md-8">
-        <p>Username: {{user.username}}</p>
-        <p>First Name: {{user.firstName}}</p>
-        <p>Last Name: {{user.lastName}}</p>
-        <p>Email: {{user.email}}</p>
-        <p>Biography: {{user.biography}}</p>
-        <p>Member since: {{user.createdAt}}</p>
+<!-- View Mode -->
+@if (!editUser) {
+  <div class="container py-5 text-light d-flex justify-content-center">
+    <div
+      #floatingCard
+      id="floating-card"
+      class="card glass-panel shadow-lg border-light outer-table p-4 position-absolute"
+      style="top: 200px; left: 200px; max-width: 500px; z-index: 1000; cursor: grab;"
+    >
+      <!-- Image -->
+      <div class="text-center mb-3">
+        <img
+          [src]="user.imageUrl || 'images/logo.png'"
+          alt="Profile image"
+          class="rounded-circle shadow"
+          style="width: 120px; height: 120px; object-fit: cover;"
+        />
       </div>
-      <div class="col-md-4">
-        <img [src]="user.imageUrl" [alt]="'Image of ' + user.username" class="img-fluid" />
+
+      <!-- Name -->
+      <h3 class="hero-title text-center mb-3">{{ user.firstName }} {{ user.lastName }}</h3>
+
+      <!-- Info -->
+      <p class="text-center text-muted mb-1">{{ user.username }}</p>
+      <p class="text-center text-muted">{{ user.email }}</p>
+
+      <!-- Bio Box -->
+      <div class="bg-white text-dark p-3 mt-3 rounded shadow-sm text-start">
+        <h6 class="text-muted mb-2">Biography</h6>
+        <p class="mb-0">{{ user.biography || 'No bio added yet.' }}</p>
+      </div>
+
+      <!-- Edit Button -->
+      <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-outline-light text-success btn-sm" (click)="setEditUser()">Edit</button>
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="col-12">
-        <button class="btn btn-success btn-lg" (click)="setEditUser()">
-          Update
-        </button>
-      </div>
-    </div>
   </div>
-} @if (editUser) {
-<h1>Update Profile Information</h1>
-<form>
-  <label for="firstName" class="hero-info">First Name:</label>
-  <input type="text" name="firstName" [(ngModel)]="editUser.firstName" /><br />
-
-  <label for="lastName" class="hero-info">Last Name:</label>
-  <input type="text" name="lastName" [(ngModel)]="editUser.lastName" /><br />
-
-  <label for="email" class="hero-info">Email:</label>
-  <input type="text" name="email" [(ngModel)]="editUser.email" /><br />
-
-  <label for="biography" class="hero-info">Biography</label>
-  <input type="text" name="biography" [(ngModel)]="editUser.biography" /><br />
-
-  <label for="imageUrl" class="hero-info">Upload Image URL:</label>
-  <input type="text" name="imageUrl" [(ngModel)]="editUser.imageUrl" /><br />
-
-  <button class="btn btn-success btn-lg" (click)="updateUser(editUser)">
-    Submit
-  </button>
-</form>
 }
 
-<div class="container mt-5">
-  <h2 class="text-center mb-4 hero-title">Your Plants 🪴</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4"></div>
+<!-- Edit Mode -->
+@if (editUser) {
+  <div class="container mt-4 glass-panel text-light p-4" style="max-width: 600px;">
+    <h2 class="text-success text-center mb-4">Update Profile 🌱</h2>
+
+    <form class="spacing">
+      <div class="mb-3">
+        <label class="form-label text-success ">First Name:</label>
+        <input type="text" class="form-control" [(ngModel)]="editUser.firstName" name="firstName" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-success">Last Name:</label>
+        <input type="text" class="form-control" [(ngModel)]="editUser.lastName" name="lastName" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-success">Email:</label>
+        <input type="email" class="form-control" [(ngModel)]="editUser.email" name="email" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-success">Biography:</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="editUser.biography" name="biography"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-success">Image URL:</label>
+        <input type="text" class="form-control" [(ngModel)]="editUser.imageUrl" name="imageUrl" />
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn-glow" (click)="updateUser(editUser)">Submit</button>
+      </div>
+      <div class="d-flex justify-content-start mt-3">
+       <a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/']">exit</a>
+      </div>
+    </form>
+  </div>
+}
+<!-- Plant List Section -->
+
+<div class="container py-5 text-light">
+  <div class="card glass-panel  bg-opacity-80 shadow-lg border-light">
+    <div class="row g-0">
+      <!-- Left: Image -->
+      <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
+      </div>
+
+      <!-- Right: Info -->
+      <div class="col-md-8 p-4 d-flex flex-column justify-content-between">
+        <div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- mini search bar -->
+
+<div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-40%); z-index: 99;">
+  <form (ngSubmit)="goToSearch()">
+    <div class="input-group input-group-sm">
+      <input
+        type="text"
+        style="max-width: 400px"
+        [(ngModel)]="searchTerm"
+        name="miniSearch"
+        class="form-control"
+        placeholder="Search..."
+        required
+      />
+      <button type="submit" class="btn btn-success">Go</button>
+    </div>
+  </form>
 </div>
