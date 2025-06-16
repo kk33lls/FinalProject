@@ -4,69 +4,83 @@
 </video>
 
 <!-- Centered Search Form -->
-<div class="d-flex justify-content-center align-items-center min-vh-80 flex-column text-center bg-transparent">
-  <h1 class="mb-4 display-4 fw-bold hero-title ">Soil Mates 🌿</h1>
-<!-- <audio id="bgAudio" src="images/background/bg.mp3" autoplay></audio> -->
-  <form  class="w-75 w-md-50 mb-5 " style="max-width: 700px">
+<div
+  class="d-flex justify-content-center align-items-center min-vh-80 flex-column text-center bg-transparent"
+>
+  <h1 class="mb-4 display-4 fw-bold hero-title">Soil Mates 🌿</h1>
+  <!-- <audio id="bgAudio" src="images/background/bg.mp3" autoplay></audio> -->
+  <form class="w-75 w-md-50 mb-5" style="max-width: 700px">
     <div class="input-group shadow">
       <input
         type="text"
+        (change)="findPlantSpecies(searchTerm)"
         name="plantSpecies"
         [(ngModel)]="searchTerm"
         class="form-control form-control-lg"
         placeholder="Search by name, genus, or species..."
         required
       />
-      <button type="submit" class="btn btn-success btn-lg" (click)="findPlantSpecies(searchTerm)">Search</button>
+      <button
+        type="submit"
+        class="btn btn-success btn-lg"
+        (click)="findPlantSpecies(searchTerm)"
+      >
+        Search
+      </button>
     </div>
   </form>
 
   <!-- Results -->
-@if (plantSpeciesSearchResults.length > 0) {
+  @if (plantSpeciesSearchResults.length > 0) {
   <div class="w-75 table-responsive shadow rounded bg-white p-4 outer-table">
     <h2 class="h5 mb-3 text-muted">Search Results</h2>
-   <table class="table table-hover align-middle text-start">
-  <thead class="table-light">
-    <tr>
-      <th>Image</th>
-      <th>Common Name</th>
-      <th>Genus</th>
-      <th>Species</th>
-       <th>Add</th>
-    </tr>
-  </thead>
-  <tbody>
-  @for (species of plantSpeciesSearchResults; track $index) {
-    <tr>
-      <td>
-        <img
-          [src]="species.imageUrl"
-          alt="Plant image"
-          width="60"
-          height="60"
-          class="rounded"
-        />
-      </td>
-      <td>
-        <a
-          [routerLink]="['/viewPlantSpecies', species.id]"
-          class="text-decoration-none text-success fw-bold"
-        >
-          {{ species.commonNames }}
-        </a>
-      </td>
-      <td>{{ species.genus }}</td>
-      <td>{{ species.species }}</td>
-      <td class="text-center">
-        <label class="switch">
-          <input type="checkbox" (change)="togglePlantAdd(species)">
-          <span class="slider"></span>
-        </label>
-      </td>
-    </tr>
-  }
-</tbody>
-</table>
-
+    <table class="table table-hover align-middle text-start">
+      <thead class="table-light">
+        <tr>
+          <th>Image</th>
+          <th>Common Name</th>
+          <th>Genus</th>
+          <th>Species</th>
+          <!-- <th>Add to profile</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        @for (species of plantSpeciesSearchResults; track $index) {
+        <tr>
+          <td>
+            <img
+              [src]="species.imageUrl"
+              alt="Plant image"
+              width="60"
+              height="60"
+              class="rounded"
+            />
+          </td>
+          <td>
+            <a
+              [routerLink]="['/viewPlantSpecies', species.id]"
+              class="text-decoration-none text-success fw-bold"
+            >
+              {{ species.commonNames }}
+            </a>
+          </td>
+          <td>{{ species.genus }}</td>
+          <td>{{ species.species }}</td>
+<!--
+          <td class="text-center">
+            <div class="form-check d-inline-block">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="addToMyPlants-{{species.id}}"
+                (click)="addPlantToUser(species)"
+              />
+            </div>
+          </td> -->
+        </tr>
+        }
+      </tbody>
+    </table>
   </div>
-}
+  }
+</div>

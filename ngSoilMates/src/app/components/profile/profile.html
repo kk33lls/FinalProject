@@ -7,105 +7,137 @@
 
 <!-- View Mode -->
 @if (!editUser) {
-  <div class="container py-5 text-light d-flex justify-content-center">
-    <div
+<div class="container py-5 text-light d-flex justify-content-center">
+  <!-- <div
       #floatingCard
       id="floating-card"
       class="card glass-panel shadow-lg border-light outer-table p-4 position-absolute"
       style="top: 200px; left: 200px; max-width: 500px; z-index: 1000; cursor: grab;"
-    >
-      <!-- Image -->
-      <div class="text-center mb-3">
-        <img
-          [src]="user.imageUrl || 'images/logo.png'"
-          alt="Profile image"
-          class="rounded-circle shadow"
-          style="width: 120px; height: 120px; object-fit: cover;"
-        />
-      </div>
-
-      <!-- Name -->
-      <h3 class="hero-title text-center mb-3">{{ user.firstName }} {{ user.lastName }}</h3>
-
-      <!-- Info -->
-      <p class="text-center text-muted mb-1">{{ user.username }}</p>
-      <p class="text-center text-muted">{{ user.email }}</p>
-
-      <!-- Bio Box -->
-      <div class="bg-white text-dark p-3 mt-3 rounded shadow-sm text-start">
-        <h6 class="text-muted mb-2">Biography</h6>
-        <p class="mb-0">{{ user.biography || 'No bio added yet.' }}</p>
-      </div>
-
-      <!-- Edit Button -->
-      <div class="d-flex justify-content-end mt-3">
-        <button class="btn btn-outline-light text-success btn-sm" (click)="setEditUser()">Edit</button>
-      </div>
-    </div>
+    > -->
+  <!-- Image -->
+  <div class="text-center mb-3">
+    <img
+      [src]="user.imageUrl || 'images/logo.png'"
+      alt="Profile image"
+      class="rounded-circle shadow"
+      style="width: 120px; height: 120px; object-fit: cover"
+    />
   </div>
+
+  <!-- Name -->
+  <h4 class="hero-info text-center mb-3">
+    {{ user.firstName }} {{ user.lastName }}
+  </h4>
+
+  <!-- Info -->
+  <p class="text-center text-muted mb-1">{{ user.username }}</p>
+  <p class="text-center text-muted">{{ user.email }}</p>
+
+  <!-- Bio Box -->
+  <div class="bg-white text-dark p-3 mt-3 rounded shadow-sm text-start">
+    <h6 class="text-muted mb-2">Biography</h6>
+    <p class="mb-0">{{ user.biography || 'No bio added yet.' }}</p>
+  </div>
+
+  <!-- Edit Button -->
+  <div class="d-flex justify-content-end mt-3">
+    <button
+      class="btn btn-outline-light text-success btn-sm"
+      (click)="setEditUser()"
+    >
+      Edit
+    </button>
+  </div>
+</div>
+<!-- </div> -->
 }
 
 <!-- Edit Mode -->
 @if (editUser) {
-  <div class="container mt-4 glass-panel text-light p-4" style="max-width: 600px;">
-    <h2 class="text-success text-center mb-4">Update Profile 🌱</h2>
+<div class="container mt-4 glass-panel text-light p-4" style="max-width: 600px">
+  <h2 class="text-success text-center mb-4">Update Profile 🌱</h2>
 
-    <form class="spacing">
-      <div class="mb-3">
-        <label class="form-label text-success ">First Name:</label>
-        <input type="text" class="form-control" [(ngModel)]="editUser.firstName" name="firstName" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label text-success">Last Name:</label>
-        <input type="text" class="form-control" [(ngModel)]="editUser.lastName" name="lastName" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label text-success">Email:</label>
-        <input type="email" class="form-control" [(ngModel)]="editUser.email" name="email" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label text-success">Biography:</label>
-        <textarea class="form-control" rows="3" [(ngModel)]="editUser.biography" name="biography"></textarea>
-      </div>
-      <div class="mb-3">
-        <label class="form-label text-success">Image URL:</label>
-        <input type="text" class="form-control" [(ngModel)]="editUser.imageUrl" name="imageUrl" />
-      </div>
-      <div class="d-flex justify-content-end">
-        <button class="btn-glow" (click)="updateUser(editUser)">Submit</button>
-      </div>
-      <div class="d-flex justify-content-start mt-3">
-       <a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/']">exit</a>
-      </div>
-    </form>
-  </div>
+  <form class="spacing">
+    <div class="mb-3">
+      <label class="form-label text-success">First Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="editUser.firstName"
+        name="firstName"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label text-success">Last Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="editUser.lastName"
+        name="lastName"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label text-success">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="editUser.email"
+        name="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label text-success">Biography:</label>
+      <textarea
+        class="form-control"
+        rows="3"
+        [(ngModel)]="editUser.biography"
+        name="biography"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label text-success">Image URL:</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="editUser.imageUrl"
+        name="imageUrl"
+      />
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn-glow" (click)="updateUser(editUser)">Submit</button>
+    </div>
+    <div class="d-flex justify-content-start mt-3">
+      <a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/']"
+        >exit</a
+      >
+    </div>
+  </form>
+</div>
 }
 <!-- Plant List Section -->
 
-<div class="container py-5 text-light">
-  <div class="card glass-panel  bg-opacity-80 shadow-lg border-light">
-    <div class="row g-0">
-      <!-- Left: Image -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
-      </div>
-
-      <!-- Right: Info -->
-      <div class="col-md-8 p-4 d-flex flex-column justify-content-between">
-        <div>
-
-
-
-        </div>
+<div class="scrollable-cards-container">
+  @for (userPlant of userPlants; track $index) {
+    <div class="card" style="width: 18rem">
+      <img [src]="userPlant.imageUrl" alt="{{userPlant.name}}" />
+      <div class="card-body">
+        <p>{{userPlant.name}}</p>
       </div>
     </div>
-  </div>
+  }
 </div>
-
-
 
 <!-- mini search bar -->
 
-<div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-40%); z-index: 99;">
+<div
+  style="
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-40%);
+    z-index: 99;
+  "
+>
   <form (ngSubmit)="goToSearch()">
     <div class="input-group input-group-sm">
       <input
