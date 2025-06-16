@@ -58,10 +58,8 @@ delete(plantSpeciesId: number): Observable<void> {
           })
         );
 }
-
-
 viewDetails(userPlantId: number): Observable<UserPlant> {
-    return this.http.get<UserPlant>(this.url + '/' + userPlantId).pipe(
+    return this.http.get<UserPlant>(this.url + '/' + userPlantId, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

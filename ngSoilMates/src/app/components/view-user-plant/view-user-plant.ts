@@ -41,6 +41,10 @@ export class ViewUserPlant {
     });
   }
 
+  setEditUserPlant(){
+    this.editUserPlant = {...this.selected}
+  }
+
   loadById(userPlantId: number): void {
     this.userPlantsService.viewDetails(userPlantId).subscribe({
       next: (userPlant) => {
@@ -57,7 +61,8 @@ export class ViewUserPlant {
   updateUserPlant(userPlant: UserPlant) {
     this.userPlantsService.edit(userPlant.id, userPlant).subscribe({
       next: (success) => {
-        this.editUserPlant = success;
+        this.selected = success;
+        this.editUserPlant = null;
       },
       error: (err) => {
         console.error('error updating plant:', err);
@@ -67,7 +72,9 @@ export class ViewUserPlant {
 
   deleteUserPlant(id: number): void {
     this.userPlantsService.delete(id).subscribe({
-      next: (success) => {},
+      next: (success) => {
+        this.router.navigateByUrl('/profile');
+      },
       error: (err) => {
         console.log(err);
         console.error('❌error deleting id:', err);

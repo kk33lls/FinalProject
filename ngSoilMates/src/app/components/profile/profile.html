@@ -115,8 +115,6 @@
       <img [src]="userPlant.imageUrl" alt="{{userPlant.name}}" />
       <div class="card-body">
         <p><a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/viewUserPlant/' + userPlant.id]">{{userPlant.name}}</a></p>
-        <button class="btn-glow" (click)="updateUserPlant(userPlant)">edit</button>
-        <button class="btn-glow" (click)="deleteUserPlant(userPlant.id)">Delete</button>
       </div>
     </div>
   }
