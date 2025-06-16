@@ -1,41 +1,90 @@
+@if (!updateForm) {
 <div class="container py-5 text-light">
-    <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
-      <div class="row g-0">
-        <!-- Left: Image -->
-        <div
-          class="col-md-4 d-flex justify-content-center align-items-center p-3"
-        >
-          <img
-            [src]="selected.imageUrl"
-            alt="Image of {{ selected.name }}"
-            class="img-fluid rounded shadow"
-            style="max-height: 350px; object-fit: contain"
-          />
-        </div>
-
-        <!-- Right: Info -->
-<!--
-        <div class="col-md-8 p-4 d-flex flex-column justify-content-between">
-          <div>
-            <h2 class="hero-title mb-3">{{ selected.name }}</h2>
-            <h5 class="mb-2">
-              <strong>Difficulty:</strong> {{ selected.careDifficulty.name }}
-            </h5>
-            <p class="text-muted">{{ selected.careDifficulty.description }}</p>
-            <hr />
-            <p><strong>Genus:</strong> {{ selected.genus }}</p>
-            <p><strong>Species:</strong> {{ selected.species }}</p>
-            <p><strong>Description:</strong> {{ selected.description }}</p>
-            <p><strong>Light:</strong> {{ selected.lightRequirements }}</p>
-            <p><strong>Water:</strong> {{ selected.waterFrequency }}</p>
-            <p><strong>Native To:</strong> {{ selected.nativeTo }}</p>
-            <p><strong>Temp Range:</strong> {{ selected.temperatureRange }}</p>
-          </div> -->
-
-          <div class="col-md-8 p-4 d-flex flex-column justify-content-between">
-          <div>
-            <h2 class="hero-title mb-3">{{ selected.name }}</h2>
-            <p><strong>Created:</strong> {{ selected.createdAt }}</p>
-            <p><strong>Located:</strong> {{ selected.location}}</p>
-            <p><strong>Notes:</strong> {{ selected.notes }}</p>
-          </div>
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+    <div class="row g-0">
+      <!-- Left: Image -->
+      <div
+        class="col-md-4 d-flex justify-content-center align-items-center p-3"
+      >
+        <img
+          [src]="selected.imageUrl"
+          alt="Image of {{ selected.name }}"
+          class="img-fluid rounded shadow"
+          style="max-height: 350px; object-fit: contain"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
+  <div>
+    <img
+      [src]="selected.imageUrl || 'image/logo.png'"
+      [alt]="selected.name"
+      class="rounded-circle shadow"
+      style="width: 120px; height: 120px; object-fit: cover"
+    />
+    <h2 class="hero-title mb-3">{{ selected.name }}</h2>
+    <p><strong>Created:</strong> {{ selected.acquiredDate }}</p>
+    <p><strong>Located:</strong> {{ selected.location}}</p>
+    <p><strong>Notes:</strong> {{ selected.alive }}</p>
+    <p><strong>Notes:</strong> {{ selected.notes }}</p>
+    <button class="btn-glow" (click)="updateForm=true">edit</button>
+    <button class="btn-glow" (click)="deleteUserPlant(selected.id)">
+      Delete
+    </button>
+  </div>
+</div>
+} @if(updateForm && editUserPlant) {
+<div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
+  <form action="">
+    <div>
+      <label for="name">Name</label>
+      <input
+        [(ngModel)]="editUserPlant.name"
+        type="text"
+        name="name"
+        id="name"
+      />
+      <label for="acquiredDate">Acquired Date</label>
+      <input
+        [(ngModel)]="editUserPlant.acquiredDate"
+        type="text"
+        name="acquiredDate"
+        id="acquiredDate"
+      />
+      <label for="location">Location</label>
+      <input
+        [(ngModel)]="editUserPlant.location"
+        type="text"
+        name="location"
+        id="location"
+      />
+      <label for="alive">Alive</label>
+      <input
+        [(ngModel)]="editUserPlant.alive"
+        type="checkbox"
+        name="alive"
+        id="alive"
+      />
+      <label for="notes">Notes</label>
+      <textarea [(ngModel)]="editUserPlant.notes" name="notes" id="notes">
+<textarea></textarea
+      >
+      <label for="imageUrl">Image</label>
+      <input
+        [(ngModel)]="editUserPlant.imageUrl"
+        type="text"
+        name="imageUrl"
+        id="imageUrl"
+      />
+      <button
+        class="btn-glow"
+        (click)="updateUserPlant(editUserPlant); updateForm=false"
+      >
+        save
+      </button>
+    </div>
+  </form>
+</div>
+}

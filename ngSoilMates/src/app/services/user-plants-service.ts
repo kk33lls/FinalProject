@@ -31,19 +31,29 @@ export class UserPlantsService {
     catchError((err: any) => {
             console.log(err);
             return throwError(
-              () => new Error('UserPlantSpeciesService.create(): error adding plant species: ' + err)
+              () => new Error('❌ UserPlantService.create(): error creating plant: ' + err)
+            );
+          })
+        );
+}
+edit(userPlantId: number, userPlant: UserPlant): Observable<UserPlant> {
+   return this.http.put<UserPlant>(this.url + `/` +   userPlantId, userPlant, this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+            console.log(err);
+            return throwError(
+              () => new Error('❌ userplantservice.edit(): error updating plant: ' + err)
             );
           })
         );
 }
 
 delete(plantSpeciesId: number): Observable<void> {
-   return this.http.delete<void>(this.url + `/plantSpecies/`
+   return this.http.delete<void>(this.url + `/`
     +  plantSpeciesId, this.getHttpOptions()).pipe(
     catchError((err: any) => {
             console.log(err);
             return throwError(
-              () => new Error('❌UserPlantSpeciesService.delete(): error adding plant species: ' + err)
+              () => new Error('❌ UserPlantService.delete(): error deleting plant: ' + err)
             );
           })
         );

@@ -21,6 +21,7 @@ export class Profile implements OnInit{
   user: User = new User();
   userPlants: UserPlant[] = []
   editUser: User | null = null;
+  editUserPlant: UserPlant | null = null;
   searchTerm: string = '';
   // @ViewChild('floatingCard') floatingCardRef!: ElementRef;
 
@@ -79,11 +80,24 @@ export class Profile implements OnInit{
       }
     });
   }
+  updateUserPlant(userPlant: UserPlant) {
+    this.userPlantsService.edit(userPlant.id, userPlant).subscribe ({
+      next: (success) => {
+        this.loadUserPlants();
+        this.loadUser();
+        this.editUserPlant = null;
+      },
+       error: (err) => {
+        console.error('error updating plant:', err);
+       }
+    });
+  }
 
   deleteUserPlant( id:number) : void {
    this.userPlantsService.delete(id).subscribe({
     next: (success) => {
       this.loadUser();
+      this.loadUserPlants();
     },
     error: (err) => {
       console.log(err);
