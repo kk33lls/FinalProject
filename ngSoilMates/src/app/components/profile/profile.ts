@@ -79,34 +79,29 @@ export class Profile implements OnInit{
       }
     });
   }
-    // //***floating logic***//
-    //   ngAfterViewInit(): void {
-    //   const card = this.floatingCardRef.nativeElement;
 
-    //   if (!card) return;
+  deleteUserPlant( id:number) : void {
+   this.userPlantsService.delete(id).subscribe({
+    next: (success) => {
+      this.loadUser();
+    },
+    error: (err) => {
+      console.log(err);
+        console.error('❌error deleting id:', err);
+    }
+   });
+  }
 
-    //   let isDragging = false;
-    //   let offsetX = 0;
-    //   let offsetY = 0;
 
-    //   card.addEventListener('mousedown', (e: MouseEvent) => {
-    //     isDragging = true;
-    //     offsetX = e.clientX - card.offsetLeft;
-    //     offsetY = e.clientY - card.offsetTop;
-    //     card.style.cursor = 'grabbing';
-    //   });
 
-    //   document.addEventListener('mouseup', () => {
-    //     isDragging = false;
-    //     card.style.cursor = 'grab';
-    //   });
 
-    //   document.addEventListener('mousemove', (e: MouseEvent) => {
-    //     if (isDragging) {
-    //       card.style.left = `${e.clientX - offsetX}px`;
-    //       card.style.top = `${e.clientY - offsetY}px`;
-    //     }
-    //   });
-    // }
+
+
+
+
+
+
+
+
 
 }

@@ -36,6 +36,20 @@ export class UserPlantsService {
           })
         );
 }
+
+delete(plantSpeciesId: number): Observable<void> {
+   return this.http.delete<void>(this.url + `/plantSpecies/`
+    +  plantSpeciesId, this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+            console.log(err);
+            return throwError(
+              () => new Error('❌UserPlantSpeciesService.delete(): error adding plant species: ' + err)
+            );
+          })
+        );
+}
+
+
 viewDetails(userPlantId: number): Observable<UserPlant> {
     return this.http.get<UserPlant>(this.url + '/' + userPlantId).pipe(
       catchError((err: any) => {
