@@ -22,12 +22,12 @@
       class="rounded-circle shadow"
       style="width: 120px; height: 120px; object-fit: cover"
     />
-  </div>
+  </div><br>
 
   <!-- Name -->
   <h4 class="hero-info text-center mb-3">
     {{ user.firstName }} {{ user.lastName }}
-  </h4>
+  </h4><br>
 
   <!-- Info -->
   <p class="text-center text-muted mb-1">{{ user.username }}</p>
@@ -122,6 +122,7 @@
       <img [src]="userPlant.imageUrl" alt="{{userPlant.name}}" />
       <div class="card-body">
         <p><a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/viewUserPlant/' + userPlant.id]">{{userPlant.name}}</a></p>
+        <button class="btn-glow" (click)="deleteUserPlant(userPlant.id)">Delete</button>
       </div>
     </div>
   }
