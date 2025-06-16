@@ -33,7 +33,5 @@ export class UserService {
     };
     return httpOptions;
   }
-  addPlantToUser(plantSpeciesId: number) {
-  return this.http.post(`/api/user/plants/${plantSpeciesId}`, null);
-}
+
 }

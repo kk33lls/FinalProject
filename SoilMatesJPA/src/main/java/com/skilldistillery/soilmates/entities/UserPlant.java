@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -55,15 +57,19 @@ public class UserPlant {
 	private boolean enabled;
 	
 	@OneToMany(mappedBy="userPlant")
+	@JsonIgnore
 	private List<PlantComment> plantComments;
 	
 	@OneToMany(mappedBy = "userPlant")
+	@JsonIgnore
 	private List<Reminder> reminders;
 	
 	@OneToMany(mappedBy = "userPlant")
+	@JsonIgnore
 	private List<CareLog> careLogs;
 	
 	@ManyToMany(mappedBy="userPlants")
+	@JsonIgnore
 	private List<PlantCollection> plantCollections;
 	
 	@ManyToOne

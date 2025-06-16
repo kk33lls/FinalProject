@@ -1,0 +1,48 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth-service';
+import { environment } from '../../environments/environment';
+import { catchError, Observable, throwError } from 'rxjs';
+import { UserPlant } from '../models/user-plant';
+import { PlantSpecies } from '../models/plant-species';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserPlantsService {
+  private url = environment.baseUrl + 'api/plants';
+
+  constructor(private http: HttpClient, private auth: AuthService) { }
+
+  getUserPlants(): Observable<UserPlant[]>{
+    return this.http.get<UserPlant[]>(this.url, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('UserPlantService.getUserPlants(): error retrieving plants: ' + err)
+        );
+      })
+    );
+  }
+
+   create(plantSpeciesId: number, userPlant: UserPlant): Observable<UserPlant> {
+   return this.http.post<UserPlant>(this.url + `/plantSpecies/` +  plantSpeciesId, userPlant, this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+            console.log(err);
+            return throwError(
+              () => new Error('UserPlantSpeciesService.create(): error adding plant species: ' + err)
+            );
+          })
+        );
+}
+  getHttpOptions() {
+    let httpOptions = {
+      headers: {
+        Authorization: 'Basic ' + this.auth.getCredentials(),
+        'X-Requested-with': 'XMLHttpRequest',
+      },
+    };
+    return httpOptions;
+  }
+}

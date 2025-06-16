@@ -1,3 +1,4 @@
+import { UserPlantsService } from './../../services/user-plants-service';
 import { PlantSpecies } from './../../models/plant-species';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +22,8 @@ export class Home {
     private plantSpeciesService: PlantSpeciesService,
     private router: Router,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private  userPlantsService: UserPlantsService
   ) {}
 
   ngOnInit(): void {
@@ -45,14 +47,14 @@ export class Home {
       },
     });
   }
-  togglePlantAdd(species: PlantSpecies): void {
-    this.userService.addPlantToUser(species.id).subscribe({
-      next: () => {
-        console.log(`Plant ${species.commonNames} added to profile`);
-      },
-      error: (err) => {
-        console.error('Error adding plant:', err);
-      },
-    });
-  }
+  // addPlantToUser(species: PlantSpecies): void {
+  //   this.userPlantsService.addPlantToUser(species.id).subscribe({
+  //     next: () => {
+  //       console.log(`Plant ${species.commonNames} added to profile`);
+  //     },
+  //     error: (err) => {
+  //       console.error('Error adding plant:', err);
+  //     },
+  //   });
+  // }
 }
