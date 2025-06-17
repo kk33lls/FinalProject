@@ -1,29 +1,42 @@
+@if (!editLog){
 <div class="hero-info">
   <form>
-    <label for="notes">Notes: </label>
-    <textarea name="notes" id="notes"></textarea>
     <label class="form-label">Care Type:</label>
-        <select class="form-select" name="careTypeId" [(ngModel)]="newCareLog.careType.id">
-          <option value="">Select type of care...</option>
-          @for(type of careTypes; track type.id) {
-            <option [value]="type.id">{{type.name}}</option>
-          }
-        </select>
-      <button (click)="create()">Create</button>
+    <select
+      class="form-select"
+      name="careTypeId"
+      [(ngModel)]="newCareLog.careType.id"
+    >
+      <option value="">Select type of care...</option>
+      @for(type of careTypes; track type.id) {
+      <option [value]="type.id">{{type.name}}</option>
+      }
+    </select>
+    <label for="notes">Notes: </label>
+    <textarea name="notes" id="notes" [(ngModel)]="newCareLog.notes"></textarea>
+    <label class="form-label" for="careDate">Care Date:</label>
+    <input type="datetime-local" id="careDate" name="careDate" [(ngModel)]="newCareLog.careDate">
+    <button (click)="create()">Create</button>
   </form>
 </div>
-@if (editLog){
+} @else {
 <div class="hero-info">
   <form>
+    <label class="form-label">Care Type:</label>
+    <select
+      class="form-select"
+      name="careTypeId"
+      [(ngModel)]="editLog.careType.id">
+      <option value="">Select type of care...</option>
+      @for(type of careTypes; track type.id) {
+      <option [value]="type.id">{{type.name}}</option>
+      }
+    </select>
     <label for="notes">Notes: </label>
     <textarea name="notes" id="notes" [(ngModel)]="editLog.notes"></textarea>
-    <label class="form-label">Care Type:</label>
-        <select class="form-select" name="careTypeId" [(ngModel)]="editLog.careType.id">
-          <option value="">Select type of care...</option>
-          @for(type of careTypes; track type.id) {
-            <option [value]="type.id">{{type.name}}</option>
-          }
-        </select>
-      <button (click)="saveEditCareLog()">Create</button>
+    <label class="form-label" for="careDate">Care Date:</label>
+    <input type="datetime-local" id="careDate" name="careDate" [(ngModel)]="editLog.careDate">
+    <button (click)="updateCareLog()">Save Changes</button>
   </form>
-</div>}
+</div>
+}

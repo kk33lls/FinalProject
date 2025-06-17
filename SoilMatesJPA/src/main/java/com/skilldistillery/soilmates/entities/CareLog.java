@@ -131,7 +131,7 @@ public class CareLog {
 	@Override
 	public String toString() {
 		return "CareLog [id=" + id + ", notes=" + notes + ", careDate=" + careDate + ", imageUrl=" + imageUrl
-				+ ", enabled=" + enabled + ", userPlant=" + userPlant + ", careType=" + careType + "]";
+				+ ", enabled=" + enabled + "]";
 	}
 
 	

@@ -36,6 +36,15 @@ public class CareLogController {
 		}
 		return foundCareLogs;
 	}
+	@GetMapping("userPlants/{userPlantId}/careLogs/{careLogId}")
+	public CareLog show(Principal principal, HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("userPlantId") int userPlantId, @PathVariable("careLogId") int careLogId) {
+		CareLog foundCareLog = careLogService.getCareLog(principal.getName(), userPlantId, careLogId);
+		if (foundCareLog == null) {
+			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
+		return foundCareLog;
+	}
 
 	@PostMapping("userPlants/{userPlantId}/careLogs")
 	public CareLog create(Principal principal, HttpServletRequest req, HttpServletResponse res,
