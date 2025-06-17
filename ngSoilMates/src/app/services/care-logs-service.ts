@@ -32,25 +32,27 @@ export class CareLogsService {
         })
       );
   }
-  // create(plantSpeciesId: number, userPlant: UserPlant): Observable<UserPlant> {
-  //   return this.http
-  //     .post<UserPlant>(
-  //       this.url + `/plantSpecies/` + plantSpeciesId,
-  //       userPlant,
-  //       this.getHttpOptions()
-  //     )
-  //     .pipe(
-  //       catchError((err: any) => {
-  //         console.log(err);
-  //         return throwError(
-  //           () =>
-  //             new Error(
-  //               '❌ UserPlantService.create(): error creating plant: ' + err
-  //             )
-  //         );
-  //       })
-  //     );
-  // }
+
+  create(userPlantId: number, careLog: CareLog): Observable<CareLog> {
+    return this.http
+      .post<CareLog>(
+        this.url + `/userPlant/` + userPlantId + '/careLog',
+        careLog,
+        this.getHttpOptions()
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                '❌ CareLogService.create(): error creating care log: ' + err
+              )
+          );
+        })
+      );
+  }
+
   // edit(userPlantId: number, userPlant: UserPlant): Observable<UserPlant> {
   //   return this.http
   //     .put<UserPlant>(
