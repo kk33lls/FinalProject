@@ -21,7 +21,7 @@ public class CareLogServiceImpl implements CareLogService {
 	@Override
 	public List<CareLog> displayCareLogs(String username, int userPlantId) {
 		if (careLogRepo.existsByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId)) {
-			return careLogRepo.findByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId);
+			return careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndEnabledTrue(username, userPlantId);
 		}
 		return null;
 	}
@@ -36,5 +36,18 @@ public class CareLogServiceImpl implements CareLogService {
 		careLog.setUserPlant(plant);
 		return careLogRepo.saveAndFlush(careLog);
 
+	}
+
+	@Override
+	public CareLog updateCareLog(String username, int userPlantId, int careLogId, CareLog careLog) {
+		CareLog managedCareLog = careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username, userPlantId, careLogId);
+		if(managedCareLog != null) {
+			managedCareLog.setCareType(careLog.getCareType());
+			managedCareLog.setNotes(careLog.getNotes());
+			
+			careLogRepo.saveAndFlush(managedCareLog);
+			return managedCareLog;
+		}
+		return null;
 	}
 }

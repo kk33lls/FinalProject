@@ -8,5 +8,6 @@ import com.skilldistillery.soilmates.entities.CareLog;
 
 public interface CareLogRepository extends JpaRepository<CareLog, Integer>{
  boolean existsByUserPlant_User_UsernameAndUserPlant_Id(String username, int userPlantId);
- List<CareLog> findByUserPlant_User_UsernameAndUserPlant_Id(String username, int userPlantId);
+ List<CareLog> findByUserPlant_User_UsernameAndUserPlant_IdAndEnabledTrue(String username, int userPlantId);
+ CareLog findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(String username, int userPlantId, int careLogId);
 }

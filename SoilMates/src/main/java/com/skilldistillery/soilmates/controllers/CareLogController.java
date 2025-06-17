@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,4 +50,20 @@ public class CareLogController {
 		}
 		return createdLog;
 	};
+	@PutMapping("userPlants/{userPlantId}/careLogs/{careLogId}")
+	public CareLog update(Principal principal, HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("userPlantId") int userPlantId, @PathVariable("careLogId") int careLogId, @RequestBody CareLog careLog) {
+				
+			try {
+				careLogService.updateCareLog(principal.getName(), userPlantId, careLogId, careLog);
+				if (careLog == null) {
+					res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				}
+				
+			} catch (Exception e) {
+				res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				careLog = null;
+			}
+		return careLog;
+				}
 }
