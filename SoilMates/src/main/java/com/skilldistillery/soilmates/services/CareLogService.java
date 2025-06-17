@@ -15,6 +15,8 @@ CareLog createCareLog (String username, int userPlantId, CareLog careLog);
 CareLog updateCareLog(String username, int userPlantId, int careLogId, CareLog careLog);
 
 CareLog getCareLog(String username, int userPlantId, int careLogId);
+
+boolean delete(String username, int userPlantId, int careLogId);
 }
 
 

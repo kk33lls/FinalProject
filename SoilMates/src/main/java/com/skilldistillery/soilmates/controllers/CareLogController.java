@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,4 +76,21 @@ public class CareLogController {
 			}
 		return careLog;
 				}
+	@DeleteMapping("userPlants/{userPlantId}/careLogs/{careLogId}")
+	public void delete(Principal principal,HttpServletRequest req, HttpServletResponse res, @PathVariable("userPlantId") int id, @PathVariable("careLogId") int logId) {
+		try {
+			boolean deleted = careLogService.delete(principal.getName(), id, logId);
+			if (deleted) {
+				res.setStatus(HttpServletResponse.SC_NO_CONTENT);// 204
+			} else {
+
+				res.setStatus(HttpServletResponse.SC_NOT_FOUND);// 404
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);// 400
+			e.printStackTrace();
+		}
+
+	}
 }
