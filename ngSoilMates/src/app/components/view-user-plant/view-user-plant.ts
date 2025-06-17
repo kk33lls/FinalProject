@@ -5,10 +5,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PlantSpeciesService } from '../../services/plant-species-service';
 import { UserPlantsService } from '../../services/user-plants-service';
 import { UserService } from '../../services/user-service';
+import { CommonModule } from '@angular/common';
+import { CareLog } from '../../models/care-log';
 
 @Component({
   selector: 'app-view-user-plant',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './view-user-plant.html',
   styleUrl: './view-user-plant.css',
 })
@@ -16,6 +18,7 @@ export class ViewUserPlant {
   editUserPlant: UserPlant | null = null;
   selected: UserPlant = new UserPlant();
   updateForm: boolean = false;
+  careLog: CareLog | null = null;
 
   constructor(
     private router: Router,

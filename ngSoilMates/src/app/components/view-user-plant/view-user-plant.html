@@ -18,16 +18,18 @@
 </div>
 <div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
   <div>
-    <img
+    <!-- <img
       [src]="selected.imageUrl"
       [alt]="selected.name"
       class="rounded-circle shadow"
       style="width: 120px; height: 120px; object-fit: cover"
-    />
+    /> -->
     <h2 class="hero-title mb-3">{{ selected.name }}</h2>
-    <p><strong>Created:</strong> {{ selected.acquiredDate }}</p>
+    <p><strong>Created:</strong> {{ selected.acquiredDate | date:'medium'}}</p>
     <p><strong>Located:</strong> {{ selected.location}}</p>
-    <p><strong>Notes:</strong> {{ selected.alive }}</p>
+
+    <p><strong>Alive </strong> {{ selected.alive ? '✅' : '❌'}} </p>
+
     <p><strong>Notes:</strong> {{ selected.notes }}</p>
     <button class="btn-glow" (click)="setEditUserPlant()">Edit</button>
     <button class="btn-glow" (click)="deleteUserPlant(selected.id)">
@@ -35,7 +37,9 @@
     </button>
   </div>
 </div>
-} @if(editUserPlant) {
+}
+
+@if(editUserPlant) {
 <div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
   <form action="">
     <div>
@@ -88,3 +92,28 @@
   </form>
 </div>
 }
+<div>
+  <h2>Care Logs</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Care Type</th>
+        <th>Plant</th>
+        <th>Notes</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{careLog?.id}}</td>
+        <td>{{careLog?.careDate}}</td>
+        <td>{{careLog?.careType}}</td>
+        <td>{{careLog?.userPlant}}</td>
+        <td>{{careLog?.notes}}</td>
+        <!-- <td><button (click)="FIXME">Edit</button></td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
