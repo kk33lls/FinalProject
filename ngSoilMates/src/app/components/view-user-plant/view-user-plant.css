@@ -3,6 +3,9 @@ body, html {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
 }
+h2{
+  color: #000000;
+}
 
 nav.navbar {
   z-index: 1000;
