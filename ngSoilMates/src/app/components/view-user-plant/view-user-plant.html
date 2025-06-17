@@ -92,6 +92,7 @@
   </form>
 </div>
 }
+@if(careLogs.length > 0){
 <div class="hero-info">
   <h2>Care Logs</h2>
   <table>
@@ -104,7 +105,7 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
+   <tbody>
       @for (careLog of careLogs; track $index) {
       <tr>
         <td>{{careLog.id}}</td>
@@ -116,8 +117,20 @@
       </tr>
     }
     </tbody>
-  </table>
-  <div>
+       </table>
+       </div>
+       <div>
     <button [routerLink]="['newCareLog']">New Care Log</button>
   </div>
-</div>
+      } @else {
+       <div class="hero-info">
+        <h2>No Care Logs Found</h2>
+       </div>
+       <div>
+    <button [routerLink]="['newCareLog']">Add a Care Log</button>
+  </div>
+    }
+  <!-- <div>
+    <button [routerLink]="['newCareLog']">New Care Log</button>
+  </div> -->
+
