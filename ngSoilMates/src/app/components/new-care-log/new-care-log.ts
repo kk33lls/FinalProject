@@ -18,6 +18,8 @@ newCareLog: CareLog = new CareLog();
 showForm: boolean = true;
 careTypes: CareType [] = [];
 userPlantId: number = 0;
+careLogs: CareLog[] = [];
+editLog: CareLog | null = null;
 
   constructor(
     private careLogService: CareLogsService,
@@ -67,7 +69,29 @@ userPlantId: number = 0;
     }
   });
   }
+  loadCareLogs(): void {
+    this.careLogService.getCareLogs(this.userPlantId).subscribe({
+      next: careLog => (this.careLogs = careLog)
+      });
+    }
+
+      setEditCareLog(log: CareLog){
+        this.editLog = {...log};
+      }
+      saveEditCareLog(){
+        if (!this.editLog)
+          return;
+        this.careLogService.getCareLogs(this.userPlantId).subscribe({
+                next:  ()=> {
+                 this.editLog = null;
+                 this.loadCareLogs();
+                },
+                 error: (err) =>
+      console.error('Error editing care log:', err)
+
+        });
+      }
+  }
 
 
 
-}

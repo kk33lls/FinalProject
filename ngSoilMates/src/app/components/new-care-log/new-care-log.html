@@ -12,3 +12,18 @@
       <button (click)="create()">Create</button>
   </form>
 </div>
+@if (editLog){
+<div class="hero-info">
+  <form>
+    <label for="notes">Notes: </label>
+    <textarea name="notes" id="notes" [(ngModel)]="editLog.notes"></textarea>
+    <label class="form-label">Care Type:</label>
+        <select class="form-select" name="careTypeId" [(ngModel)]="editLog.careType.id">
+          <option value="">Select type of care...</option>
+          @for(type of careTypes; track type.id) {
+            <option [value]="type.id">{{type.name}}</option>
+          }
+        </select>
+      <button (click)="saveEditCareLog()">Create</button>
+  </form>
+</div>}
