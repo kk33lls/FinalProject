@@ -1,1 +1,14 @@
-<p>view-care-logs works!</p>
+<div class="hero-info">
+  <form>
+    <label for="notes">Notes: </label>
+    <textarea name="notes" id="notes"></textarea>
+    <label class="form-label">Care Type:</label>
+        <select class="form-select" name="careTypeId" [(ngModel)]="newCareLog.careType.id">
+          <option value="">Select type of care...</option>
+          @for(type of careTypes; track type.id) {
+            <option [value]="type.id">{{type.name}}</option>
+          }
+        </select>
+      <button (click)="create(newCareLog.userPlant.id)">Create</button>
+  </form>
+</div>

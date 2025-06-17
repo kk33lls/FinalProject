@@ -1,8 +1,7 @@
-import { CareLogsService } from './../../services/care-logs-service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserPlant } from '../../models/user-plant';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { PlantSpeciesService } from '../../services/plant-species-service';
 import { UserPlantsService } from '../../services/user-plants-service';
 import { UserService } from '../../services/user-service';
@@ -11,7 +10,7 @@ import { CareLog } from '../../models/care-log';
 
 @Component({
   selector: 'app-view-user-plant',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './view-user-plant.html',
   styleUrl: './view-user-plant.css',
 })
@@ -19,16 +18,14 @@ export class ViewUserPlant {
   editUserPlant: UserPlant | null = null;
   selected: UserPlant = new UserPlant();
   updateForm: boolean = false;
-  careLogs: CareLog[] = [];
-
+  careLogs: CareLog [] = [];
 
   constructor(
     private router: Router,
     private plantSpeciesService: PlantSpeciesService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private userPlantsService: UserPlantsService,
-    private careLogsService: CareLogsService
+    private userPlantsService: UserPlantsService
   ) {}
 
   ngOnInit(): void {
@@ -42,23 +39,10 @@ export class ViewUserPlant {
           } else {
             console.log('Navigate with Id: ' + userPlantId);
             this.loadById(userPlantId);
-            this.loadCarelogByUserPlantId(userPlantId);
           }
         }
       },
     });
-  }
-   loadCarelogByUserPlantId(userPlantId: number): void {
-  this.careLogsService.getCareLogs(userPlantId).subscribe({
-    next: (careLogs) => {
-      this.careLogs = careLogs;
-    },
-    error: (err) => {
-      console.error(err);
-      console.error("View-User-Plant.ts Component: error loading user plant's care log");
-      this.router.navigateByUrl("notFound")
-    }
-  });
   }
 
   setEditUserPlant(){

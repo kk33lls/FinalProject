@@ -15,6 +15,7 @@ export const routes: Routes = [
   {path: 'viewPlantSpecies/:speciesId', component: ViewPlantSpecies},
   {path: 'profile', component: Profile},
   {path: 'viewUserPlant/:userPlantId', component: ViewUserPlant},
-  {path: 'viewCareLog/:careLogId', component: ViewCareLogs}
+  {path: 'viewCareLog/:careLogId', component: ViewCareLogs},
+  {path: 'viewCareLog', component: ViewCareLogs},
   // {path: '**', component: NotFound}
 ];
