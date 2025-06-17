@@ -1,9 +1,10 @@
+import { CareLog } from './../models/care-log';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth-service';
 import { catchError, Observable, throwError } from 'rxjs';
-import { CareLog } from '../models/care-log';
+
 import { UserPlant } from '../models/user-plant';
 
 @Injectable({
@@ -33,6 +34,25 @@ export class CareLogsService {
         })
       );
   }
+  show(userPlantId: number, careLogId: number): Observable<CareLog> {
+    return this.http
+      .get<CareLog>(
+        this.url + '/userPlants/' + userPlantId + '/careLogs/' + careLogId,
+        this.getHttpOptions()
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                'CareLogService.show(): error retrieving care log: ' +
+                  err
+              )
+          );
+        })
+      );
+  }
 
   create(userPlantId: number, careLog: CareLog): Observable<CareLog> {
     return this.http
@@ -54,11 +74,9 @@ export class CareLogsService {
       );
   }
 
-  edit(userPlantId: number, userPlant: UserPlant): Observable<UserPlant> {
-    return this.http
-      .put<UserPlant>(
-        this.url + `/` + userPlantId,
-        userPlant,
+  edit(userPlantId: number, careLog: CareLog): Observable<CareLog> {
+    return this.http.put<CareLog>(
+        this.url + `/userPlants/` + userPlantId + '/careLogs/' + careLog.id, careLog,
         this.getHttpOptions()
       )
       .pipe(

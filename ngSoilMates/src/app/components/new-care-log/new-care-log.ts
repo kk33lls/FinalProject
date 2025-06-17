@@ -11,39 +11,48 @@ import { CareTypesService } from '../../services/care-types-service';
   selector: 'app-view-care-logs',
   imports: [FormsModule],
   templateUrl: './new-care-log.html',
-  styleUrl: './new-care-log.css'
+  styleUrl: './new-care-log.css',
 })
 export class NewCareLog {
-newCareLog: CareLog = new CareLog();
-showForm: boolean = true;
-careTypes: CareType [] = [];
-userPlantId: number = 0;
-careLogs: CareLog[] = [];
-editLog: CareLog | null = null;
+  newCareLog: CareLog = new CareLog();
+  showForm: boolean = true;
+  careTypes: CareType[] = [];
+  userPlantId: number = 0;
+  careLogs: CareLog[] = [];
+  editLog: CareLog | null = null;
 
   constructor(
     private careLogService: CareLogsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private careTypesService: CareTypesService
-  ){}
+  ) {}
 
   ngOnInit(): void {
-  this.activatedRoute.paramMap.subscribe({
-    next: (params) => {
-      let userPlantIdStr = params.get('userPlantId');
-      if (userPlantIdStr) {
-        let userPlantId = parseInt(userPlantIdStr);
-        if (isNaN(userPlantId)) {
-          this.router.navigateByUrl('notFound');
-        } else {
-          console.log('Navigate with Id: ' + userPlantId);
-          this.userPlantId = userPlantId;
-          this.loadCareTypes();
+    this.activatedRoute.paramMap.subscribe({
+      next: (params) => {
+        let userPlantIdStr = params.get('userPlantId');
+        let careLogIdStr = params.get('careLogId');
+        if (userPlantIdStr) {
+          let userPlantId = parseInt(userPlantIdStr);
+          if (isNaN(userPlantId)) {
+            this.router.navigateByUrl('notFound');
+          } else {
+            console.log('Navigate with Id: ' + userPlantId);
+            this.userPlantId = userPlantId;
+            this.loadCareTypes();
+          }
+        } if (careLogIdStr) {
+          let careLogId = parseInt(careLogIdStr);
+          if (isNaN(careLogId)) {
+            this.router.navigateByUrl('notFound');
+          } else {
+            console.log('Navigate with Id: ' + careLogId);
+            this.loadCareLog(careLogId);
+          }
         }
-      }
-    },
-  });
+      },
+    });
   }
   loadCareTypes(): void {
     this.careTypesService.getcareTypes().subscribe({
@@ -58,40 +67,52 @@ editLog: CareLog | null = null;
     });
   }
 
-  create(): void {
-  this.careLogService.create(this.userPlantId, this.newCareLog).subscribe({
-    next: (careLog) => {
-      this.newCareLog = new CareLog();
-      this.showForm = false;
-    },
-    error: (err) => {
-      console.error('Error adding care log:', err);
-    }
-  });
-  }
+
   loadCareLogs(): void {
     this.careLogService.getCareLogs(this.userPlantId).subscribe({
-      next: careLog => (this.careLogs = careLog)
-      });
-    }
+      next: (careLog) => {
+        this.careLogs = careLog;
+      },
+      error: (err) => {
+        console.error('Error loading care logs:', err);
+        this.router.navigateByUrl('notFound');
+      },
+    });
+  }
+  loadCareLog(careLogId: number): void {
+    this.careLogService.show(this.userPlantId, careLogId ).subscribe({
+      next: (careLog) => {
+        this.editLog = careLog;
+      },
+      error: (err) => {
+        console.error('Error loading care logs:', err);
+        this.router.navigateByUrl('notFound');
+      },
+    });
+  }
+  create(): void {
+    this.careLogService.create(this.userPlantId, this.newCareLog).subscribe({
+      next: (careLog) => {
 
-      setEditCareLog(log: CareLog){
-        this.editLog = {...log};
-      }
-      saveEditCareLog(){
-        if (!this.editLog)
-          return;
-        this.careLogService.getCareLogs(this.userPlantId).subscribe({
-                next:  ()=> {
-                 this.editLog = null;
-                 this.loadCareLogs();
-                },
-                 error: (err) =>
-      console.error('Error editing care log:', err)
-
-        });
-      }
+        this.router.navigateByUrl('viewUserPlant/' + this.userPlantId);
+      },
+      error: (err) => {
+        console.error('Error adding care log:', err);
+      },
+    });
   }
 
-
-
+  updateCareLog() {
+    if(this.editLog){
+    this.careLogService.edit(this.userPlantId, this.editLog).subscribe({
+      next: (success) => {
+     this.router.navigateByUrl('viewUserPlant/' + this.userPlantId);
+      },
+      error: (err) => {
+        console.error('Error editing care log:', err);
+        this.router.navigateByUrl('notFound');
+      },
+    });
+  }
+}
+}

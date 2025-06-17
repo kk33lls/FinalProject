@@ -1,3 +1,4 @@
+import { CareLogsService } from './../../services/care-logs-service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserPlant } from '../../models/user-plant';
@@ -25,7 +26,8 @@ export class ViewUserPlant {
     private plantSpeciesService: PlantSpeciesService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private userPlantsService: UserPlantsService
+    private userPlantsService: UserPlantsService,
+    private careLogService: CareLogsService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,18 @@ export class ViewUserPlant {
       },
     });
   }
+  loadCareLogs(): void {
+    this.careLogService.getCareLogs(this.selected.id).subscribe({
+      next: (careLog) => {
+        this.careLogs = careLog;
 
+      },
+      error: (err) => {
+        console.error('Error loading care logs:', err);
+        this.router.navigateByUrl('notFound');
+      },
+    });
+  }
   setEditUserPlant(){
     this.editUserPlant = {...this.selected}
   }
@@ -53,6 +66,7 @@ export class ViewUserPlant {
     this.userPlantsService.viewDetails(userPlantId).subscribe({
       next: (userPlant) => {
         this.selected = userPlant;
+        this.loadCareLogs();
       },
       error: (err) => {
         console.error(err);

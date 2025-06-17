@@ -29,11 +29,11 @@ public class CareLogServiceImpl implements CareLogService {
 	@Override
 	public CareLog createCareLog(String username, int userPlantId, CareLog careLog) {
 		if (!careLogRepo.existsByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId)) {
-
 			return null;
 		}
 		UserPlant plant = userPlantRepo.findByIdAndUser_Username(userPlantId, username);
 		careLog.setUserPlant(plant);
+		careLog.setEnabled(true);
 		return careLogRepo.saveAndFlush(careLog);
 
 	}
@@ -41,13 +41,20 @@ public class CareLogServiceImpl implements CareLogService {
 	@Override
 	public CareLog updateCareLog(String username, int userPlantId, int careLogId, CareLog careLog) {
 		CareLog managedCareLog = careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username, userPlantId, careLogId);
+	
 		if(managedCareLog != null) {
 			managedCareLog.setCareType(careLog.getCareType());
 			managedCareLog.setNotes(careLog.getNotes());
+			managedCareLog.setCareDate(careLog.getCareDate());
 			
 			careLogRepo.saveAndFlush(managedCareLog);
 			return managedCareLog;
 		}
 		return null;
+	}
+
+	@Override
+	public CareLog getCareLog(String username, int userPlantId, int careLogId) {
+		return careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username, userPlantId, careLogId);
 	}
 }

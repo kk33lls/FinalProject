@@ -112,8 +112,8 @@
         <td>{{careLog.careDate}}</td>
         <td>{{careLog.careType.name}}</td>
         <td>{{careLog.notes}}</td>
-        <!-- <td><button (click)="FIXME [routerLink]="'/viewCareLogs/' + careLog.id">Edit</button></td> -->
-        <!-- <td><button (click)="FIXME">Delete</button></td> -->
+        <td><button [routerLink]="['editCareLog/' + careLog.id]">Edit</button></td>
+
       </tr>
     }
     </tbody>
@@ -130,7 +130,5 @@
     <button [routerLink]="['newCareLog']">Add a Care Log</button>
   </div>
     }
-  <!-- <div>
-    <button [routerLink]="['newCareLog']">New Care Log</button>
-  </div> -->
+
 
