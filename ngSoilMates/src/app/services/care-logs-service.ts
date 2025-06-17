@@ -36,7 +36,7 @@ export class CareLogsService {
   create(userPlantId: number, careLog: CareLog): Observable<CareLog> {
     return this.http
       .post<CareLog>(
-        this.url + `/userPlant/` + userPlantId + '/careLog',
+        this.url + `/userPlants/` + userPlantId + '/careLogs',
         careLog,
         this.getHttpOptions()
       )

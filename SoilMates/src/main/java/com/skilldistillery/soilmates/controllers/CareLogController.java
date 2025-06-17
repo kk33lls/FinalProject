@@ -36,7 +36,7 @@ public class CareLogController {
 		return foundCareLogs;
 	}
 
-	@PostMapping("userPlant/{userPlantId}/careLog")
+	@PostMapping("userPlants/{userPlantId}/careLogs")
 	public CareLog create(Principal principal, HttpServletRequest req, HttpServletResponse res,
 			@PathVariable("userPlantId") int userPlantId, @RequestBody CareLog careLog) {
 		CareLog createdLog = careLogService.createCareLog(principal.getName(), userPlantId, careLog);
