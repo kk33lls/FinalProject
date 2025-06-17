@@ -22,12 +22,16 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CareLogController {
 
 	@Autowired
- CareLogService careLogService;
-	
-	
-	@GetMapping("/careLogs/{userPlantId}")
-	public List<CareLog> loadCareLogs(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable("userPlantId") int userPlantId) {
-		return  careLogService.displayCareLogs(principal.getName());
+	CareLogService careLogService;
+
+	@GetMapping("userPlants/{userPlantId}/careLogs")
+	public List<CareLog> loadCareLogs(Principal principal, HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("userPlantId") int userPlantId) {
+		List<CareLog> foundCareLogs = careLogService.displayCareLogs(principal.getName(), userPlantId);
+		if(foundCareLogs == null) {
+			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
+			return foundCareLogs;
 	}
-	
+
 }

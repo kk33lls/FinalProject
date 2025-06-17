@@ -92,7 +92,7 @@
   </form>
 </div>
 }
-<div>
+<div class="hero-info">
   <h2>Care Logs</h2>
   <table>
     <thead>
@@ -106,14 +106,16 @@
       </tr>
     </thead>
     <tbody>
+      @for (careLog of careLogs; track $index) {
       <tr>
-        <td>{{careLog?.id}}</td>
-        <td>{{careLog?.careDate}}</td>
-        <td>{{careLog?.careType}}</td>
-        <td>{{careLog?.userPlant}}</td>
-        <td>{{careLog?.notes}}</td>
-        <!-- <td><button (click)="FIXME">Edit</button></td> -->
+        <td>{{careLog.id}}</td>
+        <td>{{careLog.careDate}}</td>
+        <td>{{careLog.careType.name}}</td>
+        <td>{{careLog.notes}}</td>
+        <!-- <td><button (click)="FIXME [routerLink]="'/viewCareLogs/' + careLog.id">Edit</button></td> -->
+        <!-- <td><button (click)="FIXME">Delete</button></td> -->
       </tr>
+    }
     </tbody>
   </table>
 </div>
