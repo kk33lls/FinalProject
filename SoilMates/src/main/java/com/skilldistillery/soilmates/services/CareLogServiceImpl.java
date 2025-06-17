@@ -15,8 +15,11 @@ public class CareLogServiceImpl implements CareLogService {
 	CareLogRepository careLogRepo;
 
 	@Override
-	public List<CareLog> displayCareLogs(String username) {
-		return careLogRepo.findByUser_UserPlant(username);
+	public List<CareLog> displayCareLogs(String username, int userPlantId) {
+		if(careLogRepo.existsByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId)) {
+			return careLogRepo.findByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId);
+		}
+		return null;
 	}
 
 }

@@ -1,3 +1,4 @@
+import { CareLogsService } from './../../services/care-logs-service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserPlant } from '../../models/user-plant';
@@ -18,15 +19,18 @@ export class ViewUserPlant {
   editUserPlant: UserPlant | null = null;
   selected: UserPlant = new UserPlant();
   updateForm: boolean = false;
-  careLog: CareLog | null = null;
+  careLogs: CareLog[] = [];
+
 
   constructor(
     private router: Router,
     private plantSpeciesService: PlantSpeciesService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private userPlantsService: UserPlantsService
+    private userPlantsService: UserPlantsService,
+    private careLogsService: CareLogsService
   ) {}
+
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe({
       next: (params) => {
@@ -38,10 +42,23 @@ export class ViewUserPlant {
           } else {
             console.log('Navigate with Id: ' + userPlantId);
             this.loadById(userPlantId);
+            this.loadCarelogByUserPlantId(userPlantId);
           }
         }
       },
     });
+  }
+   loadCarelogByUserPlantId(userPlantId: number): void {
+  this.careLogsService.getCareLogs(userPlantId).subscribe({
+    next: (careLogs) => {
+      this.careLogs = careLogs;
+    },
+    error: (err) => {
+      console.error(err);
+      console.error("View-User-Plant.ts Component: error loading user plant's care log");
+      this.router.navigateByUrl("notFound")
+    }
+  });
   }
 
   setEditUserPlant(){
