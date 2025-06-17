@@ -5,7 +5,7 @@ import { Register } from './components/register/register';
 import { ViewPlantSpecies } from './components/view-plant-species/view-plant-species';
 import { Profile } from './components/profile/profile';
 import { ViewUserPlant } from './components/view-user-plant/view-user-plant';
-import { ViewCareLogs } from './components/view-care-logs/view-care-logs';
+import { NewCareLog } from './components/new-care-log/new-care-log';
 
 export const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -15,7 +15,6 @@ export const routes: Routes = [
   {path: 'viewPlantSpecies/:speciesId', component: ViewPlantSpecies},
   {path: 'profile', component: Profile},
   {path: 'viewUserPlant/:userPlantId', component: ViewUserPlant},
-  {path: 'viewCareLog/:careLogId', component: ViewCareLogs},
-  {path: 'viewCareLog', component: ViewCareLogs},
+  {path: 'viewUserPlant/:userPlantId/newCareLog', component: NewCareLog},
   // {path: '**', component: NotFound}
 ];

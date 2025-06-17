@@ -1,18 +1,19 @@
-import { UserPlantsService } from './../../services/user-plants-service';
+import { CareType } from './../../models/care-type';
+import { UserPlantsService } from '../../services/user-plants-service';
 import { FormsModule } from '@angular/forms';
-import { CareLog, CareLogsService } from './../../services/care-logs-service';
+import { CareLog, CareLogsService } from '../../services/care-logs-service';
 import { Component } from '@angular/core';
-import { CareType } from '../../models/care-type';
 import { UserPlant } from '../../models/user-plant';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CareTypesService } from '../../services/care-types-service';
 
 @Component({
   selector: 'app-view-care-logs',
-  imports: [FormsModule, RouterLink],
-  templateUrl: './view-care-logs.html',
-  styleUrl: './view-care-logs.css'
+  imports: [FormsModule],
+  templateUrl: './new-care-log.html',
+  styleUrl: './new-care-log.css'
 })
-export class ViewCareLogs {
+export class NewCareLog {
 newCareLog: CareLog = new CareLog();
 showForm: boolean = true;
 careTypes: CareType [] = [];
@@ -21,7 +22,8 @@ userPlantId: number = 0;
   constructor(
     private careLogService: CareLogsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private careTypesService: CareTypesService
   ){}
 
   ngOnInit(): void {
@@ -35,16 +37,27 @@ userPlantId: number = 0;
         } else {
           console.log('Navigate with Id: ' + userPlantId);
           this.userPlantId = userPlantId;
+          this.loadCareTypes();
         }
       }
     },
   });
   }
+  loadCareTypes(): void {
+    this.careTypesService.getcareTypes().subscribe({
+      next: (careTypes) => {
+        this.careTypes = careTypes;
+      },
+      error: (err) => {
+        console.error(err);
+        console.error('view-user-plant.ts Component: error loading plant');
+        this.router.navigateByUrl('notFound');
+      },
+    });
+  }
 
-
-
-  create(userPlantId: number): void {
-  this.careLogService.create(userPlantId, this.newCareLog).subscribe({
+  create(): void {
+  this.careLogService.create(this.userPlantId, this.newCareLog).subscribe({
     next: (careLog) => {
       this.newCareLog = new CareLog();
       this.showForm = false;
