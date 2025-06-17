@@ -8,5 +8,6 @@ import com.skilldistillery.soilmates.entities.CareType;
 @Service
 public interface CareTypeService {
 	List<CareType> getCareTypes();
+	
 
 }
