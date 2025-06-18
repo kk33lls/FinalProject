@@ -28,7 +28,7 @@ public class CareLogServiceImpl implements CareLogService {
 
 	@Override
 	public CareLog createCareLog(String username, int userPlantId, CareLog careLog) {
-		if (!careLogRepo.existsByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId)) {
+		if (!userPlantRepo.existsByIdAndUser_UsernameAndEnabledTrue(userPlantId, username)) {
 			return null;
 		}
 		UserPlant plant = userPlantRepo.findByIdAndUser_UsernameAndEnabledTrue(userPlantId, username);
