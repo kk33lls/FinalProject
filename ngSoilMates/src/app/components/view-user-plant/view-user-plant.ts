@@ -1,3 +1,5 @@
+import { CareTypesService } from './../../services/care-types-service';
+import { ReminderService } from './../../services/reminder-service';
 import { CareLogsService } from './../../services/care-logs-service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +10,8 @@ import { UserPlantsService } from '../../services/user-plants-service';
 import { UserService } from '../../services/user-service';
 import { CommonModule } from '@angular/common';
 import { CareLog } from '../../models/care-log';
+import { Reminder } from '../../models/reminder';
+import { CareType } from '../../models/care-type';
 
 @Component({
   selector: 'app-view-user-plant',
@@ -20,6 +24,10 @@ export class ViewUserPlant {
   selected: UserPlant = new UserPlant();
   updateForm: boolean = false;
   careLogs: CareLog [] = [];
+  newReminder: Reminder = new Reminder();
+  showReminderForm: boolean = false;
+  careTypes: CareType[] = [];
+  careType: CareType | null = null;
 
   constructor(
     private router: Router,
@@ -27,7 +35,9 @@ export class ViewUserPlant {
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private userPlantsService: UserPlantsService,
-    private careLogService: CareLogsService
+    private careLogService: CareLogsService,
+    private reminderService: ReminderService,
+    private careTypesService: CareTypesService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +51,7 @@ export class ViewUserPlant {
           } else {
             console.log('Navigate with Id: ' + userPlantId);
             this.loadById(userPlantId);
+            this.loadCareTypes();
           }
         }
       },
@@ -54,6 +65,18 @@ export class ViewUserPlant {
       },
       error: (err) => {
         console.error('Error loading care logs:', err);
+        this.router.navigateByUrl('notFound');
+      },
+    });
+  }
+  loadCareTypes(): void {
+    this.careTypesService.getcareTypes().subscribe({
+      next: (careTypes) => {
+        this.careTypes = careTypes;
+      },
+      error: (err) => {
+        console.error(err);
+        console.error('view-user-plant.ts Component: error loading plant');
         this.router.navigateByUrl('notFound');
       },
     });
@@ -96,6 +119,29 @@ export class ViewUserPlant {
       error: (err) => {
         console.log(err);
         console.error('❌error deleting id:', err);
+      },
+    });
+  }
+
+  deleteCareLog(userPlantId: number, careLogId: number): void {
+    this.careLogService.delete(userPlantId, careLogId).subscribe({
+      next: (success) => {
+        this.loadCareLogs();
+      },
+      error: (err) => {
+        console.log(err);
+        console.error('❌error deleting id:', err);
+      },
+    });
+  }
+
+  createReminder(userPlantId: number, careTypeId: number, reminder: Reminder): void {
+    this.reminderService.create(userPlantId, careTypeId, reminder).subscribe({
+      next: (reminder) => {
+        this.newReminder = reminder;
+      },
+      error: (err) => {
+        console.error('Error creating reminder:', err);
       },
     });
   }
