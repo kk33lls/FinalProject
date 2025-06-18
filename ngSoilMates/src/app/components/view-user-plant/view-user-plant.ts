@@ -28,6 +28,7 @@ export class ViewUserPlant {
   showReminderForm: boolean = false;
   careTypes: CareType[] = [];
   careType: CareType | null = null;
+  reminders: Reminder[] = [];
 
   constructor(
     private router: Router,
@@ -40,23 +41,25 @@ export class ViewUserPlant {
     private careTypesService: CareTypesService
   ) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe({
-      next: (params) => {
-        let userPlantIdStr = params.get('userPlantId');
-        if (userPlantIdStr) {
-          let userPlantId = parseInt(userPlantIdStr);
-          if (isNaN(userPlantId)) {
-            this.router.navigateByUrl('notFound');
-          } else {
-            console.log('Navigate with Id: ' + userPlantId);
-            this.loadById(userPlantId);
-            this.loadCareTypes();
-          }
+ngOnInit(): void {
+  this.newReminder.careType = new CareType(); 
+
+  this.activatedRoute.paramMap.subscribe({
+    next: (params) => {
+      let userPlantIdStr = params.get('userPlantId');
+      if (userPlantIdStr) {
+        let userPlantId = parseInt(userPlantIdStr);
+        if (isNaN(userPlantId)) {
+          this.router.navigateByUrl('notFound');
+        } else {
+          console.log('Navigate with Id: ' + userPlantId);
+          this.loadById(userPlantId);
+          this.loadCareTypes();
         }
-      },
-    });
-  }
+      }
+    },
+  });
+}
   loadCareLogs(): void {
     this.careLogService.getCareLogs(this.selected.id).subscribe({
       next: (careLog) => {
@@ -90,6 +93,7 @@ export class ViewUserPlant {
       next: (userPlant) => {
         this.selected = userPlant;
         this.loadCareLogs();
+         this.loadReminders(userPlantId);
       },
       error: (err) => {
         console.error(err);
@@ -134,11 +138,19 @@ export class ViewUserPlant {
       },
     });
   }
+loadReminders(upId: number) {
+    this.reminderService.getReminders(upId).subscribe({
+      next: rs => this.reminders = rs,
+      error: err => console.error('Error loading reminders', err)
+    });
+  }
 
   createReminder(userPlantId: number, careTypeId: number, reminder: Reminder): void {
     this.reminderService.create(userPlantId, careTypeId, reminder).subscribe({
       next: (reminder) => {
-        this.newReminder = reminder;
+        this.newReminder = new Reminder();
+         this.loadReminders(userPlantId);
+          this.showReminderForm = false;
       },
       error: (err) => {
         console.error('Error creating reminder:', err);
