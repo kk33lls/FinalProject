@@ -1,3 +1,5 @@
+import { PlantSpeciesService } from './../../services/plant-species-service';
+import { PlantSpecies } from './../../models/plant-species';
 import { UserPlantsService } from './../../services/user-plants-service';
 
 import { AfterViewInit, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -6,7 +8,7 @@ import { User } from '../../models/user';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user-service';
 import { AuthService } from '../../services/auth-service';
-import { PlantSpecies } from '../../models/plant-species';
+
 import { UserPlant } from '../../models/user-plant';
 import { FormsModule } from '@angular/forms';
 
@@ -23,6 +25,7 @@ export class Profile implements OnInit{
   editUser: User | null = null;
   editUserPlant: UserPlant | null = null;
   searchTerm: string = '';
+  plantSpecies: PlantSpecies | null = null;
   // @ViewChild('floatingCard') floatingCardRef!: ElementRef;
 
   constructor(
@@ -30,12 +33,14 @@ export class Profile implements OnInit{
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private userPlantsService: UserPlantsService
+    private userPlantsService: UserPlantsService,
+    private plantSpeciesService: PlantSpeciesService
    ){}
 
   ngOnInit(): void {
   this.loadUser();
   this.loadUserPlants();
+
   }
   goToSearch(): void {
     this.router.navigate(['/home'], { queryParams: { search: this.searchTerm } });
@@ -57,6 +62,18 @@ export class Profile implements OnInit{
   setEditUser(){
     this.editUser = Object.assign({}, this.user)
   }
+  //  loadSpeciesById(speciesId: number): void {
+  // this.plantSpeciesService.viewDetails(speciesId).subscribe({
+  //   next: (species) => {
+  //     this.plantSpecies = species;
+  //   },
+  //   error: (err) => {
+  //     console.error(err);
+  //     console.error("view-plant-species.ts Component: error loading species");
+  //     this.router.navigateByUrl("notFound")
+  //   }
+  // });
+  // }
   updateUser(updateUser: User){
     this.userService.update(updateUser, updateUser.id).subscribe({
       next: (success) => {

@@ -14,10 +14,30 @@ private url = environment.baseUrl + 'api';
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
+  getReminders(userPlantId: number): Observable<Reminder[]> {
+      return this.http
+        .get<Reminder[]>(
+          this.url + '/userPlants/' + userPlantId + '/reminders',
+          this.getHttpOptions()
+        )
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError(
+              () =>
+                new Error(
+                  'ReminderService.getReminders(): error retrieving reminders: ' +
+                    err
+                )
+            );
+          })
+        );
+    }
+
    create(userPlantId: number, careTypeId: number, reminder: Reminder): Observable<Reminder> {
      return this.http
        .post<Reminder>(
-         this.url + `/userPlants/` + userPlantId + '/careTypes' + careTypeId + '/reminders',
+         this.url + `/userPlants/` + userPlantId + '/reminders/careTypes' + careTypeId,
          reminder,
          this.getHttpOptions()
        )
