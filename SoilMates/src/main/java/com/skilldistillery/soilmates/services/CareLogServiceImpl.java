@@ -40,13 +40,14 @@ public class CareLogServiceImpl implements CareLogService {
 
 	@Override
 	public CareLog updateCareLog(String username, int userPlantId, int careLogId, CareLog careLog) {
-		CareLog managedCareLog = careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username, userPlantId, careLogId);
-	
-		if(managedCareLog != null) {
+		CareLog managedCareLog = careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username,
+				userPlantId, careLogId);
+
+		if (managedCareLog != null) {
 			managedCareLog.setCareType(careLog.getCareType());
 			managedCareLog.setNotes(careLog.getNotes());
 			managedCareLog.setCareDate(careLog.getCareDate());
-			
+
 			careLogRepo.saveAndFlush(managedCareLog);
 			return managedCareLog;
 		}
@@ -55,6 +56,20 @@ public class CareLogServiceImpl implements CareLogService {
 
 	@Override
 	public CareLog getCareLog(String username, int userPlantId, int careLogId) {
-		return careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username, userPlantId, careLogId);
+		return careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username, userPlantId,
+				careLogId);
+	}
+
+	@Override
+	public boolean delete(String username, int userPlantId, int careLogId) {
+
+		CareLog careLog = careLogRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndIdAndEnabledTrue(username,
+				userPlantId, careLogId);
+		if (careLog == null) {
+			return false;
+		}
+		careLog.setEnabled(false);
+		careLogRepo.saveAndFlush(careLog);
+		return true;
 	}
 }
