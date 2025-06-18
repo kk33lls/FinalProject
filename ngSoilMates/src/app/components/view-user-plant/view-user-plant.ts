@@ -70,7 +70,7 @@ ngOnInit(): void {
       },
       error: (err) => {
         console.error('Error loading care logs:', err);
-        this.router.navigateByUrl('notFound');
+        // this.router.navigateByUrl('notFound');
       },
     });
   }
