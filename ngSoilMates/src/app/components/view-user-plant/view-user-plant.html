@@ -1,6 +1,8 @@
+
+
 @if (!editUserPlant) {
-<div class="container py-5 text-light">
-  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+<div class="container py-5 centered-container text-light">
+  <div class="card glass-panel bg-opacity-75 shadow-lg centered-container border-light">
     <div class="row g-0">
       <!-- Left: Image -->
       <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
@@ -33,7 +35,7 @@
 </div>
 
 @if (showReminderForm) {
-<div class="container py-3">
+<div class="container py-3 centered-container">
   <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
     <div class="hero-info p-4">
       <h3 class="hero-title mb-3">Create Reminder</h3>
@@ -63,7 +65,7 @@
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group centered-container">
           <label class="form-label" for="notes">Notes:</label>
           <input
             class="form-input"
@@ -74,7 +76,7 @@
           />
         </div>
 
-        <div class="form-group">
+        <div class="form-group centered-container">
           <label class="form-label" for="date">Remind me on:</label>
           <input
             class="form-input"
@@ -103,13 +105,13 @@
 }
 
 @if(editUserPlant) {
-<div class="container py-3">
-  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+<div class="container py-3 centered-container">
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light ">
     <div class="hero-info p-4">
-      <h3 class="hero-title mb-3">Edit Plant</h3>
+      <h3 class="hero-title mb-3">Edit Plant </h3>
       <form class="form-container">
         <div class="form-group">
-          <label class="form-label" for="name">Name</label>
+          <label class="form-label" for="name">Name </label>
           <input
             class="form-input"
             [(ngModel)]="editUserPlant.name"
@@ -120,7 +122,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="acquiredDate">Acquired Date</label>
+          <label class="form-label" for="acquiredDate">Acquired Date </label>
           <input
             class="form-input"
             [(ngModel)]="editUserPlant.acquiredDate"
@@ -131,7 +133,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="location">Location</label>
+          <label class="form-label" for="location">Location </label>
           <input
             class="form-input"
             [(ngModel)]="editUserPlant.location"
@@ -142,7 +144,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="alive">Alive</label>
+          <label class="form-label" for="alive">Alive </label>
           <input
             class="form-checkbox"
             [(ngModel)]="editUserPlant.alive"
@@ -153,7 +155,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="notes">Notes</label>
+          <label class="form-label" for="notes">Notes </label>
           <textarea
             class="form-textarea"
             [(ngModel)]="editUserPlant.notes"

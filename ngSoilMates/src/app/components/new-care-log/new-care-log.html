@@ -7,7 +7,7 @@
       name="careTypeId"
       [(ngModel)]="newCareLog.careType.id"
     >
-      <option value="">Select type of care...</option>
+      <option class="max-width: 200px" value="">Select type of care...</option>
       @for(type of careTypes; track type.id) {
       <option [value]="type.id">{{type.name}}</option>
       }
@@ -16,8 +16,8 @@
     <textarea name="notes" id="notes" [(ngModel)]="newCareLog.notes"></textarea>
     <label class="form-label" for="careDate">Care Date:</label>
     <input type="datetime-local" id="careDate" name="careDate" [(ngModel)]="newCareLog.careDate">
-    <button (click)="create()">Create</button>
-    <a class="btn btn-outline-light text-success btn-sm ms-3"
+    <button class="ms-3 btn-glow" (click)="create()">Create</button>
+    <a class="btn btn-outline-light text-success btn-med ms-3 me-2"
         [routerLink]="['/profile']" role="button"
       >
         exit

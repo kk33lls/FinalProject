@@ -37,12 +37,12 @@
           </div>
 
           @if (! showForm) {
-                <button (click)="showForm = !showForm">Add to profile</button>
+                <button class="btn-glow" (click)="showForm = !showForm">Add to profile</button>
           } @else{
             <form>
               <label for="name">Name</label>
-              <input type="text" name="name" id="name" [(ngModel)]="userPlant.name">
-              <button (click)="createUserPlant(selected.id)">Save</button>
+              <input class="me-2" type="text" name="name" id="name" [(ngModel)]="userPlant.name">
+              <button class="btn-glow me-2" (click)="createUserPlant(selected.id)">Save</button>
             </form>
 
           }
