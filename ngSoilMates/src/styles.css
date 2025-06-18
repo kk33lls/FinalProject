@@ -39,26 +39,7 @@ body, html {
   padding: 0;
 }
 
-.body-bg4 {
-  background: url('../public/images/background/bg3.jpg') center center fixed;
-  background-size: cover;
-  color: #dbecd1;
-  min-width: 100vw;
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-.body-bg5 {
-  background: url('../public/images/background/bg4.jpg') center center fixed;
-  background-size: cover;
-  color: #dbecd1;
-  min-width: 100vw;
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-}
+
 #bg-video {
   position: fixed;
   top: 0;

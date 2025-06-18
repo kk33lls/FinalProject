@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlantSpecies } from './../../models/plant-species';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth-service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './view-plant-species.css'
 })
 export class ViewPlantSpecies {
-
+  isAuthenticated = true;
   selected: PlantSpecies = new PlantSpecies();
   showForm: boolean = false;
   userPlant: UserPlant = new UserPlant();
@@ -24,12 +25,14 @@ export class ViewPlantSpecies {
     private plantSpeciesService: PlantSpeciesService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private  userPlantsService: UserPlantsService
+    private  userPlantsService: UserPlantsService,
+    private authService: AuthService
   ){}
 
   ngOnInit(): void {
    this.activatedRoute.paramMap.subscribe({
-    next: (params) => {
+     next: (params) => {
+      this.isAuthenticated = this.authService.checkLogin();
       let speciesIdStr = params.get("speciesId");
       if(speciesIdStr) {
         let speciesId = parseInt(speciesIdStr);
@@ -42,6 +45,9 @@ export class ViewPlantSpecies {
       }
     }
   })
+  }
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
   }
 
   loadSpeciesById(speciesId: number): void {
