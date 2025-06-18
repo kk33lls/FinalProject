@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { CareLog, CareLogsService } from '../../services/care-logs-service';
 import { Component } from '@angular/core';
 import { UserPlant } from '../../models/user-plant';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CareTypesService } from '../../services/care-types-service';
 
 @Component({
   selector: 'app-view-care-logs',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './new-care-log.html',
   styleUrl: './new-care-log.css',
 })
