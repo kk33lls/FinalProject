@@ -15,10 +15,11 @@ import { UserPlant } from '../../models/user-plant';
 import { FormsModule } from '@angular/forms';
 import { Reminder } from '../../models/reminder';
 import { DatePipe } from '@angular/common';
+import { IncompletePipe } from "../../pipes/incomplete-pipe";
 
 @Component({
   selector: 'app-profile',
-  imports: [FormsModule, RouterModule, DatePipe],
+  imports: [FormsModule, RouterModule, DatePipe, IncompletePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 
@@ -32,6 +33,7 @@ export class Profile implements OnInit{
   plantSpecies: PlantSpecies | null = null;
   reminders: Reminder[] = [];
   newReminder: Reminder = new Reminder();
+  showComplete: boolean = false;
   // @ViewChild('floatingCard') floatingCardRef!: ElementRef;
 
   constructor(
@@ -152,15 +154,16 @@ export class Profile implements OnInit{
       });
     }
 
-
-
-
-
-
-
-
-
-
-
+    deleteReminder(userPlantId: number, reminderId: number): void {
+    this.reminderService.delete(userPlantId, reminderId).subscribe({
+      next: (success) => {
+        this.loadReminders();
+      },
+      error: (err) => {
+        console.log(err);
+        console.error('❌error deleting reminder:', err);
+      },
+    });
+  }
 
 }
