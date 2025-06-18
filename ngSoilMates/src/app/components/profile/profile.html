@@ -11,7 +11,7 @@
   <!-- Image -->
   <div class="text-center mb-3">
     <img
-      [src]="user.imageUrl || 'images/logo.png'"
+      [src]="user.imageUrl"
       alt="Profile image"
       class="rounded-circle shadow"
       style="width: 120px; height: 120px; object-fit: cover"
@@ -112,9 +112,20 @@
 <div class="scrollable-cards-container">
   @for (userPlant of userPlants; track $index) {
     <div class="card" style="width: 18rem">
-      <img [src]="userPlant.imageUrl" alt="{{userPlant.name}}" />
+      <img
+        class="card-img-top"
+        [src]="userPlant.imageUrl"
+        [alt]="userPlant.name"
+        style="height: 200px; object-fit: cover;"
+      />
       <div class="card-body">
-        <p><a class="btn btn-outline-light text-success btn-sm" [routerLink]="['/viewUserPlant/' + userPlant.id]">{{userPlant.name}}</a></p>
+        <h5 class="card-title">{{userPlant.name}}</h5>
+        <a
+          class="btn btn-outline-light text-success btn-sm"
+          [routerLink]="['/viewUserPlant/' + userPlant.id]"
+        >
+          View Details
+        </a>
       </div>
     </div>
   }

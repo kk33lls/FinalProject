@@ -3,9 +3,7 @@
   <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
     <div class="row g-0">
       <!-- Left: Image -->
-      <div
-        class="col-md-4 d-flex justify-content-center align-items-center p-3"
-      >
+      <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
         <img
           [src]="selected.imageUrl"
           alt="Image of {{ selected.name }}"
@@ -13,122 +11,237 @@
           style="max-height: 350px; object-fit: contain"
         />
       </div>
+
+      <!-- Right: Plant Info -->
+      <div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
+        <div>
+          <h2 class="hero-title mb-3">{{ selected.name }}</h2>
+          <p><strong>Created:</strong> {{ selected.acquiredDate | date:'medium'}}</p>
+          <p><strong>Located:</strong> {{ selected.location}}</p>
+          <p><strong>Alive </strong> {{ selected.alive ? '✅' : '❌'}}</p>
+          <p><strong>Notes:</strong> {{ selected.notes }}</p>
+
+          <div class="button-group">
+            <button class="btn-glow" (click)="setEditUserPlant()">Edit</button>
+            <button class="btn-glow" (click)="deleteUserPlant(selected.id)">Delete</button>
+            <button class="btn-glow" (click)="showReminderForm=true">Create Reminder</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
-  <div>
-    <!-- <img
-      [src]="selected.imageUrl"
-      [alt]="selected.name"
-      class="rounded-circle shadow"
-      style="width: 120px; height: 120px; object-fit: cover"
-    /> -->
-    <h2 class="hero-title mb-3">{{ selected.name }}</h2>
-    <p><strong>Created:</strong> {{ selected.acquiredDate | date:'medium'}}</p>
-    <p><strong>Located:</strong> {{ selected.location}}</p>
 
-    <p><strong>Alive </strong> {{ selected.alive ? '✅' : '❌'}} </p>
+@if (showReminderForm) {
+<div class="container py-3">
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+    <div class="hero-info p-4">
+      <h3 class="hero-title mb-3">Create Reminder</h3>
+      <form class="form-container">
+        <div class="form-group">
+          <label class="form-label" for="title">Reminder Label:</label>
+          <input
+            class="form-input"
+            type="text"
+            id="title"
+            name="title"
+            [(ngModel)]="newReminder.title"
+          />
+        </div>
 
-    <p><strong>Notes:</strong> {{ selected.notes }}</p>
-    <button class="btn-glow" (click)="setEditUserPlant()">Edit</button>
-    <button class="btn-glow" (click)="deleteUserPlant(selected.id)">
-      Delete
-    </button>
+        <div class="form-group">
+          <label class="form-label">Care Type:</label>
+          <select
+            class="form-select"
+            name="careTypeId"
+            [(ngModel)]="newReminder.careType.id"
+          >
+            <option value="">Select type of care...</option>
+            @for(type of careTypes; track type.id) {
+            <option [value]="type.id">{{type.name}}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="notes">Notes:</label>
+          <input
+            class="form-input"
+            type="text"
+            id="notes"
+            name="notes"
+            [(ngModel)]="newReminder.notes"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="date">Remind me on:</label>
+          <input
+            class="form-input"
+            type="datetime-local"
+            id="date"
+            name="reminderDate"
+            [(ngModel)]="newReminder.reminderDate"
+          />
+        </div>
+
+        <div class="button-group">
+          <button
+            class="btn-glow"
+            (click)="createReminder(selected.id, newReminder.careType.id, newReminder)"
+          >
+            Submit
+          </button>
+          <button class="btn-glow" (click)="showReminderForm=false">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
+}
 }
 
 @if(editUserPlant) {
-<div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
-  <form action="">
-    <div>
-      <label for="name">Name</label>
-      <input
-        [(ngModel)]="editUserPlant.name"
-        type="text"
-        name="name"
-        id="name"
-      />
-      <label for="acquiredDate">Acquired Date</label>
-      <input
-        [(ngModel)]="editUserPlant.acquiredDate"
-        type="text"
-        name="acquiredDate"
-        id="acquiredDate"
-      />
-      <label for="location">Location</label>
-      <input
-        [(ngModel)]="editUserPlant.location"
-        type="text"
-        name="location"
-        id="location"
-      />
-      <label for="alive">Alive</label>
-      <input
-        [(ngModel)]="editUserPlant.alive"
-        type="checkbox"
-        name="alive"
-        id="alive"
-      />
-      <label for="notes">Notes</label>
-      <textarea [(ngModel)]="editUserPlant.notes" name="notes" id="notes">
-<textarea></textarea
-      >
-      <label for="imageUrl">Image</label>
-      <input
-        [(ngModel)]="editUserPlant.imageUrl"
-        type="text"
-        name="imageUrl"
-        id="imageUrl"
-      />
-      <button
-        class="btn-glow"
-        (click)="updateUserPlant(editUserPlant); updateForm=false"
-      >
-        save
-      </button>
+<div class="container py-3">
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+    <div class="hero-info p-4">
+      <h3 class="hero-title mb-3">Edit Plant</h3>
+      <form class="form-container">
+        <div class="form-group">
+          <label class="form-label" for="name">Name</label>
+          <input
+            class="form-input"
+            [(ngModel)]="editUserPlant.name"
+            type="text"
+            name="name"
+            id="name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="acquiredDate">Acquired Date</label>
+          <input
+            class="form-input"
+            [(ngModel)]="editUserPlant.acquiredDate"
+            type="text"
+            name="acquiredDate"
+            id="acquiredDate"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="location">Location</label>
+          <input
+            class="form-input"
+            [(ngModel)]="editUserPlant.location"
+            type="text"
+            name="location"
+            id="location"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="alive">Alive</label>
+          <input
+            class="form-checkbox"
+            [(ngModel)]="editUserPlant.alive"
+            type="checkbox"
+            name="alive"
+            id="alive"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="notes">Notes</label>
+          <textarea
+            class="form-textarea"
+            [(ngModel)]="editUserPlant.notes"
+            name="notes"
+            id="notes"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="imageUrl">Image</label>
+          <input
+            class="form-input"
+            [(ngModel)]="editUserPlant.imageUrl"
+            type="text"
+            name="imageUrl"
+            id="imageUrl"
+          />
+        </div>
+
+        <div class="button-group">
+          <button
+            class="btn-glow"
+            (click)="updateUserPlant(editUserPlant); updateForm=false"
+          >
+            Save
+          </button>
+          <button class="btn-glow" (click)="editUserPlant">Cancel</button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
 }
+
 @if(careLogs.length > 0){
-<div class="hero-info">
-  <h2>Care Logs</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Date</th>
-        <th>Care Type</th>
-        <th>Notes</th>
-        <th></th>
-      </tr>
-    </thead>
-   <tbody>
-      @for (careLog of careLogs; track $index) {
-      <tr>
-        <td>{{careLog.id}}</td>
-        <td>{{careLog.careDate}}</td>
-        <td>{{careLog.careType.name}}</td>
-        <td>{{careLog.notes}}</td>
-        <td><button [routerLink]="['editCareLog/' + careLog.id]">Edit</button></td>
+<div class="container py-3">
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+    <div class="hero-info p-4">
+      <h2 class="hero-title mb-3">Care Logs</h2>
+      <div class="table-container">
+        <table class="data-table">
+          <thead class="table-header">
+            <tr>
+              <th class="table-cell">Id</th>
+              <th class="table-cell">Date</th>
+              <th class="table-cell">Care Type</th>
+              <th class="table-cell">Notes</th>
+              <th class="table-cell">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            @for (careLog of careLogs; track $index) {
+            <tr class="table-row">
+              <td class="table-cell">{{careLog.id}}</td>
+              <td class="table-cell">{{careLog.careDate}}</td>
+              <td class="table-cell">{{careLog.careType.name}}</td>
+              <td class="table-cell">{{careLog.notes}}</td>
+              <td class="table-cell">
+                <div class="button-group">
+                  <button class="btn-glow" [routerLink]="['editCareLog/' + careLog.id]">
+                    Edit
+                  </button>
+                  <button class="btn-glow" (click)="deleteCareLog(selected.id, careLog.id)">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
 
-      </tr>
-    }
-    </tbody>
-       </table>
-       </div>
-       <div>
-    <button [routerLink]="['newCareLog']">New Care Log</button>
+      <div class="button-group mt-3">
+        <button class="btn-glow" [routerLink]="['newCareLog']">Add New Care Log</button>
+      </div>
+    </div>
   </div>
-      } @else {
-       <div class="hero-info">
-        <h2>No Care Logs Found</h2>
-       </div>
-       <div>
-    <button [routerLink]="['newCareLog']">Add a Care Log</button>
+</div>
+} @else {
+<div class="container py-3">
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
+    <div class="hero-info p-4 text-center">
+      <h2 class="hero-title mb-3">No Care Logs Found</h2>
+      <div class="button-group">
+        <button class="btn-glow" [routerLink]="['newCareLog']">Add a Care Log</button>
+      </div>
+    </div>
   </div>
-    }
-
+</div>
+}
 

@@ -85,23 +85,22 @@ export class CareLogsService {
           return throwError(
             () =>
               new Error(
-                '❌ userplantservice.edit(): error updating plant: ' + err
+                '❌ CareLogService.edit(): error updating care log: ' + err
               )
           );
         })
       );
   }
 
-  delete(plantSpeciesId: number): Observable<void> {
-    return this.http
-      .delete<void>(this.url + `/` + plantSpeciesId, this.getHttpOptions())
-      .pipe(
+  delete(userPlantId: number, careLogId: number): Observable<CareLog> {
+    return this.http.delete<CareLog>(this.url  + `/userPlants/` + userPlantId + '/careLogs/' + careLogId, this.getHttpOptions())
+    .pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
             () =>
               new Error(
-                '❌ UserPlantService.delete(): error deleting plant: ' + err
+                '❌ CareLogService.delete(): error deleting care log: ' + err
               )
           );
         })
