@@ -54,6 +54,7 @@ export class NewCareLog {
       },
     });
   }
+
   loadCareTypes(): void {
     this.careTypesService.getcareTypes().subscribe({
       next: (careTypes) => {
@@ -66,7 +67,6 @@ export class NewCareLog {
       },
     });
   }
-
 
   loadCareLogs(): void {
     this.careLogService.getCareLogs(this.userPlantId).subscribe({
