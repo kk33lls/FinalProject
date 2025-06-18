@@ -103,7 +103,9 @@ public class CareLog {
 	public void setCareType(CareType careType) {
 		this.careType = careType;
 	}
-
+	public boolean isEnabled() {
+		return enabled;
+	}
 	//Hash/Equals
 	
 	@Override
