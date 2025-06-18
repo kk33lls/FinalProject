@@ -14,10 +14,10 @@ private url = environment.baseUrl + 'api';
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  getReminders(userPlantId: number): Observable<Reminder[]> {
+  getReminders(): Observable<Reminder[]> {
       return this.http
         .get<Reminder[]>(
-          this.url + '/userPlants/' + userPlantId + '/reminders',
+          this.url + '/userPlants/reminders',
           this.getHttpOptions()
         )
         .pipe(
@@ -37,7 +37,7 @@ private url = environment.baseUrl + 'api';
    create(userPlantId: number, careTypeId: number, reminder: Reminder): Observable<Reminder> {
      return this.http
        .post<Reminder>(
-         this.url + `/userPlants/` + userPlantId + '/reminders/careTypes' + careTypeId,
+         this.url + `/userPlants/` + userPlantId + '/reminders/careTypes/' + careTypeId,
          reminder,
          this.getHttpOptions()
        )
@@ -53,6 +53,39 @@ private url = environment.baseUrl + 'api';
          })
        );
    }
+    edit(userPlantId: number, careTypeId: number, reminder: Reminder): Observable<Reminder> {
+       return this.http.put<Reminder>(
+           this.url + `/userPlants/` + userPlantId + '/reminders/' + reminder.id + '/careTypes/' + careTypeId,
+           reminder,
+           this.getHttpOptions()
+         )
+         .pipe(
+           catchError((err: any) => {
+             console.log(err);
+             return throwError(
+               () =>
+                 new Error(
+                   '❌ ReminderService.edit(): error updating care log: ' + err
+                 )
+             );
+           })
+         );
+     }
+
+     delete(userPlantId: number, reminderId: number): Observable<Reminder> {
+       return this.http.delete<Reminder>(this.url  + `/userPlants/` + userPlantId + '/reminders/' + reminderId, this.getHttpOptions())
+       .pipe(
+           catchError((err: any) => {
+             console.log(err);
+             return throwError(
+               () =>
+                 new Error(
+                   '❌ ReminderService.delete(): error deleting care log: ' + err
+                 )
+             );
+           })
+         );
+     }
 
       getHttpOptions() {
       let httpOptions = {

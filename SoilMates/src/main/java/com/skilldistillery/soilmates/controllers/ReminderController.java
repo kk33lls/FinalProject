@@ -28,10 +28,9 @@ public class ReminderController {
 	@Autowired
 	ReminderService reminderService;
 	
-	@GetMapping("userPlants/{userPlantId}/reminders")
-	public List<Reminder> loadCareLogs(Principal principal, HttpServletRequest req, HttpServletResponse res,
-			@PathVariable("userPlantId") int userPlantId) {
-		List<Reminder> foundReminders = reminderService.getReminders(principal.getName(), userPlantId);
+	@GetMapping("userPlants/reminders")
+	public List<Reminder> loadCareLogs(Principal principal, HttpServletRequest req, HttpServletResponse res) {
+		List<Reminder> foundReminders = reminderService.getReminders(principal.getName());
 		if (foundReminders == null) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}

@@ -107,6 +107,43 @@
   </form>
 </div>
 }
+<!-- Reminder Table -->
+
+
+<div class="card p-3">
+    <h4>Reminders</h4>
+    <table class="table table-striped mb-0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>When</th>
+          <th>Plant</th>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Notes</th>
+          <th>Completed</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (reminder of reminders; track $index) {
+          <tr>
+            <td>{{ reminder.id }}</td>
+            <td>{{ reminder.reminderDate | date:'short'}}</td>
+            <td>{{ reminder.userPlant.name }}</td>
+            <td>{{ reminder.title }}</td>
+            <td>{{ reminder.careType.name }}</td>
+            <td>{{ reminder.notes }}</td>
+            <td><input type="checkbox" [(ngModel)]="reminder.completed" (change)="updateReminder(reminder.userPlant.id, reminder.careType.id, reminder)">
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="text-center">No reminders yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 <!-- Plant List Section -->
 
 <div class="scrollable-cards-container">
