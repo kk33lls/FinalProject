@@ -1,3 +1,5 @@
+import { CareType } from './../../models/care-type';
+import { ReminderService } from './../../services/reminder-service';
 import { PlantSpeciesService } from './../../services/plant-species-service';
 import { PlantSpecies } from './../../models/plant-species';
 import { UserPlantsService } from './../../services/user-plants-service';
@@ -11,10 +13,12 @@ import { AuthService } from '../../services/auth-service';
 
 import { UserPlant } from '../../models/user-plant';
 import { FormsModule } from '@angular/forms';
+import { Reminder } from '../../models/reminder';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, DatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 
@@ -26,6 +30,8 @@ export class Profile implements OnInit{
   editUserPlant: UserPlant | null = null;
   searchTerm: string = '';
   plantSpecies: PlantSpecies | null = null;
+  reminders: Reminder[] = [];
+  newReminder: Reminder = new Reminder();
   // @ViewChild('floatingCard') floatingCardRef!: ElementRef;
 
   constructor(
@@ -34,12 +40,15 @@ export class Profile implements OnInit{
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private userPlantsService: UserPlantsService,
-    private plantSpeciesService: PlantSpeciesService
+    private plantSpeciesService: PlantSpeciesService,
+    private reminderService: ReminderService
+
    ){}
 
   ngOnInit(): void {
   this.loadUser();
   this.loadUserPlants();
+  this.loadReminders();
 
   }
   goToSearch(): void {
@@ -62,18 +71,16 @@ export class Profile implements OnInit{
   setEditUser(){
     this.editUser = Object.assign({}, this.user)
   }
-  //  loadSpeciesById(speciesId: number): void {
-  // this.plantSpeciesService.viewDetails(speciesId).subscribe({
-  //   next: (species) => {
-  //     this.plantSpecies = species;
-  //   },
-  //   error: (err) => {
-  //     console.error(err);
-  //     console.error("view-plant-species.ts Component: error loading species");
-  //     this.router.navigateByUrl("notFound")
-  //   }
-  // });
-  // }
+  loadReminders() {
+    this.reminderService.getReminders().subscribe({
+      next: (rs) => {
+        this.reminders = rs
+      },
+      error: (err) => {
+        console.error('Error loading reminders', err)
+      }
+    });
+  }
   updateUser(updateUser: User){
     this.userService.update(updateUser, updateUser.id).subscribe({
       next: (success) => {
@@ -122,7 +129,28 @@ export class Profile implements OnInit{
     }
    });
   }
-
+   createReminder(userPlantId: number, careTypeId: number, reminder: Reminder): void {
+      this.reminderService.create(userPlantId, careTypeId, reminder).subscribe({
+        next: (reminder) => {
+          this.newReminder = new Reminder();
+           this.loadReminders();
+            // this.showReminderForm = false;
+        },
+        error: (err) => {
+          console.error('Error creating reminder:', err);
+        },
+      });
+    }
+    updateReminder(userPlantId: number, careTypeId: number, reminder: Reminder): void {
+      this.reminderService.edit(userPlantId, careTypeId, reminder).subscribe({
+        next: (reminder) => {
+        this.loadReminders();
+        },
+        error: (err) => {
+          console.error('Error updating reminder:', err);
+        },
+      });
+    }
 
 
 

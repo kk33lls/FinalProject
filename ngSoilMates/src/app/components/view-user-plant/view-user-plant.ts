@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { CareLog } from '../../models/care-log';
 import { Reminder } from '../../models/reminder';
 import { CareType } from '../../models/care-type';
+import { PlantSpecies } from '../../models/plant-species';
 
 @Component({
   selector: 'app-view-user-plant',
@@ -29,6 +30,7 @@ export class ViewUserPlant {
   careTypes: CareType[] = [];
   careType: CareType | null = null;
   reminders: Reminder[] = [];
+  plantSpecies: PlantSpecies | null = null;
 
   constructor(
     private router: Router,
@@ -42,7 +44,7 @@ export class ViewUserPlant {
   ) {}
 
 ngOnInit(): void {
-  this.newReminder.careType = new CareType(); 
+  this.newReminder.careType = new CareType();
 
   this.activatedRoute.paramMap.subscribe({
     next: (params) => {
@@ -93,7 +95,7 @@ ngOnInit(): void {
       next: (userPlant) => {
         this.selected = userPlant;
         this.loadCareLogs();
-         this.loadReminders(userPlantId);
+         this.loadReminders();
       },
       error: (err) => {
         console.error(err);
@@ -108,6 +110,7 @@ ngOnInit(): void {
       next: (success) => {
         this.selected = success;
         this.editUserPlant = null;
+
       },
       error: (err) => {
         console.error('error updating plant:', err);
@@ -138,10 +141,14 @@ ngOnInit(): void {
       },
     });
   }
-loadReminders(upId: number) {
-    this.reminderService.getReminders(upId).subscribe({
-      next: rs => this.reminders = rs,
-      error: err => console.error('Error loading reminders', err)
+loadReminders() {
+    this.reminderService.getReminders().subscribe({
+      next: (rs) => {
+        this.reminders = rs
+      },
+      error: (err) => {
+        console.error('Error loading reminders', err)
+      }
     });
   }
 
@@ -149,8 +156,8 @@ loadReminders(upId: number) {
     this.reminderService.create(userPlantId, careTypeId, reminder).subscribe({
       next: (reminder) => {
         this.newReminder = new Reminder();
-         this.loadReminders(userPlantId);
-          this.showReminderForm = false;
+        this.showReminderForm = false;
+        this.router.navigateByUrl('profile');
       },
       error: (err) => {
         console.error('Error creating reminder:', err);

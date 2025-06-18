@@ -5,7 +5,7 @@
       <!-- Left: Image -->
       <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
         <img
-          [src]="selected.imageUrl"
+          [src]="selected.plantSpecies.imageUrl"
           alt="Image of {{ selected.name }}"
           class="img-fluid rounded shadow"
           style="max-height: 350px; object-fit: contain"
@@ -246,37 +246,4 @@
 </div>
 }
 
-
-
-  <div class="card p-3">
-    <h4>Reminders</h4>
-    <table class="table table-striped mb-0">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>When</th>
-          <th>Type</th>
-          <th>Notes</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (r of reminders; track r.id) {
-          <tr>
-            <td>{{ r.id }}</td>
-            <td>{{ r.reminderDate | date:'short' }}</td>
-            <td>{{ r.careType.name }}</td>
-            <td>{{ r.notes }}</td>
-            <td>
-
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="5" class="text-center">No reminders yet.</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
 

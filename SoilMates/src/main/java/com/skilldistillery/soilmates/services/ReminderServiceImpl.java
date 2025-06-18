@@ -25,8 +25,8 @@ public class ReminderServiceImpl implements ReminderService {
 	CareTypeRepository careTypeRepo;
 
 	@Override
-	public List<Reminder> getReminders(String username, int userPlantId) {
-		return reminderRepo.findByUserPlant_User_UsernameAndUserPlant_IdAndEnabledTrue(username, userPlantId);
+	public List<Reminder> getReminders(String username) {
+		return reminderRepo.findByUserPlant_User_UsernameAndEnabledTrue(username);
 	}
 
 	@Override
