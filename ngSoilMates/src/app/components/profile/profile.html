@@ -7,7 +7,7 @@
 
 <!-- View Mode -->
 @if (!editUser) {
-  <div class="container py-5 text-light d-flex flex-column align-items-center">
+<div class="container py-5 text-light d-flex flex-column align-items-center">
   <!-- Image -->
   <div class="text-center mb-3">
     <img
@@ -28,7 +28,10 @@
   <p class="text-center text-muted">{{ user.email }}</p>
 
   <!-- Bio Box -->
-  <div class="bg-white text-dark p-3 mt-3 rounded shadow-sm text-start w-100" style="max-width: 500px;">
+  <div
+    class="bg-white text-dark p-3 mt-3 rounded shadow-sm text-start w-100"
+    style="max-width: 500px"
+  >
     <h6 class="text-muted mb-2">Biography</h6>
     <p class="mb-0">{{ user.biography || 'No bio added yet.' }}</p>
   </div>
@@ -109,62 +112,72 @@
 }
 <!-- Reminder Table -->
 
-
 <div class="card p-3">
-    <h4>Reminders</h4>
-    <table class="table table-striped mb-0">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>When</th>
-          <th>Plant</th>
-          <th>Title</th>
-          <th>Type</th>
-          <th>Notes</th>
-          <th>Completed</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (reminder of reminders; track $index) {
-          <tr>
-            <td>{{ reminder.id }}</td>
-            <td>{{ reminder.reminderDate | date:'short'}}</td>
-            <td>{{ reminder.userPlant.name }}</td>
-            <td>{{ reminder.title }}</td>
-            <td>{{ reminder.careType.name }}</td>
-            <td>{{ reminder.notes }}</td>
-            <td><input type="checkbox" [(ngModel)]="reminder.completed" (change)="updateReminder(reminder.userPlant.id, reminder.careType.id, reminder)">
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="5" class="text-center">No reminders yet.</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+  <h4>Reminders</h4>
+  <table class="table table-striped mb-0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>When</th>
+        <th>Plant</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Notes</th>
+        <th>Completed</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (reminder of reminders | incomplete: showComplete; track $index) {
+      <tr>
+        <td>{{ reminder.id }}</td>
+        <td>{{ reminder.reminderDate | date:'short'}}</td>
+        <td>{{ reminder.userPlant.name }}</td>
+        <td>{{ reminder.title }}</td>
+        <td>{{ reminder.careType.name }}</td>
+        <td>{{ reminder.notes }}</td>
+        <td>
+          <input
+            type="checkbox"
+            [(ngModel)]="reminder.completed"
+            (change)="updateReminder(reminder.userPlant.id, reminder.careType.id, reminder)"
+          />
+        </td>
+        <td><button (click)="deleteReminder(reminder.userPlant.id, reminder.id)">❌</button> </td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="8" class="text-center">You're all caught up</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <div class="form-check form-switch">
+    <label for="showComplete" class="form-check-label">Show Completed Reminders</label>
+    <input type="checkbox" class="form-check-input" name="showComplete" id="showComplete" [(ngModel)]="showComplete" />
   </div>
+</div>
 <!-- Plant List Section -->
 
 <div class="scrollable-cards-container">
   @for (userPlant of userPlants; track $index) {
-    <div class="card" style="width: 18rem">
-      <img
-        class="card-img-top"
-        [src]="userPlant.plantSpecies.imageUrl"
-        [alt]="userPlant.name"
-        style="height: 200px; object-fit: cover;"
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{userPlant.name}}</h5>
-        <a
-          class="btn btn-outline-light text-success btn-sm"
-          [routerLink]="['/viewUserPlant/' + userPlant.id]"
-        >
-          View Details
-        </a>
-      </div>
+  <div class="card" style="width: 18rem">
+    <img
+      class="card-img-top"
+      [src]="userPlant.plantSpecies.imageUrl"
+      [alt]="userPlant.name"
+      style="height: 200px; object-fit: cover"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{userPlant.name}}</h5>
+      <a
+        class="btn btn-outline-light text-success btn-sm"
+        [routerLink]="['/viewUserPlant/' + userPlant.id]"
+      >
+        View Details
+      </a>
     </div>
+  </div>
   }
 </div>
 

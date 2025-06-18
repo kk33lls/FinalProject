@@ -67,11 +67,11 @@ public class ReminderController {
 			}
 		return updatedReminder;
 				}
-	@DeleteMapping("userPlants/{userPlantId}/reminders/{reminderId}/careTypes/{careTypeId}")
-	public void delete(Principal principal,HttpServletRequest req, HttpServletResponse res, @PathVariable("userPlantId") int plantUserId, 
-			@PathVariable("careTypeId") int careTypeId, @PathVariable("reminderId") int reminderId) {
+	@DeleteMapping("userPlants/{userPlantId}/reminders/{reminderId}")
+	public void delete(Principal principal,HttpServletRequest req, HttpServletResponse res, @PathVariable("userPlantId") int userPlantId, 
+			@PathVariable("reminderId") int reminderId) {
 		try {
-			boolean deleted = reminderService.deleteReminder(principal.getName(), careTypeId, reminderId);
+			boolean deleted = reminderService.deleteReminder(principal.getName(), userPlantId, reminderId);
 			if (deleted) {
 				res.setStatus(HttpServletResponse.SC_NO_CONTENT);// 204
 			} else {
