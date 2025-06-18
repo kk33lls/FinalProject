@@ -42,7 +42,7 @@ public class UserPlantServiceImpl implements UserPlantService {
 
 	@Override
 	public boolean delete(String username, int userPlantId) {
-		UserPlant plantToDelete = userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+		UserPlant plantToDelete = userPlantRepo.findByIdAndUser_UsernameAndEnabledTrue(userPlantId, username);
 		if (plantToDelete != null) {
 			plantToDelete.setEnabled(false);
 			userPlantRepo.saveAndFlush(plantToDelete);
@@ -53,12 +53,12 @@ public class UserPlantServiceImpl implements UserPlantService {
 
 	@Override
 	public UserPlant show(String username, int userPlantId) {
-		return userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+		return userPlantRepo.findByIdAndUser_UsernameAndEnabledTrue(userPlantId, username);
 	}
 
 	@Override
 	public UserPlant update(String username, int userPlantId, UserPlant userPlant) {
-		UserPlant managedPlant = userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+		UserPlant managedPlant = userPlantRepo.findByIdAndUser_UsernameAndEnabledTrue(userPlantId, username);
 		if (managedPlant != null) {
 			managedPlant.setAcquiredDate(userPlant.getAcquiredDate());
 			managedPlant.setAlive(userPlant.getAlive());

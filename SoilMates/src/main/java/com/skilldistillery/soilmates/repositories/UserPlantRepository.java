@@ -8,5 +8,5 @@ import com.skilldistillery.soilmates.entities.UserPlant;
 
 public interface UserPlantRepository extends JpaRepository<UserPlant, Integer> {
 	List<UserPlant> findByUser_UsernameAndEnabledTrue(String username);
-	UserPlant findByIdAndUser_Username(int userPlantId, String username);
+	UserPlant findByIdAndUser_UsernameAndEnabledTrue(int userPlantId, String username);
 }

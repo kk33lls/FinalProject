@@ -31,7 +31,7 @@ public class CareLogServiceImpl implements CareLogService {
 		if (!careLogRepo.existsByUserPlant_User_UsernameAndUserPlant_Id(username, userPlantId)) {
 			return null;
 		}
-		UserPlant plant = userPlantRepo.findByIdAndUser_Username(userPlantId, username);
+		UserPlant plant = userPlantRepo.findByIdAndUser_UsernameAndEnabledTrue(userPlantId, username);
 		careLog.setUserPlant(plant);
 		careLog.setEnabled(true);
 		return careLogRepo.saveAndFlush(careLog);
