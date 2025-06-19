@@ -23,7 +23,7 @@
       <div class="col-md-8 p-4 d-flex hero-info flex-column justify-content-between">
         <div>
           <h2 class="hero-title mb-3">{{ selected.name }}</h2>
-          <p><strong>Created:</strong> {{ selected.acquiredDate | date:'medium'}}</p>
+          <p><strong>Date acquired:</strong> {{ selected.acquiredDate | date:'medium'}}</p>
           <p><strong>Located:</strong> {{ selected.location}}</p>
           <p><strong>Alive </strong> {{ selected.alive ? '✅' : '❌'}}</p>
           <p><strong>Notes:</strong> {{ selected.notes }}</p>
@@ -131,7 +131,7 @@
           <input
             class="form-input"
             [(ngModel)]="editUserPlant.acquiredDate"
-            type="text"
+            type="datetime-local"
             name="acquiredDate"
             id="acquiredDate"
           />
@@ -169,17 +169,6 @@
           ></textarea>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="imageUrl">Image</label>
-          <input
-            class="form-input"
-            [(ngModel)]="editUserPlant.imageUrl"
-            type="text"
-            name="imageUrl"
-            id="imageUrl"
-          />
-        </div>
-
         <div class="button-group">
           <button
             class="btn-glow"
@@ -215,7 +204,7 @@
             @for (careLog of careLogs; track $index) {
             <tr class="table-row">
               <td class="table-cell">{{careLog.id}}</td>
-              <td class="table-cell">{{careLog.careDate}}</td>
+              <td class="table-cell">{{careLog.careDate | date:'short'}}</td>
               <td class="table-cell">{{careLog.careType.name}}</td>
               <td class="table-cell">{{careLog.notes}}</td>
               <td class="table-cell">

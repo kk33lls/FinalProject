@@ -39,12 +39,12 @@
 
           @if (loggedIn()) {
             @if (! showForm) {
-              <button (click)="showForm = !showForm">Add to profile</button>
+              <button class="btn-glow" (click)="showForm = !showForm">Add to profile</button>
             } @else {
               <form>
-                <label for="name">Nickname</label>
-                <input type="text" name="name" id="name" [(ngModel)]="userPlant.name">
-                <button (click)="createUserPlant(selected.id)">Save</button>
+                <label class="hero-info" for="name">Nickname:</label>
+                <input  class="ms-3 hero-info" type="text" name="name" id="name" [(ngModel)]="userPlant.name">
+                <button class="btn-glow ms-3" (click)="createUserPlant(selected.id)">Save</button>
               </form>
             }
           }

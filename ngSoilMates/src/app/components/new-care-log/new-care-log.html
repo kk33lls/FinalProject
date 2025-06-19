@@ -1,6 +1,6 @@
 @if (!editLog){
 <div class="hero-info">
-  <form>
+  <form class="spacing">
     <label class="form-label">Care Type:</label>
     <select
       class="form-select"
@@ -13,21 +13,21 @@
       }
     </select>
     <label for="notes">Notes: </label>
-    <textarea name="notes" id="notes" [(ngModel)]="newCareLog.notes"></textarea>
+    <textarea name="notes" id="notes"  class="form-control" [(ngModel)]="newCareLog.notes"></textarea>
     <label class="form-label" for="careDate">Care Date:</label>
-    <input type="datetime-local" id="careDate" name="careDate" [(ngModel)]="newCareLog.careDate">
+    <input  class="form-control" type="datetime-local" id="careDate" name="careDate" [(ngModel)]="newCareLog.careDate">
     <button class="ms-3 btn-glow" (click)="create()">Create</button>
-    <a class="btn btn-outline-light text-success btn-med ms-3 me-2"
+    <a class="btn btn-glow delete btn-med ms-3 me-2"
         [routerLink]="['/profile']" role="button"
       >
-        exit
+        Cancel
       </a>
 
   </form>
 </div>
 } @else {
 <div class="hero-info">
-  <form>
+  <form class="spacing">
     <label class="form-label">Care Type:</label>
     <select
       class="form-select"
@@ -39,9 +39,9 @@
       }
     </select>
     <label for="notes">Notes: </label>
-    <textarea name="notes" id="notes" [(ngModel)]="editLog.notes"></textarea>
+    <textarea   class="form-control" name="notes" id="notes" [(ngModel)]="editLog.notes"></textarea>
     <label class="form-label" for="careDate">Care Date:</label>
-    <input type="datetime-local" id="careDate" name="careDate" [(ngModel)]="editLog.careDate">
+    <input  class="form-control" type="datetime-local" id="careDate" name="careDate" [(ngModel)]="editLog.careDate">
     <button (click)="updateCareLog()">Save Changes</button>
   </form>
 </div>
