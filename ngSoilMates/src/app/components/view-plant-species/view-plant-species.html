@@ -36,15 +36,17 @@
             <p><strong>Temp Range:</strong> {{ selected.temperatureRange }}</p>
           </div>
 
-          @if (! showForm) {
-                <button class="btn-glow" (click)="showForm = !showForm">Add to profile</button>
-          } @else{
-            <form>
-              <label for="name">Name</label>
-              <input class="me-2" type="text" name="name" id="name" [(ngModel)]="userPlant.name">
-              <button class="btn-glow me-2" (click)="createUserPlant(selected.id)">Save</button>
-            </form>
 
+          @if (loggedIn()) {
+            @if (! showForm) {
+              <button (click)="showForm = !showForm">Add to profile</button>
+            } @else {
+              <form>
+                <label for="name">Nickname</label>
+                <input type="text" name="name" id="name" [(ngModel)]="userPlant.name">
+                <button (click)="createUserPlant(selected.id)">Save</button>
+              </form>
+            }
           }
         </div>
       </div>

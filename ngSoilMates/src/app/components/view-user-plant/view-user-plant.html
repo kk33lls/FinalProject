@@ -1,4 +1,9 @@
 
+<video autoplay muted playsinline id="bg-video">
+  <source src="images/background/vd.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 
 @if (!editUserPlant) {
 <div class="container py-5 centered-container text-light">
@@ -24,9 +29,9 @@
           <p><strong>Notes:</strong> {{ selected.notes }}</p>
 
           <div class="button-group">
-            <button class="btn-glow me-2" (click)="setEditUserPlant()">Edit</button>
-            <button class="btn-glow me-2" (click)="deleteUserPlant(selected.id)">Delete</button>
-            <button class="btn-glow me-2" (click)="showReminderForm=true">Create Reminder</button>
+            <button class="btn-glow" (click)="setEditUserPlant()">Edit</button>
+            <button class="btn-glow" (click)="deleteUserPlant(selected.id)">Delete</button>
+            <button class="btn-glow" (click)="showReminderForm=true">Create Reminder</button>
           </div>
         </div>
       </div>
@@ -95,7 +100,7 @@
 >
   Submit
 </button>
-          <button class="btn-glow me-2" (click)="showReminderForm=false">Cancel</button>
+          <button class="btn-glow" (click)="showReminderForm=false">Cancel</button>
         </div>
       </form>
     </div>
@@ -177,7 +182,7 @@
 
         <div class="button-group">
           <button
-            class="btn-glow me-2"
+            class="btn-glow"
             (click)="updateUserPlant(editUserPlant); updateForm=false"
           >
             Save
@@ -192,7 +197,7 @@
 
 @if(careLogs.length > 0){
 <div class="container py-3">
-  <div class="card glass-panel bg-opacity-75 shadow-lg border-light outer-table">
+  <div class="card glass-panel bg-opacity-75 shadow-lg border-light">
     <div class="hero-info p-4">
       <h2 class="hero-title mb-3">Care Logs</h2>
       <div class="table-container">
@@ -215,10 +220,10 @@
               <td class="table-cell">{{careLog.notes}}</td>
               <td class="table-cell">
                 <div class="button-group">
-                  <button class="btn-glow me-2" [routerLink]="['editCareLog/' + careLog.id]">
+                  <button class="btn-glow" [routerLink]="['editCareLog/' + careLog.id]">
                     Edit
                   </button>
-                  <button class="btn-glow me-2" (click)="deleteCareLog(selected.id, careLog.id)">
+                  <button class="btn-glow" (click)="deleteCareLog(selected.id, careLog.id)">
                     Delete
                   </button>
                 </div>
@@ -230,7 +235,7 @@
       </div>
 
       <div class="button-group mt-3">
-        <button class="btn-glow me-2" [routerLink]="['newCareLog']">Add New Care Log</button>
+        <button class="btn-glow" [routerLink]="['newCareLog']">Add New Care Log</button>
       </div>
     </div>
   </div>
@@ -241,7 +246,7 @@
     <div class="hero-info p-4 text-center">
       <h2 class="hero-title mb-3">No Care Logs Found</h2>
       <div class="button-group">
-        <button class="btn-glow me-2" [routerLink]="['newCareLog']">Add a Care Log</button>
+        <button class="btn-glow" [routerLink]="['newCareLog']">Add a Care Log</button>
       </div>
     </div>
   </div>
