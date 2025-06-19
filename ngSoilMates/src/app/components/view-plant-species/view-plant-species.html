@@ -36,6 +36,7 @@
             <p><strong>Temp Range:</strong> {{ selected.temperatureRange }}</p>
           </div>
 
+
           @if (loggedIn()) {
             @if (! showForm) {
               <button (click)="showForm = !showForm">Add to profile</button>
